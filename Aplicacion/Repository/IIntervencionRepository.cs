@@ -11,5 +11,11 @@ namespace Aplicacion.Repository
     {
         List<Intervencion> GetIntervenciones();
         Intervencion CreateIntervencion(Intervencion intervencion);
+
+        Intervencion UpdateIntervencion(Intervencion newIntervencion);
+
+        Intervencion DeleteIntervencion(Intervencion intervencion);
+
+        Intervencion GetIntervencion(int id);
     }
 }

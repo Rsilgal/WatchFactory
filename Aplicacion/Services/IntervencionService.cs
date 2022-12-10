@@ -24,9 +24,24 @@ namespace Aplicacion.Services
             return intervencion;
         }
 
+        public Intervencion DeleteIntervencion(Intervencion intervencion)
+        {
+            return _intervecnionRepository.DeleteIntervencion(intervencion);
+        }
+
+        public Intervencion GetIntervencion(int id)
+        {
+            return _intervecnionRepository.GetIntervencion(id);
+        }
+
         public List<Intervencion> GetIntervenciones()
         {
             return _intervecnionRepository.GetIntervenciones();
+        }
+
+        public Intervencion UpdateIntervencion(Intervencion newIntervencion)
+        {
+            return _intervecnionRepository.UpdateIntervencion(newIntervencion);
         }
     }
 }

@@ -19,12 +19,36 @@ namespace Infraestructura.Repository
 
         public Intervencion CreateIntervencion(Intervencion intervencion)
         {
-            throw new NotImplementedException();
+            _watchFactory.Intervenciones.Add(intervencion);
+            _watchFactory.SaveChanges();
+
+            return intervencion;
+        }
+
+        public Intervencion DeleteIntervencion(Intervencion intervencion)
+        {
+            _watchFactory.Intervenciones.Remove(intervencion);
+            _watchFactory.SaveChanges();
+            
+            return intervencion;
+        }
+
+        public Intervencion GetIntervencion(int id)
+        {
+            return _watchFactory.Intervenciones.FirstOrDefault(e => e.Id == id);
         }
 
         public List<Intervencion> GetIntervenciones()
         {
-            throw new NotImplementedException();
+            return _watchFactory.Intervenciones.ToList();
+        }
+
+        public Intervencion UpdateIntervencion(Intervencion newIntervencion)
+        {
+            _watchFactory.Intervenciones.Update(newIntervencion);
+            _watchFactory.SaveChanges();
+
+            return newIntervencion;
         }
     }
 }
