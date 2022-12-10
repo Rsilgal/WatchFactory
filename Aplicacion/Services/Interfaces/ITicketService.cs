@@ -11,5 +11,11 @@ namespace Aplicacion.Services.Interfaces
     {
         List<Ticket> GetTickets();
         Ticket CreateTicket(Ticket ticket);
+
+        Ticket UpdateTicket(Ticket newTicket);
+
+        Ticket DeleteTicket(Ticket ticket);
+
+        Ticket GetTicket(int id);
     }
 }

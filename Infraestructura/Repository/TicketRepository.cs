@@ -19,12 +19,36 @@ namespace Infraestructura.Repository
 
         public Ticket CreateTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            _watchFactory.Tickets.Add(ticket);
+            _watchFactory.SaveChanges();
+
+            return ticket;
+        }
+
+        public Ticket DeleteTicket(Ticket ticket)
+        {
+            _watchFactory.Tickets.Remove(ticket);
+            _watchFactory.SaveChanges();
+
+            return ticket;
+        }
+
+        public Ticket GetTicket(int id)
+        {
+            return _watchFactory.Tickets.FirstOrDefault(e => e.Id == id);
         }
 
         public List<Ticket> GetTickets()
         {
-            throw new NotImplementedException();
+            return _watchFactory.Tickets.ToList();
+        }
+
+        public Ticket UpdateTicket(Ticket newTicket)
+        {
+            _watchFactory.Tickets.Update(newTicket);
+            _watchFactory.SaveChanges();
+
+            return newTicket;
         }
     }
 }

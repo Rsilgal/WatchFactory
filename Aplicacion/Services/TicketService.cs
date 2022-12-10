@@ -23,9 +23,24 @@ namespace Aplicacion.Services
             return _ticketRepository.CreateTicket(ticket);
         }
 
+        public Ticket DeleteTicket(Ticket ticket)
+        {
+            return _ticketRepository.DeleteTicket(ticket);
+        }
+
+        public Ticket GetTicket(int id)
+        {
+            return _ticketRepository.GetTicket(id);
+        }
+
         public List<Ticket> GetTickets()
         {
             return _ticketRepository.GetTickets();
+        }
+
+        public Ticket UpdateTicket(Ticket newTicket)
+        {
+            return _ticketRepository.UpdateTicket(newTicket);
         }
     }
 }
