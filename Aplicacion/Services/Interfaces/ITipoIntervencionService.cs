@@ -10,6 +10,34 @@ namespace Aplicacion.Services.Interfaces
     public interface ITipoIntervencionService
     {
         List<TipoIntervencion> GetTipoIntervencion();
-        TipoIntervencion CreateTipoIntervencion(TipoIntervencion tipo);
+        
+        TipoIntervencion CreateTipoIntervencion(
+            {
+                string Descripcion,
+                int TicketID,
+                int EstadoIntervencionID,
+                int TipoIntervencionID
+            }
+        );
+        
+        Intervencion UpdateIntervencion(
+            {
+                string Descripcion,
+                int TicketID,
+                int EstadoIntervencionID,
+                int TipoIntervencionID
+            }
+        );
+
+        Intervencion DeleteIntervencion(
+            {
+                string Descripcion,
+                int TicketID,
+                int EstadoIntervencionID,
+                int TipoIntervencionID
+            }
+        );
+
+        Intervencion GetIntervencion(int id);
     }
 }
