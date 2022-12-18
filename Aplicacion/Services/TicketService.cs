@@ -18,13 +18,31 @@ namespace Aplicacion.Services
             _ticketRepository = ticketRepository;
         }
 
-        public Ticket CreateTicket(Ticket ticket)
+        public Ticket CreateTicket(
+            string Descripcion,
+            int MaquinaID,
+            int CategoriaID,
+            int UsuarioID,
+            int UrgenciaID,
+            int ZonaID,
+            int EstadoID
+            )
         {
+            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
             return _ticketRepository.CreateTicket(ticket);
         }
 
-        public Ticket DeleteTicket(Ticket ticket)
+        public Ticket DeleteTicket(
+            string Descripcion,
+            int MaquinaID,
+            int CategoriaID,
+            int UsuarioID,
+            int UrgenciaID,
+            int ZonaID,
+            int EstadoID
+            )
         {
+            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
             return _ticketRepository.DeleteTicket(ticket);
         }
 
@@ -38,8 +56,17 @@ namespace Aplicacion.Services
             return _ticketRepository.GetTickets();
         }
 
-        public Ticket UpdateTicket(Ticket newTicket)
+        public Ticket UpdateTicket(
+            string Descripcion,
+            int MaquinaID,
+            int CategoriaID,
+            int UsuarioID,
+            int UrgenciaID,
+            int ZonaID,
+            int EstadoID
+            )
         {
+            Ticket newTicket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
             return _ticketRepository.UpdateTicket(newTicket);
         }
     }
