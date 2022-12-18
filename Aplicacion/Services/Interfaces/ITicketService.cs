@@ -22,6 +22,7 @@ namespace Aplicacion.Services.Interfaces
             );
 
         Ticket UpdateTicket(
+            int id,
             string Descripcion,
             int MaquinaID,
             int CategoriaID,
@@ -32,13 +33,7 @@ namespace Aplicacion.Services.Interfaces
             );
 
         Ticket DeleteTicket(
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
+            int id
             );
 
         Ticket GetTicket(int id);

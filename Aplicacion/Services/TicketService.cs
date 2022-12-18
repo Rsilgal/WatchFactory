@@ -33,16 +33,10 @@ namespace Aplicacion.Services
         }
 
         public Ticket DeleteTicket(
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
+            int id
             )
         {
-            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
+            var ticket = _ticketRepository.GetTicket(id);
             return _ticketRepository.DeleteTicket(ticket);
         }
 
@@ -57,6 +51,7 @@ namespace Aplicacion.Services
         }
 
         public Ticket UpdateTicket(
+            int id,
             string Descripcion,
             int MaquinaID,
             int CategoriaID,
@@ -66,7 +61,15 @@ namespace Aplicacion.Services
             int EstadoID
             )
         {
-            Ticket newTicket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
+            var newTicket = _ticketRepository.GetTicket(id);
+            newTicket.Descripcion= Descripcion;
+            newTicket.MaquinaID= MaquinaID;
+            newTicket.CategoriaID= CategoriaID;
+            newTicket.UsuarioID= UsuarioID;
+            newTicket.UrgenciaID= UrgenciaID;
+            newTicket.ZonaID= ZonaID;
+            newTicket.EstadoID= EstadoID;
+
             return _ticketRepository.UpdateTicket(newTicket);
         }
     }
