@@ -24,5 +24,13 @@ namespace Dominio.Modelos.Intervencion
 
         [ForeignKey("TipoIntervencionID")]
         public virtual TipoIntervencion TipoIntervencion { get; set; }
+
+        public Intervencion(string descripcion, int ticketID, int estadoIntervencionID, int tipoIntervencionID)
+        {
+            Descripcion = descripcion;
+            TicketID = ticketID;
+            EstadoIntervencionID = estadoIntervencionID;
+            TipoIntervencionID = tipoIntervencionID;
+        }
     }
 }
