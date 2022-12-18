@@ -29,5 +29,16 @@ namespace Dominio.Modelos.Nucleo
         public virtual Urgencia Urgencia { get; set; }
         [ForeignKey("ZonaID")]
         public virtual Zona Zona { get; set; }
+
+        public Ticket(string descripcion, int maquinaID, int categoriaID, int usuarioID, int urgenciaID, int zonaID, int estadoID)
+        {
+            Descripcion = descripcion;
+            MaquinaID = maquinaID;
+            CategoriaID = categoriaID;
+            UsuarioID = usuarioID;
+            UrgenciaID = urgenciaID;
+            ZonaID = zonaID;
+            EstadoID = estadoID;
+        }
     }
 }
