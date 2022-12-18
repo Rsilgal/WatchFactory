@@ -1,6 +1,8 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Configuracion;
 using Dominio.Modelos.Intervencion;
+using Dominio.Modelos.Nucleo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +20,16 @@ namespace Aplicacion.Services
             this._intervecnionRepository = intervecnionRepository;
         }
 
-        public Intervencion CreateIntervencion(Intervencion intervencion)
+        public Intervencion CreateIntervencion(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
         {
+            var intervencion = new Intervencion(Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
             _intervecnionRepository.CreateIntervencion(intervencion);
             return intervencion;
         }
 
-        public Intervencion DeleteIntervencion(Intervencion intervencion)
+        public Intervencion DeleteIntervencion(int id)
         {
+            var intervencion = _intervecnionRepository.GetIntervencion(id);
             return _intervecnionRepository.DeleteIntervencion(intervencion);
         }
 
@@ -39,8 +43,14 @@ namespace Aplicacion.Services
             return _intervecnionRepository.GetIntervenciones();
         }
 
-        public Intervencion UpdateIntervencion(Intervencion newIntervencion)
+        public Intervencion UpdateIntervencion(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
         {
+            var newIntervencion = _intervecnionRepository.GetIntervencion(id);
+            newIntervencion.Descripcion = Descripcion;
+            newIntervencion.TicketID = TicketID;
+            newIntervencion.EstadoIntervencionID = EstadoIntervencionID;
+            newIntervencion.TipoIntervencionID = TipoIntervencionID;
+
             return _intervecnionRepository.UpdateIntervencion(newIntervencion);
         }
     }

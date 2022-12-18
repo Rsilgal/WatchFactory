@@ -10,11 +10,11 @@ namespace Aplicacion.Services.Interfaces
     public interface IIntervencionService
     {
         List<Intervencion> GetIntervenciones();
-        Intervencion CreateIntervencion(Intervencion intervencion);
+        Intervencion CreateIntervencion(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID);
 
-        Intervencion UpdateIntervencion(Intervencion newIntervencion);
+        Intervencion UpdateIntervencion(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID);
 
-        Intervencion DeleteIntervencion(Intervencion intervencion);
+        Intervencion DeleteIntervencion(int id);
 
         Intervencion GetIntervencion(int id);
     }
