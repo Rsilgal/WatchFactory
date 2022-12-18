@@ -1,5 +1,4 @@
 ﻿using Aplicacion.Services;
-using Dominio.Modelos.Nucleo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,17 +32,34 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Ticket ticket)
+        public ActionResult Post(
+            string Descripcion,
+            int MaquinaID,
+            int CategoriaID,
+            int UsuarioID,
+            int UrgenciaID,
+            int ZonaID,
+            int EstadoID
+            )
         {
-            var newTicketFromService = _ticketService.CreateTicket(ticket);
+            var newTicketFromService = _ticketService.CreateTicket(Descripcion,MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
             if (newTicketFromService == null) return NotFound();
             return Ok(newTicketFromService);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(Ticket ticket) 
+        public ActionResult Put(
+            int id,
+            string Descripcion,
+            int MaquinaID,
+            int CategoriaID,
+            int UsuarioID,
+            int UrgenciaID,
+            int ZonaID,
+            int EstadoID
+            ) 
         {
-            var updatedTicketFromService = _ticketService.UpdateTicket(ticket);
+            var updatedTicketFromService = _ticketService.UpdateTicket(id, Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
             if (updatedTicketFromService == null) return NotFound();
             return Ok(updatedTicketFromService);
         }
@@ -51,8 +67,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var ticketFromService = _ticketService.GetTicket(id);
-            var deletedTicketFromService = _ticketService.DeleteTicket(ticketFromService);
+            var deletedTicketFromService = _ticketService.DeleteTicket(id);
             if (deletedTicketFromService == null) return NotFound();
             return Ok(deletedTicketFromService);
         }

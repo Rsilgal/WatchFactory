@@ -1,6 +1,4 @@
 ﻿using Aplicacion.Services;
-using Dominio.Modelos.Intervencion;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -33,17 +31,17 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Intervencion intervencion)
+        public ActionResult Post(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
         {
-            var newIntervencionFromService = _intervencionService.CreateIntervencion(intervencion);
+            var newIntervencionFromService = _intervencionService.CreateIntervencion(Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
             if (newIntervencionFromService == null) return NotFound();
             return Ok(newIntervencionFromService);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(Intervencion intervencion)
+        public ActionResult Update(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
         {
-            var updatedIntervencionFromService = _intervencionService.UpdateIntervencion(intervencion);
+            var updatedIntervencionFromService = _intervencionService.UpdateIntervencion(id, Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
             if (updatedIntervencionFromService == null) return NotFound();
             return Ok(updatedIntervencionFromService);
         }
@@ -51,8 +49,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var intervencionFromService = _intervencionService.GetIntervencion(id);
-            var deletedIntervencionFromService = _intervencionService.DeleteIntervencion(intervencionFromService);
+            var deletedIntervencionFromService = _intervencionService.DeleteIntervencion(id);
             if (deletedIntervencionFromService == null) return NotFound();
             return Ok(deletedIntervencionFromService);
         }
