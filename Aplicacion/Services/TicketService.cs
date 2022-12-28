@@ -4,6 +4,7 @@ using Dominio.Modelos.Nucleo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,6 +49,21 @@ namespace Aplicacion.Services
         public List<Ticket> GetTickets()
         {
             return _ticketRepository.GetTickets();
+        }
+
+        public List<Ticket> GetTicketsByFabrica(int FabricaID)
+        {
+            return _ticketRepository.GetTicketsByFabrica(FabricaID);
+        }
+
+        public List<Ticket> GetTicketsByLinea(int LineaID)
+        {
+            return _ticketRepository.GetTicketsByLinea(LineaID);
+        }
+
+        public List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID)
+        {
+            return _ticketRepository.GetTicketsByTipoMaquina(TipoMaquinaID);
         }
 
         public Ticket UpdateTicket(

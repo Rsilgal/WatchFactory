@@ -17,5 +17,8 @@ namespace Aplicacion.Repository
         Ticket DeleteTicket(Ticket ticket);
 
         Ticket GetTicket(int id);
+        List<Ticket> GetTicketsByFabrica(int FabricaID);
+        List<Ticket> GetTicketsByLinea(int LineaID);
+        List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID);
     }
 }

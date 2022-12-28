@@ -37,5 +37,8 @@ namespace Aplicacion.Services.Interfaces
             );
 
         Ticket GetTicket(int id);
+        List<Ticket> GetTicketsByFabrica(int FabricaID);
+        List<Ticket> GetTicketsByLinea(int LineaID);
+        List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID);
     }
 }
