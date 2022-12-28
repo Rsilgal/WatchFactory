@@ -17,13 +17,21 @@ builder.Services.AddDbContext<WatchFactoryDbContext>(options =>
     options.UseSqlServer(builder.Configuration
     .GetConnectionString("sqlServerDataBase")));
 
-builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddMvcCore().AddApiExplorer();
 
-builder.Services.AddScoped<IIntervencionService, IntervencionService>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
 builder.Services.AddScoped<IIntervencionRepository, IntervencionRepository>();
+builder.Services.AddScoped<IIntervencionService, IntervencionService>();
 
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var conetxt = scope.ServiceProvider.GetRequiredService<WatchFactoryDbContext>();
+//    conetxt.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
