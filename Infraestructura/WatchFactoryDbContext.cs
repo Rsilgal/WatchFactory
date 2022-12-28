@@ -24,7 +24,7 @@ namespace Infraestructura
         public DbSet<LineaProduccion> Lineas { get; set; }
         public DbSet<Maquina> Maquinas { get; set; }
         public DbSet<TipoMaquina> TipoMaquinas { get; set; }
-        public DbSet<Urgencia> Urgencias { get; set;}
+        public DbSet<Urgencia> Urgencias { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<EstadoIntervencion> EstadoIntervenciones { get; set; }
         public DbSet<TipoIntervencion> TipoIntervenciones { get; set; }
@@ -38,10 +38,10 @@ namespace Infraestructura
 
         // Tablas sin relacion directa con el núcleo del sistema
 
-        public DbSet<Auditoria> Auditorias { get; set; }
-        public DbSet<Empresa> Empresas { get; set; }
-        public DbSet<Estadistica> Estadisticas { get; set; }
-        public DbSet<Notificacion> Notificaciones { get; set; }
-        public DbSet<Reporte> Reportes { get; set; }
+        //public DbSet<Auditoria> Auditorias { get; set; }
+        //public DbSet<Empresa> Empresas { get; set; }
+        //public DbSet<Estadistica> Estadisticas { get; set; }
+        //public DbSet<Notificacion> Notificaciones { get; set; }
+        //public DbSet<Reporte> Reportes { get; set; }
     }
 }
