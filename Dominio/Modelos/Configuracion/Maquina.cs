@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Modelos.Configuracion
 {
-    public class Maquina
+    public class Maquina : EntidadBase<int>
     {
         public string Descripcion { get; set; } = string.Empty;
         public int LineaProduccionID { get; set; }

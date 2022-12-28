@@ -11,7 +11,7 @@ namespace Dominio.Modelos.Utils
 {
     public class Notificacion : EntidadBase<int>
     {
-        public Ticket Ticket { get; set; }
+        //public Ticket Ticket { get; set; }
         public Intervencion.Intervencion Intervencion { get; set; }
         public Zona Zona { get; set; }
     }

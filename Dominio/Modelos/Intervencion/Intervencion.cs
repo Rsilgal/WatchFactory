@@ -16,7 +16,7 @@ namespace Dominio.Modelos.Intervencion
         public int EstadoIntervencionID { get; set; }
         public int TipoIntervencionID { get; set; }
 
-        [ForeignKey("Ticket")]
+        [ForeignKey("TicketID")]
         public virtual Ticket Ticket { get; set; }
 
         [ForeignKey("EstadoIntervencionID")]

@@ -9,6 +9,7 @@ namespace Dominio.Modelos.Usuarios
 {
     public class Permiso : EntidadBase<int>
     {
+        public string Descripcion { get; set; }
         public IList<PermisoRol> PermisoRols { get; set; }
     }
 }
