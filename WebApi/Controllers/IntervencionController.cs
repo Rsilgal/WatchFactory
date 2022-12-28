@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Services;
+using Aplicacion.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -7,9 +8,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class IntervencionController : ControllerBase
     {
-        private readonly IntervencionService _intervencionService;
+        private readonly IIntervencionService _intervencionService;
 
-        public IntervencionController(IntervencionService intervencionService)
+        public IntervencionController(IIntervencionService intervencionService)
         {
             _intervencionService = intervencionService;
         }

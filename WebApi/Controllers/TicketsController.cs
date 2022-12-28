@@ -1,4 +1,6 @@
 ﻿using Aplicacion.Services;
+using Aplicacion.Services.Interfaces;
+using Infraestructura;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +10,9 @@ namespace WebApi.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
-        private readonly TicketService _ticketService;
+        private readonly ITicketService _ticketService;
 
-        public TicketsController(TicketService ticketService)
+        public TicketsController(ITicketService ticketService)
         {
             _ticketService = ticketService;
         }
