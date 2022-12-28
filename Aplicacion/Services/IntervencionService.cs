@@ -35,12 +35,34 @@ namespace Aplicacion.Services
 
         public Intervencion GetIntervencion(int id)
         {
-            return _intervecnionRepository.GetIntervencion(id);
+            //return _intervecnionRepository.GetIntervencion(id);
+            Intervencion test = new("Prueba", 1, 1,1);
+            return test;
         }
 
         public List<Intervencion> GetIntervenciones()
         {
             return _intervecnionRepository.GetIntervenciones();
+        }
+
+        public List<Intervencion> GetIntervencionesByFabrica(int FabricaID)
+        {
+            return _intervecnionRepository.GetIntervencionesByFabrica(FabricaID);
+        }
+
+        public List<Intervencion> GetIntervencionesByLinea(int LineaID)
+        {
+            return _intervecnionRepository.GetIntervencionesByLinea(LineaID);
+        }
+
+        public List<Intervencion> GetIntervencionesByMaquina(int MaquinaID)
+        {
+            return _intervecnionRepository.GetIntervencionesByMaquina(MaquinaID);
+        }
+
+        public List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
+        {
+            return _intervecnionRepository.GetIntervencionesByTipoIntervencion(TipoIntervencionID);
         }
 
         public Intervencion UpdateIntervencion(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)

@@ -17,5 +17,9 @@ namespace Aplicacion.Services.Interfaces
         Intervencion DeleteIntervencion(int id);
 
         Intervencion GetIntervencion(int id);
+        List<Intervencion> GetIntervencionesByFabrica(int FabricaID);
+        List<Intervencion> GetIntervencionesByLinea(int LineaID);
+        List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
+        List<Intervencion> GetIntervencionesByMaquina(int MaquinaID);
     }
 }

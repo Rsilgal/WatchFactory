@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Intervencion;
+using Dominio.Modelos.Nucleo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,55 @@ namespace Infraestructura.Repository
         public List<Intervencion> GetIntervenciones()
         {
             return _watchFactory.Intervenciones.ToList();
+        }
+
+        public List<Intervencion> GetIntervencionesByFabrica(int FabricaID)
+        {
+            var lineas = _watchFactory.Lineas.Where(e => e.FabricaID == FabricaID).ToList();
+            if (lineas == null) throw new Exception();
+
+            var maquinas = _watchFactory.Maquinas.Where(e => lineas.All(l => l.Id == e.LineaProduccionID)).ToList();
+            if (maquinas == null) throw new Exception();
+
+            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
+            if (tickets == null) throw new Exception();
+
+            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+
+            return intervenciones;
+        }
+
+        public List<Intervencion> GetIntervencionesByLinea(int LineaID)
+        {
+            var maquinas = _watchFactory.Maquinas.Where(e => e.LineaProduccionID== LineaID).ToList();
+            if (maquinas==null) throw new Exception();
+
+            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
+            if (tickets == null) throw new Exception();
+
+            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+
+            return intervenciones;
+        }
+
+        public List<Intervencion> GetIntervencionesByMaquina(int MaquinaID)
+        {
+            var maquinas = _watchFactory.Maquinas.Where(e => e.Id == MaquinaID).ToList();
+            if (maquinas == null) throw new Exception();
+
+            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
+            if (tickets == null) throw new Exception();
+
+            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+
+            return intervenciones;
+        }
+
+        public List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
+        {
+            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => e.TipoIntervencionID == TipoIntervencionID).ToList();
+
+            return intervenciones;
         }
 
         public Intervencion UpdateIntervencion(Intervencion newIntervencion)

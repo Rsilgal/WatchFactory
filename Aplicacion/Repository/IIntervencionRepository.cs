@@ -17,5 +17,10 @@ namespace Aplicacion.Repository
         Intervencion DeleteIntervencion(Intervencion intervencion);
 
         Intervencion GetIntervencion(int id);
+        List<Intervencion> GetIntervencionesByFabrica(int FabricaID);
+        List<Intervencion> GetIntervencionesByLinea(int LineaID);
+        List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
+        List<Intervencion> GetIntervencionesByMaquina(int MaquinaID);
+
     }
 }
