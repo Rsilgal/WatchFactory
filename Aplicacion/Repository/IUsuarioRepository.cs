@@ -11,5 +11,8 @@ namespace Aplicacion.Repository
     {
         List<Usuario> GetUsuarios();
         Usuario CreateUsuario(Usuario usuario);
+        Usuario UpdateUsuario(Usuario usuario);
+        Usuario DeleteUsuario(Usuario usuario);
+        Usuario GetUsuario(int id);
     }
 }

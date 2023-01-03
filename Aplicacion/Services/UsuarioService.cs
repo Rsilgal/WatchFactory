@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Repository;
+using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacion.Services
 {
-    public class UsuarioService : IUsuarioRepository
+    public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
 
@@ -17,15 +18,39 @@ namespace Aplicacion.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public Usuario CreateUsuario(Usuario usuario)
+        public Usuario CreateUsuario(string Nombre, string Email, string Password)
         {
+            var usuario = new Usuario(Nombre, Email, Password);
             _usuarioRepository.CreateUsuario(usuario);
             return usuario;
+        }
+
+        public Usuario DeleteUsuario(int id)
+        {
+            var usuario = _usuarioRepository.GetUsuario(id);
+            return _usuarioRepository.DeleteUsuario(usuario);
+        }
+
+        public Usuario GetUsuario(int id)
+        {
+            return _usuarioRepository.GetUsuario(id);
         }
 
         public List<Usuario> GetUsuarios()
         {
             return _usuarioRepository.GetUsuarios();
+        }
+
+        public Usuario UpdateUsuario(int id, string Nombre, string Email, string Password, bool Eliminado, IList<RolUsuario> RolUsuario)
+        {
+            var usuario = _usuarioRepository.GetUsuario(id);
+            usuario.Nombre= Nombre;
+            usuario.Email= Email;
+            usuario.Password= Password;
+            usuario.Eliminado = Eliminado;
+            usuario.RolUsuarios= RolUsuario;
+
+            return _usuarioRepository.UpdateUsuario(usuario);
         }
     }
 }

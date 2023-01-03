@@ -10,8 +10,12 @@ namespace Dominio.Modelos.Usuarios
     public class Usuario : EntidadBase<int>
     {
         public string Nombre { get; set; } = string.Empty;
-        public string email { get; set; } = string.Empty;
-        public bool eliminado { get; set; } = false;
+        public string Email { get; set; } = string.Empty;
+        public byte[] passwodrHash { get; set; }
+        public byte[] passwordSalt { get; set; }
+        public bool Eliminado { get; set; } = false;
         public IList<RolUsuario> RolUsuarios { get; set; }
+
+        //public Usuario(string Nombre, string Email, string Password) { }
     }
 }

@@ -19,12 +19,33 @@ namespace Infraestructura.Repository
 
         public Usuario CreateUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _watchFactory.Usuarios.Add(usuario);
+            _watchFactory.SaveChanges();
+            return usuario;
+        }
+
+        public Usuario DeleteUsuario(Usuario usuario)
+        {
+            _watchFactory.Usuarios.Remove(usuario);
+            _watchFactory.SaveChanges();
+            return usuario;
+        }
+
+        public Usuario GetUsuario(int id)
+        {
+            return _watchFactory.Usuarios.FirstOrDefault(e => e.Id == id);
         }
 
         public List<Usuario> GetUsuarios()
         {
-            throw new NotImplementedException();
+            return _watchFactory.Usuarios.ToList();
+        }
+
+        public Usuario UpdateUsuario(Usuario usuario)
+        {
+            _watchFactory.Usuarios.Update(usuario);
+            _watchFactory.SaveChanges();
+            return usuario;
         }
     }
 }

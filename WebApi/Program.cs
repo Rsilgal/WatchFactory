@@ -3,7 +3,12 @@ using Aplicacion.Services;
 using Aplicacion.Services.Interfaces;
 using Infraestructura;
 using Infraestructura.Repository;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using WebApi.Security;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +30,24 @@ builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IIntervencionRepository, IntervencionRepository>();
 builder.Services.AddScoped<IIntervencionService, IntervencionService>();
 
+builder.Services.AddScoped<IUserService, UserService>();
+
+//builder.Services.AddAuthentication("BasicAuthentication")
+//    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
 var app = builder.Build();
 
 //using (var scope = app.Services.CreateScope())
@@ -42,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
