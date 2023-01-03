@@ -17,7 +17,7 @@ namespace WatchFactory_Client.Services.Interfaces
 
         Task CreateTicket(Ticket ticket);
         Task UpdateTicket(Ticket ticket);
-        Task DeleteTicket(Ticket ticket);
+        Task DeleteTicket(int id);
         Task GetAllTicket();
         Task<Ticket> GetTicket(int id);
     }

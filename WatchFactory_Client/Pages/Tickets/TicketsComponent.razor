@@ -1,0 +1,52 @@
+﻿@page "/ticket"
+@inject ITicketService TicketService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Tickets</PageTitle>
+
+<h3>Tickets</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Estado</th>
+            <th>Linea</th>
+            <th>Maquina</th>
+            <th>Descripción</th>
+            <th>Urgencia</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var ticket in TicketService.Tickets)
+        {
+            <tr>
+                <td>@ticket.Estado.Descripcion</td>
+                <td>@ticket.Maquina.LineaProduccion.Descripcion</td>
+                <td>@ticket.Maquina.Descripcion</td>
+                <td>@ticket.Descripcion</td>
+                <td>@ticket.Urgencia.Descripcion</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(() => ShowTicket(ticket.Id))"><i class="oi oi-pencil"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await TicketService.GetAllTicket();
+    }
+
+    void ShowTicket(int id)
+    {
+        NavigationManager.NavigateTo($"/ticket/{id}");
+    }
+
+    void CreateTicket()
+    {
+        NavigationManager.NavigateTo("/ticket");
+    }
+}

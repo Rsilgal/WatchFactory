@@ -1,3 +1,4 @@
+global using Dominio.Modelos.Nucleo;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WatchFactory_Client;

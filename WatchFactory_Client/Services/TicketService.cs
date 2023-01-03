@@ -36,9 +36,9 @@ namespace WatchFactory_Client.Services
             await SetTickets(result);
         }
 
-        public async Task DeleteTicket(Ticket ticket)
+        public async Task DeleteTicket(int id)
         {
-            var result = await _http.DeleteAsync($"api/ticket/{ticket.Id}");
+            var result = await _http.DeleteAsync($"api/ticket/{id}");
             await SetTickets(result);
         }
 

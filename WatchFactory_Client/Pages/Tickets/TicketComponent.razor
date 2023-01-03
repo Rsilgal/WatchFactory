@@ -1,0 +1,152 @@
+﻿@page "/ticket"
+@page "/ticket/{id:int}"
+@inject ITicketService TicketService
+
+@if (Id == null)
+{
+    <PageTitle>Crear un ticket</PageTitle>
+    <h3>Nuevo Ticket</h3>
+}
+else
+{
+    <PageTitle>Actualizar un ticket</PageTitle>
+    <h3>Actualiza un Ticket</h3>
+}
+
+<EditForm Model="tkt" OnSubmit="HandleSubmit">
+@*    <div>
+        <label>Fabrica</label> <br />
+        <InputSelect @bind-Value="tkt.Maquina.LineaProduccion.FabricaID" class="form-select">
+            @foreach (var fabrica in TicketService.Fabricas)
+            {
+                <option value="@fabrica.Id">@fabrica.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Linea</label> <br />
+        <InputSelect @bind-Value="tkt.Maquina.LineaProduccionID" class="form-select">
+            @foreach (var linea in TicketService.Lineas)
+            {
+                <option value="@linea.Id">@linea.Descripcion</option>
+            }
+        </InputSelect>
+    </div>*@
+    <div>
+        <label>Maquina</label> <br />
+        <InputSelect @bind-Value="tkt.MaquinaID" class="form-select">
+            @foreach(var maquina in TicketService.Maquinas)
+            {
+                <option value="@maquina.Id">@maquina.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Urgencia</label> <br />
+        <InputSelect @bind-Value="tkt.UrgenciaID" class="form-select">
+            @foreach (var urgencia in TicketService.Urgencias)
+            {
+                <option value="@urgencia.Id">@urgencia.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Categoria</label> <br />
+        <InputSelect @bind-Value="tkt.CategoriaID" class="form-select">
+            @foreach (var categoria in TicketService.Categorias)
+            {
+                <option value="@categoria.Id">@categoria.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Estado</label> <br />
+        <InputSelect @bind-Value="tkt.EstadoID" class="form-select">
+            @foreach (var estado in TicketService.Estados)
+            {
+                <option value="@estado.Id">@estado.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label>Zona</label> <br />
+        <InputSelect @bind-Value="tkt.ZonaID" class="form-select">
+            @foreach (var zona in TicketService.Zona)
+            {
+                <option value="@zona.Id">@zona.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label for="descripcion">Descripción</label>
+        <InputText id="descripcion" @bind-Value="tkt.Descripcion" class="form-control"></InputText>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" @onclick="DeleteSubmit" class="btn btn-danger">Eliminar Ticket</button>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    string btnText = string.Empty;
+
+    // TODO: Hacer que sea el usuario logueado el que crea el ticket
+    Ticket tkt = new Ticket("Descripcion",1,1,1,1,1,1);
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = Id == null ? "Crear" : "Actualizar";
+        // TODO: Obtener todos los parámetros de configuración desde la base de datos.
+        // await TicketService.GetMaquinas();
+        // ...
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id == null)
+        {
+            // Fabrica
+            // Linea
+            tkt.Maquina = TicketService.Maquinas[0];
+            tkt.MaquinaID = tkt.Maquina.Id;
+            tkt.Urgencia = TicketService.Urgencias[0];
+            tkt.UrgenciaID = tkt.Urgencia.Id;
+            tkt.Categoria = TicketService.Categorias[0];
+            tkt.CategoriaID = tkt.Categoria.Id;
+            tkt.Estado = TicketService.Estados[0];
+            tkt.EstadoID = tkt.Estado.Id;
+            tkt.Zona = TicketService.Zona[0];
+            tkt.ZonaID = tkt.Zona.Id;
+            tkt.Descripcion = string.Empty;
+        }
+        else
+        {
+            tkt = await TicketService.GetTicket((int)Id);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if (Id == null)
+        {
+            //Creamos el ticket
+            await TicketService.CreateTicket(tkt);
+        }
+        else
+        {
+            // Actualizamos
+            await TicketService.UpdateTicket(tkt);
+        }
+    }
+
+    async Task DeleteSubmit()
+    {
+        // Eliminamos el ticket
+        await TicketService.DeleteTicket(tkt.Id);
+    }
+
+}
