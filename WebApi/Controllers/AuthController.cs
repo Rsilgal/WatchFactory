@@ -11,7 +11,7 @@ namespace WebApi.Controllers
 {
     public class AuthController : Controller
     {
-        Usuario usuario = new Usuario(); // Esto es porque no se usar persisencia (Editar para la base de datos)
+        Usuario usuario = new Usuario(); // Modificar para usar la base de datos, definido así para realizar pruebas.
         private readonly IConfiguration _configuration;
 
         public AuthController(IConfiguration configuration)
