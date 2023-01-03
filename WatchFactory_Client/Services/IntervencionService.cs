@@ -1,0 +1,62 @@
+﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Intervencion;
+using Dominio.Modelos.Nucleo;
+using System.Net.Http.Json;
+using WatchFactory_Client.Services.Interfaces;
+
+namespace WatchFactory_Client.Services
+{
+    public class IntervencionService : IIntervencionService
+    {
+        private readonly HttpClient _http;
+
+        public IntervencionService(HttpClient http)
+        {
+            _http = http;
+        }
+
+        public List<Intervencion> Intervenciones { get; set; }
+        public List<Ticket> Tickets { get; set; }
+        public List<EstadoIntervencion> Estados { get; set; }
+        public List<TipoIntervencion> Tipos { get; set; }
+
+        public async Task CreateIntervencion(Intervencion intervencion)
+        {
+            var result = await _http.PostAsJsonAsync($"api/intervencion", intervencion);
+            await SetIntervencion(result);
+        }
+
+        public async Task DeleteIntervencion(int id)
+        {
+            var result = await _http.DeleteAsync($"api/intervencion/{id}");
+            await SetIntervencion(result);
+        }
+
+        public async Task<Intervencion> GetIntervencion(int id)
+        {
+            var result = await _http.GetFromJsonAsync<Intervencion>($"api/intervencion/{id}");
+            if (result != null)
+                return result;
+            throw new Exception("No se encontro ninguna intervencion.");
+        }
+
+        public async Task GetIntervenciones()
+        {
+            var result = await _http.GetFromJsonAsync<List<Intervencion>>("api/intervencion");
+            if (result != null)
+                Intervenciones = result;
+        }
+
+        public async Task UpdateIntervencion(Intervencion intervencion)
+        {
+            var result = await _http.PutAsJsonAsync($"api/intervencion/{intervencion.Id}", intervencion);
+            await SetIntervencion(result);
+        }
+
+        private async Task SetIntervencion(HttpResponseMessage result)
+        {
+            var response = await result.Content.ReadFromJsonAsync<List<Intervencion>>();
+            Intervenciones = response;
+        }
+    }
+}
