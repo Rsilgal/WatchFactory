@@ -1,4 +1,5 @@
 global using Dominio.Modelos.Nucleo;
+global using Dominio.Modelos.Intervencion;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WatchFactory_Client;
@@ -13,5 +14,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IIntervencionService, IntervencionService>();
+builder.Services.AddScoped<IConfiguracionService, ConfiguracionService>();
 
 await builder.Build().RunAsync();
