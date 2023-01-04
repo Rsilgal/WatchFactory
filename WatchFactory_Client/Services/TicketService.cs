@@ -1,5 +1,4 @@
 ﻿using Dominio.Modelos.Configuracion;
-using Dominio.Modelos.Nucleo;
 using Dominio.Modelos.Usuarios;
 using System.Net.Http.Json;
 using WatchFactory_Client.Services.Interfaces;
@@ -18,7 +17,7 @@ namespace WatchFactory_Client.Services
             _configurationService = configuracionService;
         }
 
-        public List<Fabrica> Fabricas { get; set; } = new(); 
+        public List<Fabrica> Fabricas { get; set; } = new();
         public List<LineaProduccion> Lineas { get; set; } = new();
 
         public List<Maquina> Maquinas { get; set; } = new();

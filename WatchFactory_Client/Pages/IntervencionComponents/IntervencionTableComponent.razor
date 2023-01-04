@@ -5,7 +5,7 @@
 <PageTitle>Intervenciones</PageTitle>
 
 <h3>Tabla de intervenciones</h3>
-
+ 
 <table class="table">
     <thead>
         <tr>
@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var intervencion in IntervencionService.Intervenciones)
+        @* @foreach (var intervencion in IntervencionService.Intervenciones)
         {
             <tr>
                 <td>@intervencion.EstadoIntervencion.Descripcion</td>
@@ -31,16 +31,16 @@
                     <button class="btn btn-primary" @onclick="(() => ShowIntervencion(intervencion.Id))"><i class="oi oi-pencil"></i></button>
                 </td>
             </tr>            
-        }
+        } *@
     </tbody>
 </table>
-<button class="btn btn-primary" @onclick="CreateIntervencion"> Crear Intervencion</button>
+<button class="btn btn-primary" @onclick="CreateIntervencion"> Crear Intervencion</button> 
 
 @code{
-        protected override async Task OnInitializedAsync()
-        {
-            await IntervencionService.GetIntervenciones();
-        }
+    protected override async Task OnInitializedAsync()
+    {
+        await IntervencionService.GetIntervenciones();
+    }
 
     void ShowIntervencion(int id) {
         NavigationManager.NavigateTo($"/intervencion/{id}");
