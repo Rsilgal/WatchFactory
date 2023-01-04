@@ -10,11 +10,16 @@ namespace WatchFactory_Client.Services
     {
 
         private readonly HttpClient _http;
+        private readonly IConfiguracionService _configurationService;
 
-        public TicketService(HttpClient http)
+        public TicketService(HttpClient http, IConfiguracionService configuracionService)
         {
             _http = http;
+            _configurationService = configuracionService;
         }
+
+        public List<Fabrica> Fabricas { get; set; } = new(); 
+        public List<LineaProduccion> Lineas { get; set; } = new();
 
         public List<Maquina> Maquinas { get; set; } = new();
 
@@ -24,7 +29,7 @@ namespace WatchFactory_Client.Services
 
         public List<Urgencia> Urgencias { get; set; } = new();
 
-        public List<Zona> Zona { get; set; } = new();
+        public List<Zona> Zonas { get; set; } = new();
 
         public List<EstadoIntervencion> Estados { get; set; } = new();
 
@@ -67,6 +72,56 @@ namespace WatchFactory_Client.Services
         {
             var result = await _http.PutAsJsonAsync<Ticket>($"api/ticket/{ticket.Id}", ticket);
             await SetTickets(result);
+        }
+
+        public async Task GetFabricas()
+        {
+            await _configurationService.GetFabricas();
+            Fabricas = _configurationService.Fabricas;
+        }
+
+        // TODO: Revisar
+        public async Task GetLineas()
+        {
+            await _configurationService.GetLineas();
+            Lineas = _configurationService.Lineas;
+        }
+
+        // TODO: Revisar
+        public async Task GetMaquinas()
+        {
+            await _configurationService.GetMaquinas();
+            Maquinas = _configurationService.Maquinas;
+        }
+
+        public async Task GetCategorias()
+        {
+            await _configurationService.GetCategorias();
+            Categorias = _configurationService.Categorias;
+        }
+
+        public async Task GetUsuarios()
+        {
+            await _configurationService.GetUsuarios();
+            Usuarios = _configurationService.Usuarios;
+        }
+
+        public async Task GetUrgencias()
+        {
+            await _configurationService.GetUrgencias();
+            Urgencias = _configurationService.Urgencias;
+        }
+
+        public async Task GetZonas()
+        {
+            await _configurationService.GetZonas();
+            Zonas = _configurationService.Zonas;
+        }
+
+        public async Task GetEstados()
+        {
+            await _configurationService.GetEstados();
+            Estados = _configurationService.Estados;
         }
     }
 }

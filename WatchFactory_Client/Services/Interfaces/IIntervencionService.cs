@@ -16,5 +16,7 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreateIntervencion(Intervencion intervencion);
         Task DeleteIntervencion(int id);
         Task UpdateIntervencion(Intervencion intervencion);
+        Task GetEstadoIntervencion();
+        Task GetTipoIntervencion();
     }
 }
