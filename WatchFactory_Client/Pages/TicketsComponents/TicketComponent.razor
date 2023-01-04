@@ -14,7 +14,7 @@ else
 }
 
 <EditForm Model="tkt" OnSubmit="HandleSubmit">
-@*    <div>
+    <div>
         <label>Fabrica</label> <br />
         <InputSelect @bind-Value="tkt.Maquina.LineaProduccion.FabricaID" class="form-select">
             @foreach (var fabrica in TicketService.Fabricas)
@@ -31,7 +31,7 @@ else
                 <option value="@linea.Id">@linea.Descripcion</option>
             }
         </InputSelect>
-    </div>*@
+    </div>
     <div>
         <label>Maquina</label> <br />
         <InputSelect @bind-Value="tkt.MaquinaID" class="form-select">
@@ -71,7 +71,7 @@ else
     <div>
         <label>Zona</label> <br />
         <InputSelect @bind-Value="tkt.ZonaID" class="form-select">
-            @foreach (var zona in TicketService.Zona)
+            @foreach (var zona in TicketService.Zonas)
             {
                 <option value="@zona.Id">@zona.Descripcion</option>
             }
@@ -100,9 +100,14 @@ else
     protected override async Task OnInitializedAsync()
     {
         btnText = Id == null ? "Crear" : "Actualizar";
-        // TODO: Obtener todos los parámetros de configuración desde la base de datos.
-        // await TicketService.GetMaquinas();
-        // ...
+        await TicketService.GetFabricas();
+        await TicketService.GetLineas();
+        await TicketService.GetMaquinas();
+        await TicketService.GetCategorias();
+        await TicketService.GetEstados();
+        await TicketService.GetUrgencias();
+        await TicketService.GetUsuarios();
+        await TicketService.GetZonas();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -119,7 +124,7 @@ else
             tkt.CategoriaID = tkt.Categoria.Id;
             tkt.Estado = TicketService.Estados[0];
             tkt.EstadoID = tkt.Estado.Id;
-            tkt.Zona = TicketService.Zona[0];
+            tkt.Zona = TicketService.Zonas[0];
             tkt.ZonaID = tkt.Zona.Id;
             tkt.Descripcion = string.Empty;
         }

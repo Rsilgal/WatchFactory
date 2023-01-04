@@ -1,0 +1,86 @@
+@page "/intervencion"
+@page "/intervencion/{id:int}"
+@inject IIntervencionService IntervencionService
+
+@if (Id == null)
+{
+    <PageTitle>Crear una nueva intervencion</PageTitle>
+    <h3>Nueva intervencion</h3>
+}
+else 
+{
+    <PageTitle>Actualizar una intervencion</PageTitle>
+    <h3>Actualizar intervencion</h3>
+}
+
+<EditForm Model="intervencion" OnSubmit="HandleSubmit">
+    <div>
+        <InputSelect @bind-Value="intervencion.TipoIntervencionID" class="form-select">
+        @foreach (var tipo in IntervencionService.Tipos)
+        {
+            <option value="@tipo.Id">@tipo.Descripcion</option>
+        }
+        </InputSelect>
+    </div>
+    <div>
+        <InputSelect @bind-Value="intervencion.EstadoIntervencionID" class="form-select">
+        @foreach (var estado in IntervencionService.Estados)
+        {
+            <option value="@estado.Id">@estado.Descripcion</option>
+        }
+        </InputSelect>
+    </div>
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" @bind-Value="intervencion.Descripcion" class="form-control"></InputText>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar Intervencion</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    string btnText = string.Empty;
+    Intervencion intervencion = new Intervencion("", 1, 1, 1);
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = Id == null ? "Crear" : "Actualizar";
+        await IntervencionService.GetEstadoIntervencion();
+        await IntervencionService.GetTipoIntervencion();
+
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id == null) {
+            intervencion.Descripcion = string.Empty;
+            intervencion.EstadoIntervencion = IntervencionService.Estados[0];
+            intervencion.EstadoIntervencionID = intervencion.EstadoIntervencion.Id;
+            intervencion.TipoIntervencion = IntervencionService.Tipos[0];
+            intervencion.TipoIntervencionID = intervencion.TipoIntervencion.Id;
+        }
+        else{
+            intervencion = await IntervencionService.GetIntervencion((int)Id);
+        }
+    }
+
+    async Task HandleSubmit() {
+        if (Id == null) {
+            await IntervencionService.CreateIntervencion(intervencion);
+        }
+        else {
+            await IntervencionService.UpdateIntervencion(intervencion);
+        }
+    }
+
+    async Task DeleteSubmit() {
+        await IntervencionService.DeleteIntervencion(intervencion.Id);
+    }
+}
+
+
+
+
