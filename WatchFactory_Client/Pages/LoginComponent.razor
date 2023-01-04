@@ -1,0 +1,23 @@
+@page "/login"
+
+<h3>Login</h3>
+
+<EditForm Model="usuario" OnSubmit="HandleLogin">
+    <div class="form-group">
+        <label for="username">Usuario</label>
+        <InputText id="username" @bind-Value="usuario.Nombre" class="form-control"></InputText>
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña</label>
+        <InputText id="password" @bind-Value="usuario.Email" type="password" class="form-control"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+@code {
+    private Usuario usuario = new Usuario();
+
+    private void HandleLogin() {
+
+    }
+}

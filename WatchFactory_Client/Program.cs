@@ -1,5 +1,7 @@
 global using Dominio.Modelos.Nucleo;
 global using Dominio.Modelos.Intervencion;
+global using Dominio.Modelos.Usuarios;
+
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WatchFactory_Client;
