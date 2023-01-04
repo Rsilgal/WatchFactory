@@ -17,7 +17,7 @@ namespace Dominio.Modelos.Nucleo
         public int UsuarioID { get; set; }
         public int UrgenciaID { get; set; }
         public int ZonaID { get; set; }
-        public int EstadoID { get; set; }
+        public string Estado { get; set; }
 
         [ForeignKey("MaquinaID")]
         public virtual Maquina Maquina { get; set; }
@@ -29,10 +29,8 @@ namespace Dominio.Modelos.Nucleo
         public virtual Urgencia Urgencia { get; set; }
         [ForeignKey("ZonaID")]
         public virtual Zona Zona { get; set; }
-        [ForeignKey("EstadoID")]
-        public virtual EstadoIntervencion Estado { get; set; }
 
-        public Ticket(string descripcion, int maquinaID, int categoriaID, int usuarioID, int urgenciaID, int zonaID, int estadoID)
+        public Ticket(string descripcion, int maquinaID, int categoriaID, int usuarioID, int urgenciaID, int zonaID)
         {
             Descripcion = descripcion;
             MaquinaID = maquinaID;
@@ -40,7 +38,6 @@ namespace Dominio.Modelos.Nucleo
             UsuarioID = usuarioID;
             UrgenciaID = urgenciaID;
             ZonaID = zonaID;
-            EstadoID = estadoID;
         }
     }
 }

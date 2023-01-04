@@ -48,8 +48,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         btnText = Id == null ? "Crear" : "Actualizar";
-        await IntervencionService.GetEstadoIntervencion();
-        await IntervencionService.GetTipoIntervencion();
+        //await IntervencionService.GetEstadoIntervencion();
+        //await IntervencionService.GetTipoIntervencion();
 
     }
 
@@ -57,10 +57,10 @@ else
     {
         if (Id == null) {
             intervencion.Descripcion = string.Empty;
-            intervencion.EstadoIntervencion = IntervencionService.Estados[0];
-            intervencion.EstadoIntervencionID = intervencion.EstadoIntervencion.Id;
-            intervencion.TipoIntervencion = IntervencionService.Tipos[0];
-            intervencion.TipoIntervencionID = intervencion.TipoIntervencion.Id;
+            //intervencion.EstadoIntervencion = IntervencionService.Estados[0];
+            //intervencion.EstadoIntervencionID = intervencion.EstadoIntervencion.Id;
+            //intervencion.TipoIntervencion = IntervencionService.Tipos[0];
+            //intervencion.TipoIntervencionID = intervencion.TipoIntervencion.Id;
         }
         else{
             intervencion = await IntervencionService.GetIntervencion((int)Id);

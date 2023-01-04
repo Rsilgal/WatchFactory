@@ -19,22 +19,22 @@
         </tr>
     </thead>
     <tbody>
-        @* @foreach (var intervencion in IntervencionService.Intervenciones)
+        @foreach (var intervencion in IntervencionService.Intervenciones)
         {
             <tr>
-                <td>@intervencion.EstadoIntervencion.Descripcion</td>
-                <td>@intervencion.TipoIntervencion.Descripcion</td>
-                <td>@intervencion.Ticket.Maquina.LineaProduccion.Fabrica.Descripcion</td>
-                <td>@intervencion.Ticket.Maquina.LineaProduccion.Descripcion</td>
-                <td>@intervencion.Ticket.Urgencia.Descripcion</td>
+                <td>"intervencion.EstadoIntervencion.Descripcion"</td>
+                <td>"intervencion.TipoIntervencion.Descripcion"</td>
+                <td>"intervencion.Ticket.Maquina.LineaProduccion.Fabrica.Descripcion"</td>
+                <td>"intervencion.Ticket.Maquina.LineaProduccion.Descripcion"</td>
+                <td>"intervencion.Ticket.Urgencia.Descripcion""</td>
                 <td>
                     <button class="btn btn-primary" @onclick="(() => ShowIntervencion(intervencion.Id))"><i class="oi oi-pencil"></i></button>
                 </td>
             </tr>            
-        } *@
+        }
     </tbody>
 </table>
-<button class="btn btn-primary" @onclick="CreateIntervencion"> Crear Intervencion</button> 
+<button class="btn btn-primary" @onclick="CreateIntervencion">Crear Intervencion</button> 
 
 @code{
     protected override async Task OnInitializedAsync()

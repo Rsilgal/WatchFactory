@@ -29,7 +29,7 @@ namespace Aplicacion.Services
             int EstadoID
             )
         {
-            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
+            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID);
             return _ticketRepository.CreateTicket(ticket);
         }
 
@@ -84,7 +84,6 @@ namespace Aplicacion.Services
             newTicket.UsuarioID= UsuarioID;
             newTicket.UrgenciaID= UrgenciaID;
             newTicket.ZonaID= ZonaID;
-            newTicket.EstadoID= EstadoID;
 
             return _ticketRepository.UpdateTicket(newTicket);
         }

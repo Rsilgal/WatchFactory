@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WebApi.Security;
-using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,10 +28,15 @@ builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IIntervencionRepository, IntervencionRepository>();
 builder.Services.AddScoped<IIntervencionService, IntervencionService>();
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
-//builder.Services.AddAuthentication("BasicAuthentication")
-//    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Mis cors", builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()
+    );
+});
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -64,6 +67,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("Mis cors");
 
 app.UseAuthentication();
 app.UseAuthorization();

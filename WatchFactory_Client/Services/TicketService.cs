@@ -36,13 +36,13 @@ namespace WatchFactory_Client.Services
 
         public async Task CreateTicket(Ticket ticket)
         {
-            var result = await _http.PostAsJsonAsync<Ticket>($"api/ticket", ticket);
+            var result = await _http.PostAsJsonAsync<Ticket>($"api/tickets", ticket);
             await SetTickets(result);
         }
 
         public async Task DeleteTicket(int id)
         {
-            var result = await _http.DeleteAsync($"api/ticket/{id}");
+            var result = await _http.DeleteAsync($"api/tickets/{id}");
             await SetTickets(result);
         }
 
@@ -54,14 +54,14 @@ namespace WatchFactory_Client.Services
 
         public async Task GetAllTicket()
         {
-            var result = await _http.GetFromJsonAsync<List<Ticket>>("api/ticket");
+            var result = await _http.GetFromJsonAsync<List<Ticket>>("api/tickets");
             if (result != null)
                 Tickets = result;
         }
 
         public async Task<Ticket> GetTicket(int id)
         {
-            var result = await _http.GetFromJsonAsync<Ticket>($"api/ticket/{id}");
+            var result = await _http.GetFromJsonAsync<Ticket>($"api/tickets/{id}");
             if (result != null)
                 return result;
             throw new Exception("Ticket no encontrado!");
@@ -69,7 +69,7 @@ namespace WatchFactory_Client.Services
 
         public async Task UpdateTicket(Ticket ticket)
         {
-            var result = await _http.PutAsJsonAsync<Ticket>($"api/ticket/{ticket.Id}", ticket);
+            var result = await _http.PutAsJsonAsync<Ticket>($"api/tickets/{ticket.Id}", ticket);
             await SetTickets(result);
         }
 

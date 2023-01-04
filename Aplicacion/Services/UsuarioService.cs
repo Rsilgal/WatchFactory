@@ -18,9 +18,8 @@ namespace Aplicacion.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public Usuario CreateUsuario(string Nombre, string Email, string Password)
+        public Usuario CreateUsuario(Usuario usuario)
         {
-            var usuario = new Usuario(Nombre, Email, Password);
             _usuarioRepository.CreateUsuario(usuario);
             return usuario;
         }
@@ -46,7 +45,7 @@ namespace Aplicacion.Services
             var usuario = _usuarioRepository.GetUsuario(id);
             usuario.Nombre= Nombre;
             usuario.Email= Email;
-            usuario.Password= Password;
+            //usuario= Password;
             usuario.Eliminado = Eliminado;
             usuario.RolUsuarios= RolUsuario;
 

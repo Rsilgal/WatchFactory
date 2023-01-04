@@ -27,13 +27,13 @@ namespace WebApi.Controllers
             return Ok(usuarioFromService);
         }
 
-        [HttpPost]
-        public ActionResult Post(string Nombre, string Email, string Password) 
-        {
-            var newUsuarioFromService = _usuarioService.CreateUsuario(Nombre, Email, Password);
-            if (newUsuarioFromService== null) return NotFound();
-            return Ok(newUsuarioFromService);
-        }
+        //[HttpPost]
+        //public ActionResult Post(usua) 
+        //{
+        //    var newUsuarioFromService = _usuarioService.CreateUsuario(Nombre, Email, Password);
+        //    if (newUsuarioFromService== null) return NotFound();
+        //    return Ok(newUsuarioFromService);
+        //}
 
         [HttpPut("{id}")]
         public ActionResult Put(int id, string Nombre, string Email, string Password, bool Eliminado)

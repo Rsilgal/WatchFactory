@@ -10,7 +10,7 @@ namespace Aplicacion.Services.Interfaces
     public interface IUsuarioService
     {
         List<Usuario> GetUsuarios();
-        Usuario CreateUsuario(string Nombre, string Email, string Password);
+        Usuario CreateUsuario(Usuario usuario);
         Usuario UpdateUsuario(int id, string Nombre, string Email, string Password, bool Eliminado, IList<RolUsuario> RolUsuario);
         Usuario DeleteUsuario(int id);
         Usuario GetUsuario(int id);

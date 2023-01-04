@@ -14,7 +14,7 @@ else
 }
 
 <EditForm Model="tkt" OnSubmit="HandleSubmit">
-    <div>
+@*    <div>
         <label>Fabrica</label> <br />
         <InputSelect @bind-Value="tkt.Maquina.LineaProduccion.FabricaID" class="form-select">
             @foreach (var fabrica in TicketService.Fabricas)
@@ -22,8 +22,8 @@ else
                 <option value="@fabrica.Id">@fabrica.Descripcion</option>
             }
         </InputSelect>
-    </div>
-    <div>
+    </div>*@
+   @* <div>
         <label>Linea</label> <br />
         <InputSelect @bind-Value="tkt.Maquina.LineaProduccionID" class="form-select">
             @foreach (var linea in TicketService.Lineas)
@@ -31,8 +31,8 @@ else
                 <option value="@linea.Id">@linea.Descripcion</option>
             }
         </InputSelect>
-    </div>
-    <div>
+    </div>*@
+    @*<div>
         <label>Maquina</label> <br />
         <InputSelect @bind-Value="tkt.MaquinaID" class="form-select">
             @foreach(var maquina in TicketService.Maquinas)
@@ -40,8 +40,8 @@ else
                 <option value="@maquina.Id">@maquina.Descripcion</option>
             }
         </InputSelect>
-    </div>
-    <div>
+    </div>*@
+        @*<div>
         <label>Urgencia</label> <br />
         <InputSelect @bind-Value="tkt.UrgenciaID" class="form-select">
             @foreach (var urgencia in TicketService.Urgencias)
@@ -49,8 +49,8 @@ else
                 <option value="@urgencia.Id">@urgencia.Descripcion</option>
             }
         </InputSelect>
-    </div>
-    <div>
+    </div>*@
+@*    <div>
         <label>Categoria</label> <br />
         <InputSelect @bind-Value="tkt.CategoriaID" class="form-select">
             @foreach (var categoria in TicketService.Categorias)
@@ -58,8 +58,8 @@ else
                 <option value="@categoria.Id">@categoria.Descripcion</option>
             }
         </InputSelect>
-    </div>
-    <div>
+    </div>*@
+    @*<div>
         <label>Estado</label> <br />
         <InputSelect @bind-Value="tkt.EstadoID" class="form-select">
             @foreach (var estado in TicketService.Estados)
@@ -67,7 +67,7 @@ else
                 <option value="@estado.Id">@estado.Descripcion</option>
             }
         </InputSelect>
-    </div>
+    </div>*@
     <div>
         <label>Zona</label> <br />
         <InputSelect @bind-Value="tkt.ZonaID" class="form-select">
@@ -95,19 +95,19 @@ else
     string btnText = string.Empty;
 
     // TODO: Hacer que sea el usuario logueado el que crea el ticket
-    Ticket tkt = new Ticket("Descripcion",1,1,1,1,1,1);
+    Ticket tkt = new Ticket("Descripcion",1,1,1,1,1);
 
     protected override async Task OnInitializedAsync()
     {
         btnText = Id == null ? "Crear" : "Actualizar";
-        await TicketService.GetFabricas();
-        await TicketService.GetLineas();
-        await TicketService.GetMaquinas();
-        await TicketService.GetCategorias();
-        await TicketService.GetEstados();
-        await TicketService.GetUrgencias();
-        await TicketService.GetUsuarios();
-        await TicketService.GetZonas();
+        //await TicketService.GetFabricas();
+        //await TicketService.GetLineas();
+        //await TicketService.GetMaquinas();
+        //await TicketService.GetCategorias();
+        //await TicketService.GetEstados();
+        //await TicketService.GetUrgencias();
+        //await TicketService.GetUsuarios();
+        //await TicketService.GetZonas();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -116,17 +116,17 @@ else
         {
             // Fabrica
             // Linea
-            tkt.Maquina = TicketService.Maquinas[0];
-            tkt.MaquinaID = tkt.Maquina.Id;
-            tkt.Urgencia = TicketService.Urgencias[0];
-            tkt.UrgenciaID = tkt.Urgencia.Id;
-            tkt.Categoria = TicketService.Categorias[0];
-            tkt.CategoriaID = tkt.Categoria.Id;
-            tkt.Estado = TicketService.Estados[0];
-            tkt.EstadoID = tkt.Estado.Id;
-            tkt.Zona = TicketService.Zonas[0];
-            tkt.ZonaID = tkt.Zona.Id;
-            tkt.Descripcion = string.Empty;
+            //tkt.Maquina = TicketService.Maquinas[0];
+            //tkt.MaquinaID = tkt.Maquina.Id;
+            //tkt.Urgencia = TicketService.Urgencias[0];
+            //tkt.UrgenciaID = tkt.Urgencia.Id;
+            //tkt.Categoria = TicketService.Categorias[0];
+            //tkt.CategoriaID = tkt.Categoria.Id;
+            //tkt.Estado = TicketService.Estados[0];
+            //tkt.EstadoID = tkt.Estado.Id;
+            //tkt.Zona = TicketService.Zonas[0];
+            //tkt.ZonaID = tkt.Zona.Id;
+            tkt.Descripcion = tkt.Descripcion;
         }
         else
         {
