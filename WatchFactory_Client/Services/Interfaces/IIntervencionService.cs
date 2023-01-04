@@ -1,6 +1,4 @@
 ﻿using Dominio.Modelos.Configuracion;
-using Dominio.Modelos.Intervencion;
-using Dominio.Modelos.Nucleo;
 
 namespace WatchFactory_Client.Services.Interfaces
 {
