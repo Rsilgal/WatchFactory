@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cliente", "Cliente", "{742DF983-F682-4962-80BF-B7FE729CCB7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchFactory_Client", "WatchFactory_Client\WatchFactory_Client.csproj", "{DD5AAA3A-66E4-4D3E-9C31-EC2CF273B161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchFactory_Client", "WatchFactory_Client\WatchFactory_Client.csproj", "{DD5AAA3A-66E4-4D3E-9C31-EC2CF273B161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

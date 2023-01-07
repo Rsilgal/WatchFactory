@@ -11,6 +11,8 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : Controller
     {
         //public static Usuario usuario = new Usuario(); // Modificar para usar la base de datos, definido así para realizar pruebas.
@@ -59,6 +61,7 @@ namespace WebApi.Controllers
             return Ok(token);
         }
 
+        [NonAction]
         public string CreateToken(Usuario usuario)
         {
             List<Claim> claims = new List<Claim>
@@ -82,6 +85,7 @@ namespace WebApi.Controllers
             return jwt;
         }
 
+        [NonAction]
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using(var hmac = new HMACSHA512())
@@ -91,6 +95,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [NonAction]
         public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using(var hmac = new HMACSHA512(passwordSalt))

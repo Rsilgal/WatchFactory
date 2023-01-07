@@ -1,6 +1,7 @@
 @page "/login"
-
-<h3>Login</h3>
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http
 
 <EditForm Model="usuario" OnValidSubmit="HandleLogin">
     <DataAnnotationsValidator />
@@ -18,11 +19,20 @@
     <button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
 
+<AuthorizeView Roles="Admin">
+    <NotAuthorized>No tienes rol</NotAuthorized>
+    <Authorized>
+        De verdad eres admin!!!!!
+    </Authorized>
+</AuthorizeView>
+
 @code {
     private User usuario = new User();
 
-    private async void HandleLogin() {
-        Console.WriteLine("Login!");
-        // await al userService
+    async Task HandleLogin() {
+        var result = await Http.PostAsJsonAsync("api/auth/login", usuario);
+        var token = await result.Content.ReadAsStringAsync();
+        await LocalStorage.SetItemAsync("token", token);
+        await AuthStateProvider.GetAuthenticationStateAsync();
     }
 }
