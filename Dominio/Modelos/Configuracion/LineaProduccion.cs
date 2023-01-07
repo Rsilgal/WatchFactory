@@ -14,7 +14,8 @@ namespace Dominio.Modelos.Configuracion
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
         public int FabricaID { get; set; }
-        [ForeignKey("FabricaID")]
-        public virtual Fabrica Fabrica { get; set; }
+        
+        public Fabrica Fabrica { get; set; }
+        public IEnumerable<Maquina> Maquinas { get; set; }
     }
 }

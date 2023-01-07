@@ -12,5 +12,6 @@ namespace Dominio.Modelos.Configuracion
         /// Definición de la descripcion del tipo de máquina.
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
+        public IEnumerable<Maquina> Maquinas { get; set; }
     }
 }

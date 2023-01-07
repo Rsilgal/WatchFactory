@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.Modelos.Nucleo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,9 +13,8 @@ namespace Dominio.Modelos.Configuracion
         public string Descripcion { get; set; } = string.Empty;
         public int LineaProduccionID { get; set; }
         public int TipoMaquinaID { get; set; }
-        [ForeignKey("LineaProduccionID")]
-        public virtual LineaProduccion LineaProduccion { get; set; }
-        [ForeignKey("TipoMaquinaID")]
-        public virtual TipoMaquina TipoMaquina { get; set; }
+        public LineaProduccion LineaProduccion { get; set; }
+        public TipoMaquina TipoMaquina { get; set; }
+        public IEnumerable<Ticket> Tickets { get; set; }
     }
 }

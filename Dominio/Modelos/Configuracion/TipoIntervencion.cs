@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.Modelos.Nucleo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Dominio.Modelos.Configuracion
         /// Descipción del tipo de intervención.
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
+        public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
     }
 }
