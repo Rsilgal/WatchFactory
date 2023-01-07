@@ -13,7 +13,7 @@ namespace Dominio.Modelos.Usuarios
         public string Descripcion { get; set; } = string.Empty;
         public bool eliminado { get; set; } = false;
 
-        public IList<RolUsuario> RolUsuarios { get; set; }
-        public IList<PermisoRol> PermisoRols { get; set; }
+        public IEnumerable<Usuario> Usuarios { get; set; }
+        public IEnumerable<Permiso> Permisos { get; set; }
     }
 }

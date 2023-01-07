@@ -1,4 +1,5 @@
-﻿using Dominio.Modelos.Usuarios;
+﻿using Dominio.Modelos.Nucleo;
+using Dominio.Modelos.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace Dominio.Modelos.Usuarios
         public byte[] passwodrHash { get; set; }
         public byte[] passwordSalt { get; set; }
         public bool Eliminado { get; set; } = false;
-        public IList<RolUsuario> RolUsuarios { get; set; }
 
-        //public Usuario(string Nombre, string Email, string Password) { }
+        public IEnumerable<Ticket> Tickets { get; set; }
+
+        public IEnumerable<Rol> Roles { get; set; }
     }
 }
