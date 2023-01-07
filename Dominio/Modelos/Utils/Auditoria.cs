@@ -10,7 +10,7 @@ namespace Dominio.Modelos.Utils
 {
     public class Auditoria : EntidadBase<int>
     {
-        //public DateAndTime Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public Usuario Usuario { get; set; }
         public string Accion { get; set; }
     }

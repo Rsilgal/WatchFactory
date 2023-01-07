@@ -9,7 +9,7 @@ namespace Dominio.Modelos.Utils
 {
     public class Estadistica : EntidadBase<int>
     {
-        //public DateAndTime Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public int TicketsCerrados { get; set; }
         public int TicketsPendientes { get; set; }
         public int TicketsTotales { get; set; }

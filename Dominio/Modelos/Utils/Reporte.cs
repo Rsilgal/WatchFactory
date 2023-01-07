@@ -12,7 +12,7 @@ namespace Dominio.Modelos.Utils
     public class Reporte : EntidadBase<int>
     {
         public Ticket Ticket { get; set; }
-        public Intervencion.Intervencion Intervencion { get; set; }
         public Usuario Usuario { get; set; }
+        public DateTime FechaReporte { get; set; }
     }
 }
