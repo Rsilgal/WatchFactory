@@ -12,25 +12,19 @@ namespace Dominio.Modelos.Intervencion
     public class Intervencion : EntidadBase<int>
     {
         public string Descripcion { get; set; } = string.Empty;
+        public DateTime FechaCreacion { get; set; }
+        
         public int TicketID { get; set; }
+        
         public int EstadoIntervencionID { get; set; }
+        
         public int TipoIntervencionID { get; set; }
+        
+        public Ticket Ticket { get; set; }
 
-        [ForeignKey("TicketID")]
-        public virtual Ticket Ticket { get; set; }
+        public EstadoIntervencion EstadoIntervencion { get; set; }
 
-        [ForeignKey("EstadoIntervencionID")]
-        public virtual EstadoIntervencion EstadoIntervencion { get; set; }
+        public TipoIntervencion TipoIntervencion { get; set; }
 
-        [ForeignKey("TipoIntervencionID")]
-        public virtual TipoIntervencion TipoIntervencion { get; set; }
-
-        public Intervencion(string descripcion, int ticketID, int estadoIntervencionID, int tipoIntervencionID)
-        {
-            Descripcion = descripcion;
-            TicketID = ticketID;
-            EstadoIntervencionID = estadoIntervencionID;
-            TipoIntervencionID = tipoIntervencionID;
-        }
     }
 }

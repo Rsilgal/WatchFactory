@@ -12,32 +12,32 @@ namespace Dominio.Modelos.Nucleo
     public class Ticket : EntidadBase<int>
     {
         public string Descripcion { get; set; } = string.Empty;
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaCierre { get; set; }
+        
         public int MaquinaID { get; set; }
+        
         public int CategoriaID { get; set; }
+        
         public int UsuarioID { get; set; }
+        
         public int UrgenciaID { get; set; }
+        
         public int ZonaID { get; set; }
+        
         public string Estado { get; set; }
+        
+        public Maquina Maquina { get; set; }
+        
+        public Categoria Categoria { get; set; }
+        
+        public Usuario Usuario { get; set; }
+        
+        public Urgencia Urgencia { get; set; }
+        
+        public Zona Zona { get; set; }
 
-        [ForeignKey("MaquinaID")]
-        public virtual Maquina Maquina { get; set; }
-        [ForeignKey("CategoriaID")]
-        public virtual Categoria Categoria { get; set; }
-        [ForeignKey("UsuarioID")]
-        public virtual Usuario  Usuario { get; set; }
-        [ForeignKey("UrgenciaID")]
-        public virtual Urgencia Urgencia { get; set; }
-        [ForeignKey("ZonaID")]
-        public virtual Zona Zona { get; set; }
+        public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
 
-        public Ticket(string descripcion, int maquinaID, int categoriaID, int usuarioID, int urgenciaID, int zonaID)
-        {
-            Descripcion = descripcion;
-            MaquinaID = maquinaID;
-            CategoriaID = categoriaID;
-            UsuarioID = usuarioID;
-            UrgenciaID = urgenciaID;
-            ZonaID = zonaID;
-        }
     }
 }
