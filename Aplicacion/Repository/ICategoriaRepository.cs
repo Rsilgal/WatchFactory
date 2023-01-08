@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface ICategoriaRepository
     {
-        List<Categoria> GetCategorias();
-        Categoria CreateCategoria(Categoria categoria);
+        Task<List<Categoria>> GetCategorias();
+        Task<List<Categoria>> CreateCategoria(Categoria categoria);
+        Task<List<Categoria>> UpdateCategoria(int id, Categoria categoria);
+        Task<List<Categoria>> DeleteCategoria(Categoria categoria);
+        Task<Categoria> GetCategorias(int id);
     }
 }

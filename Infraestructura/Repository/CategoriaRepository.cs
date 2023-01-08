@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,42 @@ namespace Infraestructura.Repository
 
         public CategoriaRepository(WatchFactoryDbContext watchFactory)
         {
-            this._watchFactory = watchFactory;
+            _watchFactory = watchFactory;
         }
 
-        public Categoria CreateCategoria(Categoria categoria)
+        public async Task<List<Categoria>> CreateCategoria(Categoria categoria)
         {
-            throw new NotImplementedException();
+            await _watchFactory.Categorias.AddAsync(categoria);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetCategorias();
         }
 
-        public List<Categoria> GetCategorias()
+        public async Task<List<Categoria>> DeleteCategoria(Categoria categoria)
         {
-            throw new NotImplementedException();
+            _watchFactory.Categorias.Remove(categoria);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetCategorias();
+        }
+
+        public async Task<List<Categoria>> GetCategorias()
+        {
+            return await _watchFactory.Categorias.ToListAsync();
+        }
+
+        public async Task<Categoria> GetCategorias(int id)
+        {
+            return await _watchFactory.Categorias.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<List<Categoria>> UpdateCategoria(int id, Categoria categoria)
+        {
+            var dbCategoria = await _watchFactory.Categorias.FirstOrDefaultAsync(c => categoria.Id == id);
+
+            dbCategoria.Descripcion = categoria.Descripcion;
+
+            return await GetCategorias();
         }
     }
 }
