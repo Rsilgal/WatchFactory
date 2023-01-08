@@ -9,18 +9,16 @@ namespace Aplicacion.Repository
 {
     public interface IIntervencionRepository
     {
-        List<Intervencion> GetIntervenciones();
-        Intervencion CreateIntervencion(Intervencion intervencion);
+        Task<List<Intervencion>> GetIntervenciones();
+        Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion);
 
-        Intervencion UpdateIntervencion(Intervencion newIntervencion);
+        Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion);
 
-        Intervencion DeleteIntervencion(Intervencion intervencion);
+        Task<List<Intervencion>> DeleteIntervencion(Intervencion intervencion);
 
-        Intervencion GetIntervencion(int id);
-        List<Intervencion> GetIntervencionesByFabrica(int FabricaID);
-        List<Intervencion> GetIntervencionesByLinea(int LineaID);
-        List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
-        List<Intervencion> GetIntervencionesByMaquina(int MaquinaID);
-
+        Task<Intervencion> GetIntervencion(int id);
+        Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
+        Task<List<Intervencion>> GetIntervencionesByEstadoIntervencion(int EstadoIntervencionID);
+        Task<List<Intervencion>> GetIntervencionesByTicket(int TicketID);
     }
 }

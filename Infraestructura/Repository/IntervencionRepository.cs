@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Intervencion;
 using Dominio.Modelos.Nucleo;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,90 +16,80 @@ namespace Infraestructura.Repository
 
         public IntervencionRepository(WatchFactoryDbContext watchFactory)
         {
-            this._watchFactory = watchFactory;
+            _watchFactory = watchFactory;
         }
 
-        public Intervencion CreateIntervencion(Intervencion intervencion)
+        public async Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion)
         {
-            _watchFactory.Intervenciones.Add(intervencion);
-            _watchFactory.SaveChanges();
+            await _watchFactory.Intervenciones.AddAsync(intervencion);
+            await _watchFactory.SaveChangesAsync();
 
-            return intervencion;
+            return await GetIntervenciones();
         }
 
-        public Intervencion DeleteIntervencion(Intervencion intervencion)
+        public async Task<List<Intervencion>> DeleteIntervencion(Intervencion intervencion)
         {
             _watchFactory.Intervenciones.Remove(intervencion);
-            _watchFactory.SaveChanges();
+            await _watchFactory.SaveChangesAsync();
+            
+            return await GetIntervenciones();
+        }
+
+        public async Task<Intervencion> GetIntervencion(int id)
+        {
+            var intervencion = await _watchFactory.Intervenciones.
+                Include(e => e.Ticket).
+                Include(e => e.TipoIntervencion).
+                Include(e => e.EstadoIntervencion).
+                Where(e => e.Id == id).
+                FirstOrDefaultAsync();
             
             return intervencion;
         }
 
-        public Intervencion GetIntervencion(int id)
+        public async Task<List<Intervencion>> GetIntervenciones()
         {
-            return _watchFactory.Intervenciones.FirstOrDefault(e => e.Id == id);
+            return await _watchFactory.Intervenciones.ToListAsync();
         }
 
-        public List<Intervencion> GetIntervenciones()
+        public async Task<List<Intervencion>> GetIntervencionesByEstadoIntervencion(int EstadoIntervencionID)
         {
-            return _watchFactory.Intervenciones.ToList();
-        }
-
-        public List<Intervencion> GetIntervencionesByFabrica(int FabricaID)
-        {
-            var lineas = _watchFactory.Lineas.Where(e => e.FabricaID == FabricaID).ToList();
-            if (lineas == null) throw new Exception();
-
-            var maquinas = _watchFactory.Maquinas.Where(e => lineas.All(l => l.Id == e.LineaProduccionID)).ToList();
-            if (maquinas == null) throw new Exception();
-
-            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-            if (tickets == null) throw new Exception();
-
-            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+            var intervenciones = await _watchFactory.Intervenciones.
+                Where(e => e.EstadoIntervencionID == EstadoIntervencionID).ToListAsync();
 
             return intervenciones;
         }
 
-        public List<Intervencion> GetIntervencionesByLinea(int LineaID)
+        public async Task<List<Intervencion>> GetIntervencionesByTicket(int TicketID)
         {
-            var maquinas = _watchFactory.Maquinas.Where(e => e.LineaProduccionID== LineaID).ToList();
-            if (maquinas==null) throw new Exception();
+            var intervenciones = await _watchFactory.Intervenciones.
+                Where(e => e.TicketID == TicketID).ToListAsync();
+            
+            return intervenciones;
+        }
 
-            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-            if (tickets == null) throw new Exception();
-
-            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+        public async Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
+        {
+            var intervenciones = await _watchFactory.Intervenciones.
+                Where(e => e.TipoIntervencionID == TipoIntervencionID).ToListAsync();
 
             return intervenciones;
         }
 
-        public List<Intervencion> GetIntervencionesByMaquina(int MaquinaID)
+        public async Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion)
         {
-            var maquinas = _watchFactory.Maquinas.Where(e => e.Id == MaquinaID).ToList();
-            if (maquinas == null) throw new Exception();
+            var dbIntervencion = await _watchFactory.Intervenciones.FirstOrDefaultAsync(e => e.Id == id);
+            if (dbIntervencion == null)
+                return null;
 
-            var tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-            if (tickets == null) throw new Exception();
+            dbIntervencion.Descripcion = intervencion.Descripcion;
+            dbIntervencion.TipoIntervencionID = intervencion.TipoIntervencionID;
+            dbIntervencion.EstadoIntervencion = intervencion.EstadoIntervencion;
+            dbIntervencion.TicketID= intervencion.TicketID;
 
-            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => tickets.All(t => t.Id == e.TicketID)).ToList();
+            await _watchFactory.SaveChangesAsync();
 
-            return intervenciones;
-        }
-
-        public List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
-        {
-            List<Intervencion> intervenciones = _watchFactory.Intervenciones.Where(e => e.TipoIntervencionID == TipoIntervencionID).ToList();
-
-            return intervenciones;
-        }
-
-        public Intervencion UpdateIntervencion(Intervencion newIntervencion)
-        {
-            _watchFactory.Intervenciones.Update(newIntervencion);
-            _watchFactory.SaveChanges();
-
-            return newIntervencion;
+            return await GetIntervenciones();
         }
     }
 }
