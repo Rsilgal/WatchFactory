@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface ITipoMaquinaRepository
     {
-        List<TipoMaquina> GetAllTipoMaquinas();
-        TipoMaquina CreateTipoMaquina(TipoMaquina tipoMaquina);
+        Task<List<TipoMaquina>> GetAllTipoMaquinas();
+        Task<List<TipoMaquina>> CreateTipoMaquina(TipoMaquina tipoMaquina);
+        Task<List<TipoMaquina>> UpdateTipoMaquina(int id, TipoMaquina tipoMaquina);
+        Task<List<TipoMaquina>> DeleteTipoMaquina(TipoMaquina tipoMaquina);
+        Task<TipoMaquina> GetTipoMaquinaById(int id);
     }
 }
