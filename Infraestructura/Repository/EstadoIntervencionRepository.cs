@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,41 @@ namespace Infraestructura.Repository
             _watchFactory= watchFactory;
         }
 
-        public EstadoIntervencion CreateEstadoIntervencion(EstadoIntervencion estado)
+        public async Task<List<EstadoIntervencion>> CreateEstadoIntervencion(EstadoIntervencion estado)
         {
-            throw new NotImplementedException();
+            await _watchFactory.EstadoIntervenciones.AddAsync(estado);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetEstadoIntervencion();
         }
 
-        public List<EstadoIntervencion> GetEstadoIntervencion()
+        public async Task<List<EstadoIntervencion>> DeleteEstadoIntervencion(EstadoIntervencion estado)
         {
-            throw new NotImplementedException();
+            _watchFactory.EstadoIntervenciones.Remove(estado);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetEstadoIntervencion();
+        }
+
+        public async Task<List<EstadoIntervencion>> GetEstadoIntervencion()
+        {
+            return await _watchFactory.EstadoIntervenciones.ToListAsync();
+        }
+
+        public async Task<EstadoIntervencion> GetEstadoIntervencionById(int id)
+        {
+            return await _watchFactory.EstadoIntervenciones.FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<List<EstadoIntervencion>> UpdateEstadoIntervencion(int id, EstadoIntervencion estado)
+        {
+            var dbEstado = await _watchFactory.EstadoIntervenciones.FirstOrDefaultAsync(e => e.Id == id);
+
+            dbEstado.Descripcion = estado.Descripcion;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetEstadoIntervencion();
         }
     }
 }
