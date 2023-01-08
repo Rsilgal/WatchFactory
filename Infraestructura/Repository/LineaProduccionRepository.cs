@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,51 @@ namespace Infraestructura.Repository
         {
             _watchFactory= watchFactory;
         }
-        public LineaProduccion CreateLineaProduccion(LineaProduccion lineaProduccion)
+
+        public async Task<List<LineaProduccion>> CreateLineaProduccion(LineaProduccion lineaProduccion)
         {
-            throw new NotImplementedException();
+            await _watchFactory.Lineas.AddAsync(lineaProduccion);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetAllLineasProduccion();
         }
 
-        public List<LineaProduccion> GetAllLineasProduccion()
+        public async Task<List<LineaProduccion>> DeleteLineaProduccion(LineaProduccion lineaProduccion)
         {
-            throw new NotImplementedException();
+            _watchFactory.Lineas.Remove(lineaProduccion);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetAllLineasProduccion();
+        }
+
+        public async Task<List<LineaProduccion>> GetAllLineasProduccion()
+        {
+            return await _watchFactory.Lineas.ToListAsync();
+        }
+
+        public async Task<List<LineaProduccion>> GetLineaProduccionByFabrica(int fabricaId)
+        {
+            var lineas = await _watchFactory.Lineas.
+                Where(l => l.FabricaID == fabricaId).ToListAsync();
+
+            return lineas;
+        }
+
+        public async Task<LineaProduccion> GetLineaProduccionById(int id)
+        {
+            return await _watchFactory.Lineas.FirstOrDefaultAsync(l => l.Id == id);
+        }
+
+        public async Task<List<LineaProduccion>> UpdateLineaProduccion(int id, LineaProduccion lineaProduccion)
+        {
+            var dbLinea = await _watchFactory.Lineas.FirstOrDefaultAsync(l => l.Id == id);
+
+            dbLinea.Descripcion = lineaProduccion.Descripcion;
+            dbLinea.FabricaID = lineaProduccion.FabricaID;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetAllLineasProduccion();
         }
     }
 }

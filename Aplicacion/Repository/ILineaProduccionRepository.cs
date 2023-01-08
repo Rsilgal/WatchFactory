@@ -9,7 +9,11 @@ namespace Aplicacion.Repository
 {
     public interface ILineaProduccionRepository
     {
-        List<LineaProduccion> GetAllLineasProduccion();
-        LineaProduccion CreateLineaProduccion(LineaProduccion lineaProduccion);
+        Task<List<LineaProduccion>> GetAllLineasProduccion();
+        Task<List<LineaProduccion>> CreateLineaProduccion(LineaProduccion lineaProduccion);
+        Task<List<LineaProduccion>> UpdateLineaProduccion(int id, LineaProduccion lineaProduccion);
+        Task<List<LineaProduccion>> DeleteLineaProduccion(LineaProduccion lineaProduccion);
+        Task<LineaProduccion> GetLineaProduccionById(int id);
+        Task<List<LineaProduccion>> GetLineaProduccionByFabrica(int fabricaId);
     }
 }
