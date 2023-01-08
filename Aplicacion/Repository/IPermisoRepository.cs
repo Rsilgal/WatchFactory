@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface IPermisoRepository
     {
-        List<Permiso> GetPermisos();
-        Permiso CreatePermiso(Permiso permiso);
+        Task<List<Permiso>> GetPermisos();
+        Task<List<Permiso>> CreatePermiso(Permiso permiso);
+        Task<List<Permiso>> UpdatePermiso(int id, Permiso permiso);
+        Task<List<Permiso>> DeletePermiso(Permiso permiso);
+        Task<Permiso> GetPermisoById(int id);
     }
 }

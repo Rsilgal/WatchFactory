@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Usuarios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,41 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public Permiso CreatePermiso(Permiso permiso)
+        public async Task<List<Permiso>> CreatePermiso(Permiso permiso)
         {
-            throw new NotImplementedException();
+            await _watchFactory.Permisos.AddAsync(permiso);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetPermisos();
         }
 
-        public List<Permiso> GetPermisos()
+        public async Task<List<Permiso>> DeletePermiso(Permiso permiso)
         {
-            throw new NotImplementedException();
+            _watchFactory.Permisos.Remove(permiso);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetPermisos();
+        }
+
+        public async Task<Permiso> GetPermisoById(int id)
+        {
+            return await _watchFactory.Permisos.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<List<Permiso>> GetPermisos()
+        {
+            return await _watchFactory.Permisos.ToListAsync();
+        }
+
+        public async Task<List<Permiso>> UpdatePermiso(int id, Permiso permiso)
+        {
+            var dbPermiso = await _watchFactory.Permisos.FirstOrDefaultAsync(p => p.Id == id);
+
+            dbPermiso.Descripcion = permiso.Descripcion;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetPermisos();
         }
     }
 }
