@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface IZonaRepository
     {
-        List<Zona> GetZonas();
-        Zona CreateZona(Zona zona);
+        Task<List<Zona>> GetZonas();
+        Task<List<Zona>> CreateZona(Zona zona);
+        Task<List<Zona>> UpdateZona(int id, Zona zona);
+        Task<List<Zona>> DeleteZona(Zona zona);
+        Task<Zona> GetZonaById(int id);
     }
 }
