@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface IUrgenciaRepository
     {
-        List<Urgencia> GetUrgencias();
-        Urgencia CreateUrgencia(Urgencia urgencia);
+        Task<List<Urgencia>> GetUrgencias();
+        Task<List<Urgencia>> CreateUrgencia(Urgencia urgencia);
+        Task<List<Urgencia>> UpdateUrgencia(int id, Urgencia urgencia);
+        Task<List<Urgencia>> DeleteUrgencia(Urgencia urgencia);
+        Task<Urgencia> GetUrgenciaById(int id);
     }
 }
