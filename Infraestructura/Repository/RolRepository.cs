@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Usuarios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,44 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public Rol CreateRol(Rol rol)
+        public async Task<List<Rol>> CreateRol(Rol rol)
         {
-            throw new NotImplementedException();
+            await _watchFactory.Roles.AddAsync(rol);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetRols();
         }
 
-        public List<Rol> GetRols()
+        public async Task<List<Rol>> DeleteRol(Rol rol)
         {
-            throw new NotImplementedException();
+            _watchFactory.Roles.Remove(rol);
+            await _watchFactory.SaveChangesAsync();
+            
+            return await GetRols();
+        }
+
+        public async Task<Rol> GetRolById(int id)
+        {
+            return await _watchFactory.Roles.FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<List<Rol>> GetRols()
+        {
+            return await _watchFactory.Roles.ToListAsync();
+        }
+
+        public async Task<List<Rol>> UpdateRol(int id, Rol rol)
+        {
+            var dbRol = await _watchFactory.Roles.FirstOrDefaultAsync(r => r.Id == id);
+
+            dbRol.Descripcion = rol.Descripcion;
+            dbRol.Nombre = rol.Nombre;
+            dbRol.eliminado = rol.eliminado;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetRols();
+
         }
     }
 }

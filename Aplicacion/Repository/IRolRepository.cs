@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface IRolRepository
     {
-        List<Rol> GetRols();
-        Rol CreateRol(Rol rol);
+        Task<List<Rol>> GetRols();
+        Task<List<Rol>> CreateRol(Rol rol);
+        Task<List<Rol>> UpdateRol(int id, Rol rol);
+        Task<List<Rol>> DeleteRol(Rol rol);
+        Task<List<Rol>> GetRolById(int id);
     }
 }
