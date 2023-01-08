@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface ITipoIntervencionRepository
     {
-        List<TipoIntervencion> GetTipoIntervencion();
-        TipoIntervencion CreateTipoIntervencion(TipoIntervencion tipo);
+        Task<List<TipoIntervencion>> GetTipoIntervencion();
+        Task<List<TipoIntervencion>> CreateTipoIntervencion(TipoIntervencion tipo);
+        Task<List<TipoIntervencion>> UpdateTipoIntervencion(int id,TipoIntervencion tipo);
+        Task<List<TipoIntervencion>> DeleteTipoIntervencion(TipoIntervencion tipo);
+        Task<TipoIntervencion> GetTipoIntervencionById(int id);
     }
 }

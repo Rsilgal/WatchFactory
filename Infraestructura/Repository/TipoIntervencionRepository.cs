@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,41 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public TipoIntervencion CreateTipoIntervencion(TipoIntervencion tipo)
+        public async Task<List<TipoIntervencion>> CreateTipoIntervencion(TipoIntervencion tipo)
         {
-            throw new NotImplementedException();
+            await _watchFactory.TipoIntervenciones.AddAsync(tipo);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetTipoIntervencion();
         }
 
-        public List<TipoIntervencion> GetTipoIntervencion()
+        public async Task<List<TipoIntervencion>> DeleteTipoIntervencion(TipoIntervencion tipo)
         {
-            throw new NotImplementedException();
+            _watchFactory.TipoIntervenciones.Remove(tipo);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetTipoIntervencion();
+        }
+
+        public async Task<List<TipoIntervencion>> GetTipoIntervencion()
+        {
+            return await _watchFactory.TipoIntervenciones.ToListAsync();
+        }
+
+        public async Task<TipoIntervencion> GetTipoIntervencionById(int id)
+        {
+            return await _watchFactory.TipoIntervenciones.FirstOrDefaultAsync(ti => ti.Id == id);
+        }
+
+        public async Task<List<TipoIntervencion>> UpdateTipoIntervencion(int id, TipoIntervencion tipo)
+        {
+            var dbTipoIntervencion = await _watchFactory.TipoIntervenciones.FirstOrDefaultAsync(ti => ti.Id == id);
+
+            dbTipoIntervencion.Descripcion = tipo.Descripcion;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetTipoIntervencion();
         }
     }
 }
