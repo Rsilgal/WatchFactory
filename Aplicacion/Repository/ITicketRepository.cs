@@ -9,16 +9,16 @@ namespace Aplicacion.Repository
 {
     public interface ITicketRepository
     {
-        List<Ticket> GetTickets();
-        Ticket CreateTicket(Ticket ticket);
+        Task<List<Ticket>> GetTickets();
+        Task<List<Ticket>> CreateTicket(Ticket ticket);
 
-        Ticket UpdateTicket(Ticket newTicket);
+        Task<List<Ticket>> UpdateTicket(int id, Ticket ticket);
 
-        Ticket DeleteTicket(Ticket ticket);
+        Task<List<Ticket>> DeleteTicket(Ticket ticket);
 
-        Ticket GetTicket(int id);
-        List<Ticket> GetTicketsByFabrica(int FabricaID);
-        List<Ticket> GetTicketsByLinea(int LineaID);
-        List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID);
+        Task<Ticket> GetTicket(int id);
+        Task<List<Ticket>> GetTicketsByFabrica(int FabricaID);
+        Task<List<Ticket>> GetTicketsByLinea(int LineaID);
+        Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID);
     }
 }

@@ -19,83 +19,106 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public Ticket CreateTicket(Ticket ticket)
+        public async Task<List<Ticket>> CreateTicket(Ticket ticket)
         {
-            _watchFactory.Tickets.Add(ticket);
-            _watchFactory.SaveChanges();
+            await _watchFactory.Tickets.AddAsync(ticket);
+            await _watchFactory.SaveChangesAsync();
 
-            return ticket;
+            return await GetTickets();
         }
 
-        public Ticket DeleteTicket(Ticket ticket)
+        public async Task<List<Ticket>> DeleteTicket(Ticket ticket)
         {
             _watchFactory.Tickets.Remove(ticket);
-            _watchFactory.SaveChanges();
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetTickets();
+        }
+
+        public async Task<Ticket> GetTicket(int id)
+        {
+            var ticket = await _watchFactory.Tickets.
+                Where(t => t.Id == id).
+                Include(t => t.Urgencia).
+                Include(t => t.Categoria).
+                Include(t => t.Usuario).
+                Include(t => t.Urgencia).
+                Include(t => t.Zona).
+                Include(t => t.Maquina).
+                ThenInclude(m => m.LineaProduccion).
+                ThenInclude(lp => lp.Fabrica).
+                FirstOrDefaultAsync();
 
             return ticket;
         }
 
-        public Ticket GetTicket(int id)
+        public async Task<List<Ticket>> GetTickets()
         {
-            return _watchFactory.Tickets.FirstOrDefault(e => e.Id == id);
-        }
+            var tickets = await _watchFactory.Tickets.
+                Include(t => t.Urgencia).
+                Include(t => t.Categoria).
+                Include(t => t.Usuario).
+                Include(t => t.Urgencia).
+                Include(t => t.Zona).
+                Include(t => t.Maquina).
+                ToListAsync();
 
-        public List<Ticket> GetTickets()
-        {
-            var tickets = _watchFactory.Tickets.ToList();
             return tickets;
         }
 
-        public List<Ticket> GetTicketsByFabrica(int FabricaID)
+        public async Task<List<Ticket>> GetTicketsByFabrica(int FabricaID)
         {
             List<Ticket> tickets;
 
-            // Si el ID de Fabrica es 2
-            var linea = _watchFactory.Lineas.Where(e => e.FabricaID == FabricaID).ToList();
-            if (linea == null) throw new Exception("No existe linea asociada a la fabrica mencioanda.");
-
-            // Extraemos las máquinas asociadas a la línea
-            var maquinas = _watchFactory.Maquinas.Where(e => linea.All(l => l.Id == e.LineaProduccionID)).ToList();
-            if (maquinas == null) throw new Exception("No existen maquinas asociadas a los datos indicados.");
-
-            tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-
+            tickets = await _watchFactory.Tickets.
+                Include(t => t.Maquina).
+                ThenInclude(m => m.LineaProduccion).
+                Where(t => t.Maquina.LineaProduccion.FabricaID == FabricaID).
+                ToListAsync();
 
             return tickets;
         }
 
-        public List<Ticket> GetTicketsByLinea(int LineaID)
+        public async Task<List<Ticket>> GetTicketsByLinea(int LineaID)
         {
             List<Ticket> tickets;
 
-            var maquinas = _watchFactory.Maquinas.Where(e => e.LineaProduccionID == LineaID).ToList();
-            if (maquinas == null) throw new Exception("No existen maquinas asociadas a los datos indicados.");
-
-            tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-
+            tickets = await _watchFactory.Tickets.
+                Include(t => t.Maquina).
+                Where(t => t.Maquina.LineaProduccionID == LineaID).
+                ToListAsync();
 
             return tickets;
         }
 
-        public List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID)
+        public async Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID)
         {
             List<Ticket> tickets;
 
-            var maquinas = _watchFactory.Maquinas.Where(e => e.TipoMaquinaID == TipoMaquinaID).ToList();
-            if (maquinas == null) throw new Exception("No existen maquinas asociadas a los datos indicados.");
-
-            tickets = _watchFactory.Tickets.Where(e => maquinas.All(m => m.Id == e.MaquinaID)).ToList();
-
-
+            tickets = await _watchFactory.Tickets.
+                Include(t => t.Maquina).
+                Where(t => t.Maquina.TipoMaquinaID == TipoMaquinaID).
+                ToListAsync();
+            
             return tickets;
         }
 
-        public Ticket UpdateTicket(Ticket newTicket)
+        public async Task<List<Ticket>> UpdateTicket(int id, Ticket ticket)
         {
-            _watchFactory.Tickets.Update(newTicket);
-            _watchFactory.SaveChanges();
+            var dbTicket = await _watchFactory.Tickets.FirstOrDefaultAsync(e => e.Id == id);
+            if (dbTicket == null)
+                throw new Exception("El elemento seleccionado no es valido.");
 
-            return newTicket;
+            dbTicket.Descripcion = ticket.Descripcion;
+            dbTicket.UrgenciaID = ticket.UrgenciaID;
+            dbTicket.CategoriaID = ticket.CategoriaID;
+            dbTicket.Estado = ticket.Estado;
+            dbTicket.MaquinaID = ticket.MaquinaID;
+            dbTicket.ZonaID= ticket.ZonaID;
+
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetTickets();
         }
     }
 }
