@@ -9,10 +9,12 @@ namespace Aplicacion.Repository
 {
     public interface IUsuarioRepository
     {
-        List<Usuario> GetUsuarios();
-        Usuario CreateUsuario(Usuario usuario);
-        Usuario UpdateUsuario(Usuario usuario);
-        Usuario DeleteUsuario(Usuario usuario);
-        Usuario GetUsuario(int id);
+        Task<List<Usuario>> GetUsuarios();
+        Task<List<Usuario>> CreateUsuario(Usuario usuario);
+        Task<List<Usuario>> UpdateUsuario(int id, Usuario usuario);
+        Task<List<Usuario>> DeleteUsuario(Usuario usuario);
+        Task<Usuario> GetUsuarioById(int id);
+        Task<List<Usuario>> GetUsuarioByRol(int rolId);
+        Task<List<Usuario>> GetUsuarioByPermiso(int permisoId);
     }
 }

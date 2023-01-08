@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Usuarios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,35 +18,65 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public Usuario CreateUsuario(Usuario usuario)
+        public async Task<List<Usuario>> CreateUsuario(Usuario usuario)
         {
-            _watchFactory.Usuarios.Add(usuario);
-            _watchFactory.SaveChanges();
-            return usuario;
+            await _watchFactory.Usuarios.AddAsync(usuario);
+            await _watchFactory.SaveChangesAsync();
+            return await GetUsuarios();
         }
 
-        public Usuario DeleteUsuario(Usuario usuario)
+        public async Task<List<Usuario>> DeleteUsuario(Usuario usuario)
         {
             _watchFactory.Usuarios.Remove(usuario);
-            _watchFactory.SaveChanges();
-            return usuario;
+            await _watchFactory.SaveChangesAsync();
+            return await GetUsuarios();
         }
 
-        public Usuario GetUsuario(int id)
+        public async Task<Usuario> GetUsuarioById(int id)
         {
-            return _watchFactory.Usuarios.FirstOrDefault(e => e.Id == id);
+            return await _watchFactory.Usuarios.
+                Include(u => u.Roles).
+                ThenInclude(r => r.Permisos).
+                Where(u => u.Id == id).
+                FirstOrDefaultAsync();
         }
 
-        public List<Usuario> GetUsuarios()
+        public async Task<List<Usuario>> GetUsuarioByPermiso(int permisoId)
         {
-            return _watchFactory.Usuarios.ToList();
+            var usuarios = await _watchFactory.Usuarios.
+                Include(u => u.Roles).
+                ThenInclude(r => r.Permisos).
+                Where(u => u.Roles.Any(r => r.Permisos.Any(y => y.Id == permisoId))).
+                ToListAsync();
+
+            return usuarios;
         }
 
-        public Usuario UpdateUsuario(Usuario usuario)
+        public async Task<List<Usuario>> GetUsuarioByRol(int rolId)
         {
-            _watchFactory.Usuarios.Update(usuario);
-            _watchFactory.SaveChanges();
-            return usuario;
+            var usuarios = await _watchFactory.Usuarios.
+                Include(u => u.Roles).
+                Where(u => u.Roles.Any(y => y.Id == rolId)).
+                ToListAsync();
+
+            return usuarios;
+        }
+
+        public async Task<List<Usuario>> GetUsuarios()
+        {
+            return await _watchFactory.Usuarios.ToListAsync();
+        }
+
+        public async Task<List<Usuario>> UpdateUsuario(int id, Usuario usuario)
+        {
+            var dbUsuario = await _watchFactory.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
+
+            dbUsuario.Nombre = usuario.Nombre;
+            dbUsuario.Eliminado= usuario.Eliminado;
+            dbUsuario.Email= usuario.Email;
+            
+            await _watchFactory.SaveChangesAsync();
+            return await GetUsuarios();
         }
     }
 }
