@@ -11,7 +11,7 @@ namespace Aplicacion.Services.Interfaces
     {
         List<Usuario> GetUsuarios();
         Usuario CreateUsuario(Usuario usuario);
-        Usuario UpdateUsuario(int id, string Nombre, string Email, string Password, bool Eliminado, IList<RolUsuario> RolUsuario);
+        Usuario UpdateUsuario(int id, Usuario usuario);
         Usuario DeleteUsuario(int id);
         Usuario GetUsuario(int id);
     }
