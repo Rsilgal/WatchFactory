@@ -107,7 +107,7 @@ namespace Infraestructura.Repository
         {
             var dbTicket = await _watchFactory.Tickets.FirstOrDefaultAsync(e => e.Id == id);
             if (dbTicket == null)
-                throw new Exception("El elemento seleccionado no es valido.");
+                return null;
 
             dbTicket.Descripcion = ticket.Descripcion;
             dbTicket.UrgenciaID = ticket.UrgenciaID;
