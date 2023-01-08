@@ -9,7 +9,10 @@ namespace Aplicacion.Repository
 {
     public interface IFabricaRepository
     {
-        List<Fabrica> GetAllFabrica();
-        Fabrica CreateFabrica(Fabrica fabrica);
+        Task<List<Fabrica>> GetAllFabrica();
+        Task<List<Fabrica>> CreateFabrica(Fabrica fabrica);
+        Task<List<Fabrica>> UpdateFabrica(int id, Fabrica fabrica);
+        Task<List<Fabrica>> DeleteFabrica(Fabrica fabrica);
+        Task<Fabrica> GetFabricaById(int id);
     }
 }

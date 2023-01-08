@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,41 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public Fabrica CreateFabrica(Fabrica fabrica)
+        public async Task<List<Fabrica>> CreateFabrica(Fabrica fabrica)
         {
-            throw new NotImplementedException();
+            await _watchFactory.Fabricas.AddAsync(fabrica);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetAllFabrica();
         }
 
-        public List<Fabrica> GetAllFabrica()
+        public async Task<List<Fabrica>> DeleteFabrica(Fabrica fabrica)
         {
-            throw new NotImplementedException();
+            _watchFactory.Fabricas.Remove(fabrica);
+            await _watchFactory.SaveChangesAsync();
+
+            return await GetAllFabrica();
+        }
+
+        public async Task<List<Fabrica>> GetAllFabrica()
+        {
+            return await _watchFactory.Fabricas.ToListAsync();
+        }
+
+        public async Task<Fabrica> GetFabricaById(int id)
+        {
+            return await _watchFactory.Fabricas.Where(f => f.Id== id).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Fabrica>> UpdateFabrica(int id, Fabrica fabrica)
+        {
+            var dbFabrica = await _watchFactory.Fabricas.Where(e => e.Id== id).FirstOrDefaultAsync();
+            if (dbFabrica == null)
+                return null;
+
+            dbFabrica.Descripcion = fabrica.Descripcion;
+
+            return await GetAllFabrica();
         }
     }
 }
