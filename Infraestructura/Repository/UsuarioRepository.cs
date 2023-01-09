@@ -32,6 +32,11 @@ namespace Infraestructura.Repository
             return await GetUsuarios();
         }
 
+        public Task<Usuario> GetUsuarioByCredentials(string email)
+        {
+            return _watchFactory.Usuarios.FirstOrDefaultAsync(e => e.Email == email && e.Eliminado == false);
+        }
+
         public async Task<Usuario> GetUsuarioById(int id)
         {
             return await _watchFactory.Usuarios.

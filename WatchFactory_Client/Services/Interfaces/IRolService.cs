@@ -1,4 +1,4 @@
-﻿using WatchFactory_Client.Models.Dtos.Rol;
+﻿using Dominio.Modelos.Dtos.Rol;
 
 namespace WatchFactory_Client.Services.Interfaces
 {

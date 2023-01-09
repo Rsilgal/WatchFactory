@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IMaquinaService
     {
-        List<Maquina> GetAllMaquinas();
-        Maquina CreateMaquina(Maquina maquina);
+        Task<List<Maquina>> GetAllMaquinas();
+        Task<List<Maquina>> CreateMaquina(Maquina maquina);
     }
 }

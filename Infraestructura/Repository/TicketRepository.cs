@@ -27,15 +27,19 @@ namespace Infraestructura.Repository
             return await GetTickets();
         }
 
-        public async Task<List<Ticket>> DeleteTicket(Ticket ticket)
+        public async Task<List<Ticket>> DeleteTicket(int id)
         {
+            var ticket = await _watchFactory.Tickets.FirstOrDefaultAsync(e => e.Id == id);
+            if (ticket == null)
+                return null;
+
             _watchFactory.Tickets.Remove(ticket);
             await _watchFactory.SaveChangesAsync();
 
             return await GetTickets();
         }
 
-        public async Task<Ticket> GetTicket(int id)
+        public async Task<Ticket> GetTicketById(int id)
         {
             var ticket = await _watchFactory.Tickets.
                 Where(t => t.Id == id).

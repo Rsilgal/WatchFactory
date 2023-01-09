@@ -18,15 +18,14 @@ namespace Aplicacion.Services
             _lineaProduccionRepository = lineaProduccionRepository;
         }
 
-        public LineaProduccion CreateLineaProduccion(LineaProduccion lineaProduccion)
+        public async Task<List<LineaProduccion>> CreateLineaProduccion(LineaProduccion lineaProduccion)
         {
-            _lineaProduccionRepository.CreateLineaProduccion(lineaProduccion); 
-            return lineaProduccion;
+            return await _lineaProduccionRepository.CreateLineaProduccion(lineaProduccion); 
         }
 
-        public List<LineaProduccion> GetAllLineasProduccion()
+        public async Task<List<LineaProduccion>> GetAllLineasProduccion()
         {
-            return _lineaProduccionRepository.GetAllLineasProduccion();
+            return await _lineaProduccionRepository.GetAllLineasProduccion();
         }
     }
 }

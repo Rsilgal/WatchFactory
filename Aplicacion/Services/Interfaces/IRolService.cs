@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IRolService
     {
-        List<Rol> GetRols();
-        Rol CreateRol(Rol rol);
+        Task<List<Rol>> GetRols();
+        Task<List<Rol>> CreateRol(Rol rol);
     }
 }

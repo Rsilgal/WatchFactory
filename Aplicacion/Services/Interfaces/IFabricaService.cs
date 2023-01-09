@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IFabricaService
     {
-        List<Fabrica> GetAllFabricas();
-        Fabrica CreateFabrica(Fabrica fabrica);
+        Task<List<Fabrica>> GetAllFabricas();
+        Task<List<Fabrica>> CreateFabrica(Fabrica fabrica);
     }
 }

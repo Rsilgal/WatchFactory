@@ -27,8 +27,13 @@ namespace Infraestructura.Repository
             return await GetIntervenciones();
         }
 
-        public async Task<List<Intervencion>> DeleteIntervencion(Intervencion intervencion)
+        public async Task<List<Intervencion>> DeleteIntervencion(int id)
         {
+            var intervencion = await _watchFactory.Intervenciones.FirstOrDefaultAsync(x => x.Id == id);
+            if (intervencion == null) 
+            {
+                return null;
+            }
             _watchFactory.Intervenciones.Remove(intervencion);
             await _watchFactory.SaveChangesAsync();
             

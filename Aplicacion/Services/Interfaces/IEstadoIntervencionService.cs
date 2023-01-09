@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IEstadoIntervencionService
     {
-        List<EstadoIntervencion> GetEstadoIntervencion();
-        EstadoIntervencion CreateEstadoIntervencion(EstadoIntervencion estado);
+        Task<List<EstadoIntervencion>> GetEstadoIntervencion();
+        Task<List<EstadoIntervencion>> CreateEstadoIntervencion(EstadoIntervencion estado);
     }
 }

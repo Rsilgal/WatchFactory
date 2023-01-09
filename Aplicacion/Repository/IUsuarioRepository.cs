@@ -16,5 +16,6 @@ namespace Aplicacion.Repository
         Task<Usuario> GetUsuarioById(int id);
         Task<List<Usuario>> GetUsuarioByRol(int rolId);
         Task<List<Usuario>> GetUsuarioByPermiso(int permisoId);
+        Task<Usuario> GetUsuarioByCredentials(string email);
     }
 }

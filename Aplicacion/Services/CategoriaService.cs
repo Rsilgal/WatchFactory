@@ -18,15 +18,14 @@ namespace Aplicacion.Services
             _categoriaRepository = categoriaRepository;
         }
 
-        public Categoria CreateCategoria(Categoria categoria)
+        public async Task<List<Categoria>> CreateCategoria(Categoria categoria)
         {
-            _categoriaRepository.CreateCategoria(categoria);
-            return categoria;
+            return await _categoriaRepository.CreateCategoria(categoria);
         }
 
-        public List<Categoria> GetCategorias()
+        public async Task<List<Categoria>> GetCategorias()
         {
-            return _categoriaRepository.GetCategorias();
+            return await _categoriaRepository.GetCategorias();
         }
     }
 }

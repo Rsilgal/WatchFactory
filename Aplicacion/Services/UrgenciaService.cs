@@ -18,15 +18,15 @@ namespace Aplicacion.Services
             _urgenciaRepository = urgenciaRepository;
         }
 
-        public Urgencia CreateUrgencia(Urgencia urgencia)
+        public async Task<List<Urgencia>> CreateUrgencia(Urgencia urgencia)
         {
-            _urgenciaRepository.CreateUrgencia(urgencia);
-            return urgencia;
+            
+            return await _urgenciaRepository.CreateUrgencia(urgencia);
         }
 
-        public List<Urgencia> GetUrgencias()
+        public async Task<List<Urgencia>> GetUrgencias()
         {
-            return _urgenciaRepository.GetUrgencias();
+            return await _urgenciaRepository.GetUrgencias();
         }
     }
 }

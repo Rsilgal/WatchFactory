@@ -18,14 +18,14 @@ namespace Aplicacion.Services
             _rolRepository = rolRepository;
         }
 
-        public Rol CreateRol(Rol rol)
+        public async Task<List<Rol>> CreateRol(Rol rol)
         {
-            return _rolRepository.CreateRol(rol);
+            return await _rolRepository.CreateRol(rol);
         }
 
-        public List<Rol> GetRols()
+        public async Task<List<Rol>> GetRols()
         {
-            return _rolRepository.GetRols();
+            return await _rolRepository.GetRols();
         }
     }
 }

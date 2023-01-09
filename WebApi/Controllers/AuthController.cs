@@ -46,9 +46,11 @@ namespace WebApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UsuarioDto request)
         {
-            Usuario usuario = (from user in _usuarioService.GetUsuarios()
-                               where user.Email == request.Email && user.Eliminado == false
-                               select user).FirstOrDefault();
+            //Usuario usuario = await(from user in _usuarioService.GetUsuarios()
+            //                   where user.Email == request.Email && user.Eliminado == false
+            //                   select user).FirstOrDefaultAsync();
+
+            Usuario usuario = await _usuarioService.GetUsuarioByCredentials(request.Email);
 
             if (usuario == null)
                 return BadRequest("Usuario no encontrado.");

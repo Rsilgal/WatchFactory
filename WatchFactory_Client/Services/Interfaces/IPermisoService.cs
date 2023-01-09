@@ -1,4 +1,4 @@
-﻿using WatchFactory_Client.Models.Dtos.Permiso;
+﻿using Dominio.Modelos.Dtos.Permiso;
 
 namespace WatchFactory_Client.Services.Interfaces
 {

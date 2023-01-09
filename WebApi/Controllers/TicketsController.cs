@@ -1,5 +1,7 @@
 ﻿using Aplicacion.Services;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Nucleo;
+using Dominio.Modelos.Usuarios;
 using Infraestructura;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,58 +20,41 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var ticketsFromService = _ticketService.GetTickets();
+            var ticketsFromService = await _ticketService.GetTickets();
             if (ticketsFromService == null) return NotFound();
             return Ok(ticketsFromService);
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var ticketFromService = _ticketService.GetTicket(id);
+            var ticketFromService = await _ticketService.GetTicketById(id);
             if (ticketFromService == null) return NotFound();
             return Ok(ticketFromService);
         }
 
         [HttpPost]
-        public ActionResult Post(
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            )
+        public async Task<ActionResult> Post(Ticket ticket)
         {
-            var newTicketFromService = _ticketService.CreateTicket(Descripcion,MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
+            var newTicketFromService = await _ticketService.CreateTicket(ticket);
             if (newTicketFromService == null) return NotFound();
             return Ok(newTicketFromService);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(
-            int id,
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            ) 
+        public async Task<ActionResult> Put(int id, Ticket ticket) 
         {
-            var updatedTicketFromService = _ticketService.UpdateTicket(id, Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID, EstadoID);
+            var updatedTicketFromService = await _ticketService.UpdateTicket(id, ticket);
             if (updatedTicketFromService == null) return NotFound();
             return Ok(updatedTicketFromService);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var deletedTicketFromService = _ticketService.DeleteTicket(id);
+            var deletedTicketFromService = await _ticketService.DeleteTicket(id);
             if (deletedTicketFromService == null) return NotFound();
             return Ok(deletedTicketFromService);
         }

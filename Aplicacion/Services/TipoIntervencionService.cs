@@ -18,15 +18,14 @@ namespace Aplicacion.Services
             _tipoIntervencionRepository = tipoIntervencionRepository;
         }
 
-        public TipoIntervencion CreateTipoIntervencion(TipoIntervencion tipo)
+        public async Task<List<TipoIntervencion>> CreateTipoIntervencion(TipoIntervencion tipo)
         {
-            _tipoIntervencionRepository.CreateTipoIntervencion(tipo);
-            return tipo;
+            return await _tipoIntervencionRepository.CreateTipoIntervencion(tipo);
         }
 
-        public List<TipoIntervencion> GetTipoIntervencion()
+        public async Task<List<TipoIntervencion>> GetTipoIntervencion()
         {
-            return _tipoIntervencionRepository.GetTipoIntervencion();
+            return await _tipoIntervencionRepository.GetTipoIntervencion();
         }
     }
 }

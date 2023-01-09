@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IZonaService
     {
-        List<Zona> GetZonas();
-        Zona CreateZona(Zona zona);
+        Task<List<Zona>> GetZonas();
+        Task<List<Zona>> CreateZona(Zona zona);
     }
 }

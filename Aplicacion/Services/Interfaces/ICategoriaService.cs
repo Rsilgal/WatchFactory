@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface ICategoriaService
     {
-        List<Categoria> GetCategorias();
-        Categoria CreateCategoria(Categoria categoria);
+        Task<List<Categoria>> GetCategorias();
+        Task<List<Categoria>> CreateCategoria(Categoria categoria);
     }
 }

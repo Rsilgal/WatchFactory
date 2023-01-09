@@ -9,8 +9,8 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface ITipoIntervencionService
     {
-        List<TipoIntervencion> GetTipoIntervencion();
-        
-        TipoIntervencion CreateTipoIntervencion(TipoIntervencion tipoIntervencion);
+        Task<List<TipoIntervencion>> GetTipoIntervencion();
+
+        Task<List<TipoIntervencion>> CreateTipoIntervencion(TipoIntervencion tipoIntervencion);
     }
 }

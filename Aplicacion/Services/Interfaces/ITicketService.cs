@@ -9,36 +9,17 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface ITicketService
     {
-        List<Ticket> GetTickets();
+        Task<List<Ticket>> GetTickets();
 
-        Ticket CreateTicket(
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            );
+        Task<List<Ticket>> CreateTicket(Ticket ticket);
 
-        Ticket UpdateTicket(
-            int id,
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            );
+        Task<List<Ticket>> UpdateTicket(int id, Ticket ticket);
 
-        Ticket DeleteTicket(
-            int id
-            );
+        Task<List<Ticket>> DeleteTicket(int id);
 
-        Ticket GetTicket(int id);
-        List<Ticket> GetTicketsByFabrica(int FabricaID);
-        List<Ticket> GetTicketsByLinea(int LineaID);
-        List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID);
+        Task<Ticket> GetTicketById(int id);
+        Task<List<Ticket>> GetTicketsByFabrica(int FabricaID);
+        Task<List<Ticket>> GetTicketsByLinea(int LineaID);
+        Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID);
     }
 }

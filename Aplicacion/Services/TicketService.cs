@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Nucleo;
+using Dominio.Modelos.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,73 +20,44 @@ namespace Aplicacion.Services
             _ticketRepository = ticketRepository;
         }
 
-        public Ticket CreateTicket(
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            )
+        public async Task<List<Ticket>> CreateTicket(Ticket ticket)
         {
-            Ticket ticket = new(Descripcion, MaquinaID, CategoriaID, UsuarioID, UrgenciaID, ZonaID);
-            return _ticketRepository.CreateTicket(ticket);
+            return await _ticketRepository.CreateTicket(ticket);
         }
 
-        public Ticket DeleteTicket(
-            int id
-            )
+        public async Task<List<Ticket>> DeleteTicket(int id)
         {
-            var ticket = _ticketRepository.GetTicket(id);
-            return _ticketRepository.DeleteTicket(ticket);
+            return await _ticketRepository.DeleteTicket(id);
         }
 
-        public Ticket GetTicket(int id)
+        public async Task<Ticket> GetTicketById(int id)
         {
-            return _ticketRepository.GetTicket(id);
+            return await _ticketRepository.GetTicketById(id);
         }
 
-        public List<Ticket> GetTickets()
+        public async Task<List<Ticket>> GetTickets()
         {
-            return _ticketRepository.GetTickets();
+            return await _ticketRepository.GetTickets();
         }
 
-        public List<Ticket> GetTicketsByFabrica(int FabricaID)
+        public async Task<List<Ticket>> GetTicketsByFabrica(int FabricaID)
         {
-            return _ticketRepository.GetTicketsByFabrica(FabricaID);
+            return await _ticketRepository.GetTicketsByFabrica(FabricaID);
         }
 
-        public List<Ticket> GetTicketsByLinea(int LineaID)
+        public async Task<List<Ticket>> GetTicketsByLinea(int LineaID)
         {
-            return _ticketRepository.GetTicketsByLinea(LineaID);
+            return await _ticketRepository.GetTicketsByLinea(LineaID);
         }
 
-        public List<Ticket> GetTicketsByTipoMaquina(int TipoMaquinaID)
+        public async Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID)
         {
-            return _ticketRepository.GetTicketsByTipoMaquina(TipoMaquinaID);
+            return await _ticketRepository.GetTicketsByTipoMaquina(TipoMaquinaID);
         }
 
-        public Ticket UpdateTicket(
-            int id,
-            string Descripcion,
-            int MaquinaID,
-            int CategoriaID,
-            int UsuarioID,
-            int UrgenciaID,
-            int ZonaID,
-            int EstadoID
-            )
+        public async Task<List<Ticket>> UpdateTicket(int id, Ticket ticket)
         {
-            var newTicket = _ticketRepository.GetTicket(id);
-            newTicket.Descripcion= Descripcion;
-            newTicket.MaquinaID= MaquinaID;
-            newTicket.CategoriaID= CategoriaID;
-            newTicket.UsuarioID= UsuarioID;
-            newTicket.UrgenciaID= UrgenciaID;
-            newTicket.ZonaID= ZonaID;
-
-            return _ticketRepository.UpdateTicket(newTicket);
+            return await _ticketRepository.UpdateTicket(id, ticket);
         }
     }
 }

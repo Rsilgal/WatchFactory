@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IUrgenciaService
     {
-        List<Urgencia> GetUrgencias();
-        Urgencia CreateUrgencia(Urgencia urgencia);
+        Task<List<Urgencia>> GetUrgencias();
+        Task<List<Urgencia>> CreateUrgencia(Urgencia urgencia);
     }
 }

@@ -3,6 +3,7 @@ using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Configuracion;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,15 @@ namespace Aplicacion.Services
             _tipoMaquinaRepository= tipoMaquinaRepository;
         }
 
-        public TipoMaquina CreateTipoMaquina(TipoMaquina tipoMaquina)
+        public async Task<List<TipoMaquina>> CreateTipoMaquina(TipoMaquina tipoMaquina)
         {
-            _tipoMaquinaRepository.CreateTipoMaquina(tipoMaquina);
-            return tipoMaquina;
+            return await _tipoMaquinaRepository.CreateTipoMaquina(tipoMaquina);
+            
         }
 
-        public List<TipoMaquina> GetAllTipoMaquinas()
+        public async Task<List<TipoMaquina>> GetAllTipoMaquinas()
         {
-            return _tipoMaquinaRepository.GetAllTipoMaquinas();
+            return await _tipoMaquinaRepository.GetAllTipoMaquinas();
         }
     }
 }

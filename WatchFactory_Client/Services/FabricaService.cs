@@ -1,6 +1,6 @@
 ﻿using Dominio.Modelos.Configuracion;
 using System.Net.Http.Json;
-using WatchFactory_Client.Models.Dtos.Fabrica;
+using Dominio.Modelos.Dtos.Fabrica;
 using WatchFactory_Client.Services.Interfaces;
 
 namespace WatchFactory_Client.Services

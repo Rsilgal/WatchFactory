@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-using WatchFactory_Client.Models;
+using Dominio.Modelos;
 using WatchFactory_Client.Services.Interfaces;
 
 namespace WatchFactory_Client.Services

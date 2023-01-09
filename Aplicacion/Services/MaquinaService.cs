@@ -17,15 +17,14 @@ namespace Aplicacion.Services
             _maquinaRepository = maquinaRepository;
         }
 
-        public Maquina CreateMaquina(Maquina maquina)
+        public async Task<List<Maquina>> CreateMaquina(Maquina maquina)
         {
-            _maquinaRepository.CreateMaquina(maquina);
-            return maquina;
+            return await _maquinaRepository.CreateMaquina(maquina);
         }
 
-        public List<Maquina> GetAllMaquinas()
+        public async Task<List<Maquina>> GetAllMaquinas()
         {
-            return _maquinaRepository.GetAllMaquinas();
+            return await _maquinaRepository.GetAllMaquinas();
         }
     }
 }

@@ -18,15 +18,14 @@ namespace Aplicacion.Services
             this._estadoIntervencionRepository = estadoIntervencionRepository;
         }
 
-        public EstadoIntervencion CreateEstadoIntervencion(EstadoIntervencion estado)
+        public async Task<List<EstadoIntervencion>> CreateEstadoIntervencion(EstadoIntervencion estado)
         {
-            _estadoIntervencionRepository.CreateEstadoIntervencion(estado);
-            return estado;
+            return await _estadoIntervencionRepository.CreateEstadoIntervencion(estado);
         }
 
-        public List<EstadoIntervencion> GetEstadoIntervencion()
+        public async Task<List<EstadoIntervencion>> GetEstadoIntervencion()
         {
-            return _estadoIntervencionRepository.GetEstadoIntervencion();
+            return await _estadoIntervencionRepository.GetEstadoIntervencion();
         }
     }
 }

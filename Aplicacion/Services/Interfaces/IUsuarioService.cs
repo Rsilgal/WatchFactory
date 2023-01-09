@@ -9,10 +9,11 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        List<Usuario> GetUsuarios();
-        Usuario CreateUsuario(Usuario usuario);
-        Usuario UpdateUsuario(int id, Usuario usuario);
-        Usuario DeleteUsuario(int id);
-        Usuario GetUsuario(int id);
+        Task<List<Usuario>> GetUsuarios();
+        Task<List<Usuario>> CreateUsuario(Usuario usuario);
+        Task<List<Usuario>> UpdateUsuario(int id, Usuario usuario);
+        Task<List<Usuario>> DeleteUsuario(int id);
+        Task<Usuario> GetUsuarioById(int id);
+        Task<Usuario> GetUsuarioByCredentials(string Email);
     }
 }

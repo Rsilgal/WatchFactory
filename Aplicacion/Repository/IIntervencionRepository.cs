@@ -14,7 +14,7 @@ namespace Aplicacion.Repository
 
         Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion);
 
-        Task<List<Intervencion>> DeleteIntervencion(Intervencion intervencion);
+        Task<List<Intervencion>> DeleteIntervencion(int id);
 
         Task<Intervencion> GetIntervencion(int id);
         Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);

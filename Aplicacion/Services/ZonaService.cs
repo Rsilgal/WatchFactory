@@ -18,15 +18,15 @@ namespace Aplicacion.Services
             _zonaRepository = zonaRepository;
         }
 
-        public Zona CreateZona(Zona zona)
+        public async Task<List<Zona>> CreateZona(Zona zona)
         {
-            _zonaRepository.CreateZona(zona);
-            return zona;
+            return await _zonaRepository.CreateZona(zona);
+            
         }
 
-        public List<Zona> GetZonas()
+        public async Task<List<Zona>> GetZonas()
         {
-            return _zonaRepository.GetZonas();
+            return await _zonaRepository.GetZonas();
         }
     }
 }

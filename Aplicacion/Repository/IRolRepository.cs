@@ -13,6 +13,6 @@ namespace Aplicacion.Repository
         Task<List<Rol>> CreateRol(Rol rol);
         Task<List<Rol>> UpdateRol(int id, Rol rol);
         Task<List<Rol>> DeleteRol(Rol rol);
-        Task<List<Rol>> GetRolById(int id);
+        Task<Rol> GetRolById(int id);
     }
 }

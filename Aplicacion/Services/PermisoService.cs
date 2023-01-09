@@ -18,15 +18,14 @@ namespace Aplicacion.Services
             _permisoRepository = permisoRepository;
         }
 
-        public Permiso CreatePermiso(Permiso permiso)
+        public async Task<List<Permiso>> CreatePermiso(Permiso permiso)
         {
-            _permisoRepository.CreatePermiso(permiso);
-            return permiso;
+            return await _permisoRepository.CreatePermiso(permiso);
         }
 
-        public List<Permiso> GetPermisos()
+        public async Task<List<Permiso>> GetPermisos()
         {
-            return _permisoRepository.GetPermisos();
+            return await _permisoRepository.GetPermisos();
         }
     }
 }

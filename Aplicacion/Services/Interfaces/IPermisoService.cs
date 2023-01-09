@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IPermisoService
     {
-        List<Permiso> GetPermisos();
-        Permiso CreatePermiso(Permiso permiso);
+        Task<List<Permiso>> GetPermisos();
+        Task<List<Permiso>> CreatePermiso(Permiso permiso);
     }
 }

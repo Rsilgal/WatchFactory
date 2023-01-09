@@ -20,60 +20,35 @@ namespace Aplicacion.Services
             this._intervecnionRepository = intervecnionRepository;
         }
 
-        public Intervencion CreateIntervencion(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
+        public async Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion)
         {
-            var intervencion = new Intervencion(Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
-            _intervecnionRepository.CreateIntervencion(intervencion);
-            return intervencion;
+            return await _intervecnionRepository.CreateIntervencion(intervencion);
         }
 
-        public Intervencion DeleteIntervencion(int id)
+        public async Task<List<Intervencion>> DeleteIntervencion(int id)
         {
-            var intervencion = _intervecnionRepository.GetIntervencion(id);
-            return _intervecnionRepository.DeleteIntervencion(intervencion);
+            return await _intervecnionRepository.DeleteIntervencion(id);
         }
 
-        public Intervencion GetIntervencion(int id)
+        public async Task<Intervencion> GetIntervencionById(int id)
         {
-            //return _intervecnionRepository.GetIntervencion(id);
-            Intervencion test = new("Prueba", 1, 1,1);
-            return test;
+            return await _intervecnionRepository.GetIntervencion(id);
+
         }
 
-        public List<Intervencion> GetIntervenciones()
+        public async Task<List<Intervencion>> GetIntervenciones()
         {
-            return _intervecnionRepository.GetIntervenciones();
+            return await _intervecnionRepository.GetIntervenciones();
         }
 
-        public List<Intervencion> GetIntervencionesByFabrica(int FabricaID)
+        public async Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
         {
-            return _intervecnionRepository.GetIntervencionesByFabrica(FabricaID);
+            return await _intervecnionRepository.GetIntervencionesByTipoIntervencion(TipoIntervencionID);
         }
 
-        public List<Intervencion> GetIntervencionesByLinea(int LineaID)
+        public async Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion)
         {
-            return _intervecnionRepository.GetIntervencionesByLinea(LineaID);
-        }
-
-        public List<Intervencion> GetIntervencionesByMaquina(int MaquinaID)
-        {
-            return _intervecnionRepository.GetIntervencionesByMaquina(MaquinaID);
-        }
-
-        public List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID)
-        {
-            return _intervecnionRepository.GetIntervencionesByTipoIntervencion(TipoIntervencionID);
-        }
-
-        public Intervencion UpdateIntervencion(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
-        {
-            var newIntervencion = _intervecnionRepository.GetIntervencion(id);
-            newIntervencion.Descripcion = Descripcion;
-            newIntervencion.TicketID = TicketID;
-            newIntervencion.EstadoIntervencionID = EstadoIntervencionID;
-            newIntervencion.TipoIntervencionID = TipoIntervencionID;
-
-            return _intervecnionRepository.UpdateIntervencion(newIntervencion);
+            return await _intervecnionRepository.UpdateIntervencion(id, intervencion);
         }
     }
 }

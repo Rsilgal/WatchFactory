@@ -9,17 +9,14 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface IIntervencionService
     {
-        List<Intervencion> GetIntervenciones();
-        Intervencion CreateIntervencion(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID);
+        Task<List<Intervencion>> GetIntervenciones();
+        Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion);
 
-        Intervencion UpdateIntervencion(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID);
+        Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion);
 
-        Intervencion DeleteIntervencion(int id);
+        Task<List<Intervencion>> DeleteIntervencion(int id);
 
-        Intervencion GetIntervencion(int id);
-        List<Intervencion> GetIntervencionesByFabrica(int FabricaID);
-        List<Intervencion> GetIntervencionesByLinea(int LineaID);
-        List<Intervencion> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
-        List<Intervencion> GetIntervencionesByMaquina(int MaquinaID);
+        Task<Intervencion> GetIntervencionById(int id);
+        Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
     }
 }

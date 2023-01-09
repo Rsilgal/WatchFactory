@@ -1,0 +1,11 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Dominio.Modelos.Dtos.Categoria
+{
+    public class UpdateCategoriaDto
+    {
+
+        [MinLength(1), MaxLength(100)]
+        public string Descripcion { get; set; }
+    }
+}

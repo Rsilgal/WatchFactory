@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using System.Reflection;
-using WatchFactory_Client.Models.Dtos.Rol;
+using Dominio.Modelos.Dtos.Rol;
 using WatchFactory_Client.Services.Interfaces;
 
 namespace WatchFactory_Client.Services

@@ -1,7 +1,7 @@
 ﻿using Dominio.Modelos.Configuracion;
 using System.Net.Http.Json;
 using System.Reflection;
-using WatchFactory_Client.Models.Dtos.TipoMaquina;
+using Dominio.Modelos.Dtos.TipoMaquina;
 using WatchFactory_Client.Services.Interfaces;
 
 namespace WatchFactory_Client.Services

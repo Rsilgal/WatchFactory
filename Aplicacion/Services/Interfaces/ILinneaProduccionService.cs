@@ -9,7 +9,7 @@ namespace Aplicacion.Services.Interfaces
 {
     public interface ILinneaProduccionService
     {
-        List<LineaProduccion> GetAllLineasProduccion();
-        LineaProduccion CreateLineaProduccion(LineaProduccion lineaProduccion);
+        Task<List<LineaProduccion>> GetAllLineasProduccion();
+        Task<List<LineaProduccion>> CreateLineaProduccion(LineaProduccion lineaProduccion);
     }
 }

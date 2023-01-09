@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Services;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Intervencion;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -16,41 +17,41 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            var intervencionesFromService = _intervencionService.GetIntervenciones();
+            var intervencionesFromService = await _intervencionService.GetIntervenciones();
             if (intervencionesFromService == null) return NotFound();
             return Ok(intervencionesFromService);
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var intervencionFromService = _intervencionService.GetIntervencion(id);
+            var intervencionFromService = await _intervencionService.GetIntervencionById(id);
             if (intervencionFromService == null) return NotFound();
             return Ok(intervencionFromService);
         }
 
         [HttpPost]
-        public ActionResult Post(string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
+        public async Task<ActionResult> Post(Intervencion intervencion)
         {
-            var newIntervencionFromService = _intervencionService.CreateIntervencion(Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
+            var newIntervencionFromService = await _intervencionService.CreateIntervencion(intervencion);
             if (newIntervencionFromService == null) return NotFound();
             return Ok(newIntervencionFromService);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(int id, string Descripcion, int TicketID, int EstadoIntervencionID, int TipoIntervencionID)
+        public async Task<ActionResult> Update(int id, Intervencion intervencion)
         {
-            var updatedIntervencionFromService = _intervencionService.UpdateIntervencion(id, Descripcion, TicketID, EstadoIntervencionID, TipoIntervencionID);
+            var updatedIntervencionFromService = await _intervencionService.UpdateIntervencion(id, intervencion);
             if (updatedIntervencionFromService == null) return NotFound();
             return Ok(updatedIntervencionFromService);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var deletedIntervencionFromService = _intervencionService.DeleteIntervencion(id);
+            var deletedIntervencionFromService = await _intervencionService.DeleteIntervencion(id);
             if (deletedIntervencionFromService == null) return NotFound();
             return Ok(deletedIntervencionFromService);
         }

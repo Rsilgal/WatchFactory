@@ -1,4 +1,6 @@
 ﻿using Aplicacion.Services.Interfaces;
+using Dominio.Modelos;
+using Dominio.Modelos.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -20,9 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var usuarioFromService = _usuarioService.GetUsuario(id);
+            var usuarioFromService = await _usuarioService.GetUsuarioById(id);
             if (usuarioFromService== null) return NotFound();
             return Ok(usuarioFromService);
         }
@@ -36,9 +38,9 @@ namespace WebApi.Controllers
         //}
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, string Nombre, string Email, string Password, bool Eliminado)
+        public ActionResult Put(int id, Usuario usuario)
         {
-            var updatedUsuarioFromService = _usuarioService.UpdateUsuario(id, Nombre, Email, Password, Eliminado, null);
+            var updatedUsuarioFromService = _usuarioService.UpdateUsuario(id, usuario);
             if (updatedUsuarioFromService== null) return NotFound();
             return Ok(updatedUsuarioFromService);
         }

@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Configuracion;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,14 @@ namespace Aplicacion.Services
             _fabricaRepository = fabricaRepository;
         }
 
-        public Fabrica CreateFabrica(Fabrica fabrica)
+        public async Task<List<Fabrica>> CreateFabrica(Fabrica fabrica)
         {
-            _fabricaRepository.CreateFabrica(fabrica);
-            return fabrica;
+            return await _fabricaRepository.CreateFabrica(fabrica);
         }
 
-        public List<Fabrica> GetAllFabricas()
+        public async Task<List<Fabrica>> GetAllFabricas()
         {
-            return _fabricaRepository.GetAllFabrica();
+            return await _fabricaRepository.GetAllFabrica();
         }
     }
 }

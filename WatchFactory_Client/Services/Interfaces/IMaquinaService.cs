@@ -1,5 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
-using WatchFactory_Client.Models.Dtos.Maquina;
+using Dominio.Modelos.Dtos.Maquina;
 
 namespace WatchFactory_Client.Services.Interfaces
 {

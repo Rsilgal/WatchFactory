@@ -14,9 +14,9 @@ namespace Aplicacion.Repository
 
         Task<List<Ticket>> UpdateTicket(int id, Ticket ticket);
 
-        Task<List<Ticket>> DeleteTicket(Ticket ticket);
+        Task<List<Ticket>> DeleteTicket(int id);
 
-        Task<Ticket> GetTicket(int id);
+        Task<Ticket> GetTicketById(int id);
         Task<List<Ticket>> GetTicketsByFabrica(int FabricaID);
         Task<List<Ticket>> GetTicketsByLinea(int LineaID);
         Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID);

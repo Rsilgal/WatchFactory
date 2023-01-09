@@ -18,38 +18,36 @@ namespace Aplicacion.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public Usuario CreateUsuario(Usuario usuario)
+        public async Task<List<Usuario>> CreateUsuario(Usuario usuario)
         {
-            _usuarioRepository.CreateUsuario(usuario);
-            return usuario;
+            return await _usuarioRepository.CreateUsuario(usuario);
+            
         }
 
-        public Usuario DeleteUsuario(int id)
+        public async Task<List<Usuario>> DeleteUsuario(int id)
         {
-            var usuario = _usuarioRepository.GetUsuario(id);
-            return _usuarioRepository.DeleteUsuario(usuario);
+            var usuario = await _usuarioRepository.GetUsuarioById(id);
+            return await _usuarioRepository.DeleteUsuario(usuario);
         }
 
-        public Usuario GetUsuario(int id)
+        public async Task<Usuario> GetUsuarioById(int id)
         {
-            return _usuarioRepository.GetUsuario(id);
+            return await _usuarioRepository.GetUsuarioById(id);
         }
 
-        public List<Usuario> GetUsuarios()
+        public async Task<List<Usuario>> GetUsuarios()
         {
-            return _usuarioRepository.GetUsuarios();
+            return await _usuarioRepository.GetUsuarios();
         }
 
-        public Usuario UpdateUsuario(int id, string Nombre, string Email, string Password, bool Eliminado, IList<RolUsuario> RolUsuario)
+        public async Task<List<Usuario>> UpdateUsuario(int id, Usuario usuario)
         {
-            var usuario = _usuarioRepository.GetUsuario(id);
-            usuario.Nombre= Nombre;
-            usuario.Email= Email;
-            //usuario= Password;
-            usuario.Eliminado = Eliminado;
-            usuario.RolUsuarios= RolUsuario;
+              return await _usuarioRepository.UpdateUsuario(id, usuario);
+        }
 
-            return _usuarioRepository.UpdateUsuario(usuario);
+        public async Task<Usuario> GetUsuarioByCredentials(string Email)
+        {
+            return await _usuarioRepository.GetUsuarioByCredentials(Email);
         }
     }
 }
