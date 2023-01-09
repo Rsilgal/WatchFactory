@@ -11,10 +11,10 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<Fabrica> Fabricas { get; set; }
 
         Task GetAllMaquinas();
-        Task<Maquina> GetMaquinaById(int id);
+        Task GetMaquinaById(int id);
         Task CreateMaquina(CreateMaquinaDto model);
         Task DeleteMaquina(int id);
-        Task UpdateMaquina(int id, UpdateMaquinaDto model);
+        Task UpdateMaquina(UpdateMaquinaDto model);
 
         Task GetAllTipoMaquina();
         Task GetAllLineas();

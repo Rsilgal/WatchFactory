@@ -5,12 +5,12 @@ namespace WatchFactory_Client.Services.Interfaces
 {
     public interface ITipoIntervencion
     {
-        IEnumerable<TipoIntervencion> Tipos { get; set; }
+        IEnumerable<TipoIntervencion> TiposIntervencion { get; set; }
 
         Task GetAllTiposIntervencion();
-        Task<TipoIntervencion> GetTipoIntervencionById(int id);
+        Task GetTipoIntervencionById(int id);
         Task CreateTipoIntervencion(CreateTipoIntervencionDto model);
         Task DeleteTipoIntervencion(int id);
-        Task UpdateTipoIntervencion(int id, UpdateTipoIntervencionDto model);
+        Task UpdateTipoIntervencion(UpdateTipoIntervencionDto model);
     }
 }

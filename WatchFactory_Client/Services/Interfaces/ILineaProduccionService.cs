@@ -8,10 +8,10 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<LineaProduccion> Lineas { get; set; }
         IEnumerable<Fabrica> Fabricas { get; set; }
         Task GetAllLineas();
-        Task<LineaProduccion> GetLineaById(int id);
+        Task GetLineaById();
         Task CreateLinea(CreateLineaDto model);
         Task DeleteLinea(int id);
-        Task UpdateLinea(int id, UpdateLineaDto model);
+        Task UpdateLinea(UpdateLineaDto model);
         Task GetFabricas();
     }
 }

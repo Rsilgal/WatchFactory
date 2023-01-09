@@ -25,7 +25,7 @@ namespace Dominio.Modelos.Nucleo
         
         public int ZonaID { get; set; }
         
-        public string EstadoID { get; set; }
+        public string Estado { get; set; }
         
         public Maquina Maquina { get; set; }
         
