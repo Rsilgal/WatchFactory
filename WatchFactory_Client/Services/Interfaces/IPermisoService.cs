@@ -8,9 +8,9 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<Rol> Roles { get; set; }
 
         Task GetAllPermisos();
-        Task<Permiso> GetPermisoById(int id);
+        Task GetPermisoById(int id);
         Task CreatePermiso(CreatePermisoDto model);
         Task DeletePermisoById(int id);
-        Task UpdatePermiso(int id, UpdatePermisoDto model);
+        Task UpdatePermiso(UpdatePermisoDto model);
     }
 }

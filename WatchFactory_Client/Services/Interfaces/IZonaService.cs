@@ -8,9 +8,9 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<Zona> Zonas { get; set; }
 
         Task GetAllZonas();
-        Task<Zona> GetZonaById(int id);
+        Task GetZonaById(int id);
         Task CreateZona(CreateZonaDto model);
         Task DeleteZona(int id);
-        Task UpdateZona(int id, UpdateZonaDto model);
+        Task UpdateZona(UpdateZonaDto model);
     }
 }
