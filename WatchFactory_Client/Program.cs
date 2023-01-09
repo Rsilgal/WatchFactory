@@ -20,7 +20,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IIntervencionService, IntervencionService>();
-builder.Services.AddScoped<IConfiguracionService, ConfiguracionService>();
+//builder.Services.AddScoped<IConfiguracionService, ConfiguracionService>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddAuthorizationCore();

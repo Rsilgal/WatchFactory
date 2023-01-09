@@ -8,10 +8,10 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<Usuario> Usuarios { get; set; }
 
         Task GetAllRoles();
-        Task GetRolById(int id);
+        Task<Rol> GetRolById(int id);
         Task CreateRol(CreateRolDto model);
         Task DeleteRol(int id);
-        Task UpdateRol(UpdateRolDto model);
+        Task UpdateRol(int id, UpdateRolDto model);
 
         Task GetUsuarios();
     }
