@@ -8,9 +8,9 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<EstadoIntervencion> Estados { get; set; }
 
         Task GetAllEstados();
-        Task GetEstadoById(int id);
+        Task<EstadoIntervencion> GetEstadoById(int id);
         Task CreateEstado(CreateEstadoIntervencionDto model);
         Task DeleteEstadoById(int id);
-        Task UpdateEstado(UpdateEstadoIntervencionDto model);
+        Task UpdateEstado(int id, UpdateEstadoIntervencionDto model);
     }
 }

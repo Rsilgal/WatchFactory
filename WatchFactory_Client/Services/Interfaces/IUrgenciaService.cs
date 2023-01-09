@@ -9,9 +9,9 @@ namespace WatchFactory_Client.Services.Interfaces
         IEnumerable<Urgencia> Urgencias { get; set; }
 
         Task GetAllUrgencias();
-        Task GetUrgenciaById(int id);
+        Task<Urgencia> GetUrgenciaById(int id);
         Task CreateUrgencia(CreateUrgenciaDto model);
         Task DeleteUrgencia(int id);
-        Task UpdateUrgencia(UpdateUrgenciaDto model);
+        Task UpdateUrgencia(int id, UpdateUrgenciaDto model);
     }
 }

@@ -7,10 +7,10 @@ namespace WatchFactory_Client.Services.Interfaces
     {
         IEnumerable<Fabrica> Fabricas { get; set; }
         Task GetAllFabrica();
-        Task GetFabricaById(int id);
+        Task<Fabrica> GetFabricaById(int id);
         Task CreateFabrica(CreateFabricaDto model);
         Task DeleteFabricaById(int id);
-        Task UpdateFabrica(UpdateFabricaDto model);
+        Task UpdateFabrica(int id, UpdateFabricaDto model);
 
     }
 }

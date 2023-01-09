@@ -5,12 +5,12 @@ namespace WatchFactory_Client.Services.Interfaces
 {
     public interface ICategoriaService
     {
-        IEnumerable<Categoria> categorias { get; set; }
+        IEnumerable<Categoria> Categorias { get; set; }
 
         Task GetAllCategorias();
-        Task GetCategoriaByID(int id);
+        Task<Categoria> GetCategoriaByID(int id);
         Task CreateCategoria(CreateCategoriaDto model);
         Task DeleteCategoria(int id);
-        Task UpdateCategoria(UpdateCategoriaDto model);
+        Task UpdateCategoria(int id, UpdateCategoriaDto model);
     }
 }
