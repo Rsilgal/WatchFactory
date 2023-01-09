@@ -1,11 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
 using Dominio.Modelos.Usuarios;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio.Modelos.Nucleo
 {
