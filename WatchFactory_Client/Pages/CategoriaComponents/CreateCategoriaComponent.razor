@@ -1,0 +1,29 @@
+﻿@page "/categoria"
+@using Dominio.Modelos.Dtos.Categoria;
+@inject ICategoriaService CategoriaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crea una nueva categoria</PageTitle>
+<h3>Nueva Categoría</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</EditForm>
+
+@code {
+    CreateCategoriaDto Dto = new CreateCategoriaDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Dto.Descripcion = string.Empty;
+    }
+
+    async Task HandleSubmit()
+    {
+        await CategoriaService.CreateCategoria(Dto);
+    }
+}
