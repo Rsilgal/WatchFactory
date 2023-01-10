@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Maquina;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Aplicacion.Repository
     public interface IMaquinaRepository
     {
         Task<List<Maquina>> GetAllMaquinas();
-        Task<List<Maquina>> CreateMaquina(Maquina maquina);
-        Task<List<Maquina>> UpdateMaquina(int id, Maquina maquina);
-        Task<List<Maquina>> DeleteMaquina(Maquina maquina);
+        Task<List<Maquina>> CreateMaquina(CreateMaquinaDto maquina);
+        Task<List<Maquina>> UpdateMaquina(int id, UpdateMaquinaDto maquina);
+        Task<List<Maquina>> DeleteMaquina(int id);
         Task<Maquina> GetMaquinaById(int id);
         Task<List<Maquina>> GetMaquinasByLinea(int lineaId);
         Task<List<Maquina>> GetMaquinasByTipoMaquina(int tipoMaquinaId);

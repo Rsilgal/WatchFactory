@@ -1,4 +1,5 @@
-﻿using Dominio.Modelos.Nucleo;
+﻿using Dominio.Modelos.Dtos.Ticket;
+using Dominio.Modelos.Nucleo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Aplicacion.Services.Interfaces
     {
         Task<List<Ticket>> GetTickets();
 
-        Task<List<Ticket>> CreateTicket(Ticket ticket);
+        Task<List<Ticket>> CreateTicket(CreateTicketDto ticket);
 
-        Task<List<Ticket>> UpdateTicket(int id, Ticket ticket);
+        Task<List<Ticket>> UpdateTicket(int id, UpdateTicketDto ticket);
 
         Task<List<Ticket>> DeleteTicket(int id);
 

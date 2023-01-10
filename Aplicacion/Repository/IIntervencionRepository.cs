@@ -1,4 +1,5 @@
-﻿using Dominio.Modelos.Intervencion;
+﻿using Dominio.Modelos.Dtos.Intervencion;
+using Dominio.Modelos.Intervencion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Aplicacion.Repository
     public interface IIntervencionRepository
     {
         Task<List<Intervencion>> GetIntervenciones();
-        Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion);
+        Task<List<Intervencion>> CreateIntervencion(CreateIntervencionDto intervencion);
 
-        Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion);
+        Task<List<Intervencion>> UpdateIntervencion(int id, UpdateIntervencionDto intervencion);
 
         Task<List<Intervencion>> DeleteIntervencion(int id);
 

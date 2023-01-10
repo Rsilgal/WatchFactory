@@ -1,4 +1,5 @@
-﻿using Dominio.Modelos.Usuarios;
+﻿using Dominio.Modelos.Dtos.Permiso;
+using Dominio.Modelos.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace Aplicacion.Services.Interfaces
     public interface IPermisoService
     {
         Task<List<Permiso>> GetPermisos();
-        Task<List<Permiso>> CreatePermiso(Permiso permiso);
+        Task<List<Permiso>> CreatePermiso(CreatePermisoDto model);
+        Task<List<Permiso>> DeletePermiso(int id);
+        Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
+        Task<Permiso> GetPermisoById(int id);
     }
 }

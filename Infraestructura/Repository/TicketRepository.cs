@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Repository;
+using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Nucleo;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,18 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Ticket>> CreateTicket(Ticket ticket)
+        public async Task<List<Ticket>> CreateTicket(CreateTicketDto model)
         {
-            await _watchFactory.Tickets.AddAsync(ticket);
+            await _watchFactory.Tickets.AddAsync(new Ticket
+            {
+                Descripcion= model.Descripcion,
+                FechaCreacion = DateTime.Now,
+                CategoriaID= model.CategoriaID,
+                MaquinaID= model.MaquinaID,
+                UrgenciaID= model.UrgenciaID,
+                UsuarioID= model.UsuarioID,
+                ZonaID= model.ZonaID,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetTickets();
@@ -107,18 +117,18 @@ namespace Infraestructura.Repository
             return tickets;
         }
 
-        public async Task<List<Ticket>> UpdateTicket(int id, Ticket ticket)
+        public async Task<List<Ticket>> UpdateTicket(int id, UpdateTicketDto model)
         {
             var dbTicket = await _watchFactory.Tickets.FirstOrDefaultAsync(e => e.Id == id);
             if (dbTicket == null)
                 return null;
 
-            dbTicket.Descripcion = ticket.Descripcion;
-            dbTicket.UrgenciaID = ticket.UrgenciaID;
-            dbTicket.CategoriaID = ticket.CategoriaID;
-            dbTicket.Estado = ticket.Estado;
-            dbTicket.MaquinaID = ticket.MaquinaID;
-            dbTicket.ZonaID= ticket.ZonaID;
+            dbTicket.Descripcion = model.Descripcion;
+            dbTicket.UrgenciaID = model.UrgenciaID;
+            dbTicket.CategoriaID = model.CategoriaID;
+            dbTicket.EstadoID = model.EstadoID;
+            dbTicket.MaquinaID = model.MaquinaID;
+            dbTicket.ZonaID= model.ZonaID;
 
             await _watchFactory.SaveChangesAsync();
 

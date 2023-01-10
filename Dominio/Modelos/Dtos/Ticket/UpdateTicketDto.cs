@@ -17,6 +17,6 @@ namespace Dominio.Modelos.Dtos.Ticket
         [Required, Range(1, int.MaxValue)]
         public int ZonaID { get; set; }
         [Required, Range(1, int.MaxValue)]
-        public string EstadoID { get; set; }
+        public int EstadoID { get; set; }
     }
 }

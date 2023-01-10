@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Categoria;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,12 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Categoria>> CreateCategoria(Categoria categoria)
+        public async Task<List<Categoria>> CreateCategoria(CreateCategoriaDto model)
         {
-            await _watchFactory.Categorias.AddAsync(categoria);
+            await _watchFactory.Categorias.AddAsync(new Categoria
+            {
+                Descripcion= model.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetCategorias();
@@ -39,16 +43,16 @@ namespace Infraestructura.Repository
             return await _watchFactory.Categorias.ToListAsync();
         }
 
-        public async Task<Categoria> GetCategorias(int id)
+        public async Task<Categoria> GetCategoriaById(int id)
         {
             return await _watchFactory.Categorias.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<List<Categoria>> UpdateCategoria(int id, Categoria categoria)
+        public async Task<List<Categoria>> UpdateCategoria(int id, UpdateCategoriaDto model)
         {
-            var dbCategoria = await _watchFactory.Categorias.FirstOrDefaultAsync(c => categoria.Id == id);
+            var dbCategoria = await _watchFactory.Categorias.FirstOrDefaultAsync(c => c.Id == id);
 
-            dbCategoria.Descripcion = categoria.Descripcion;
+            dbCategoria.Descripcion = model.Descripcion;
 
             return await GetCategorias();
         }

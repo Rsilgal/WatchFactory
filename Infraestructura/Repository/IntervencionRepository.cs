@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Repository;
+using Dominio.Modelos.Dtos.Intervencion;
 using Dominio.Modelos.Intervencion;
 using Dominio.Modelos.Nucleo;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,16 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion)
+        public async Task<List<Intervencion>> CreateIntervencion(CreateIntervencionDto model)
         {
-            await _watchFactory.Intervenciones.AddAsync(intervencion);
+            await _watchFactory.Intervenciones.AddAsync(new Intervencion
+            {
+                Descripcion= model.Descripcion,
+                FechaCreacion = DateTime.Now,
+                TicketID = model.TicketId,
+                EstadoIntervencionID = model.EstadoId,
+                TipoIntervencionID = model.TipoId,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetIntervenciones();
@@ -81,16 +89,15 @@ namespace Infraestructura.Repository
             return intervenciones;
         }
 
-        public async Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion)
+        public async Task<List<Intervencion>> UpdateIntervencion(int id, UpdateIntervencionDto model)
         {
             var dbIntervencion = await _watchFactory.Intervenciones.FirstOrDefaultAsync(e => e.Id == id);
             if (dbIntervencion == null)
                 return null;
 
-            dbIntervencion.Descripcion = intervencion.Descripcion;
-            dbIntervencion.TipoIntervencionID = intervencion.TipoIntervencionID;
-            dbIntervencion.EstadoIntervencion = intervencion.EstadoIntervencion;
-            dbIntervencion.TicketID= intervencion.TicketID;
+            dbIntervencion.Descripcion = model.Descripcion;
+            dbIntervencion.TipoIntervencionID = model.TipoId;
+            dbIntervencion.EstadoIntervencionID = model.EstadoId;
 
             await _watchFactory.SaveChangesAsync();
 

@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Fabrica;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,21 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Fabrica>> CreateFabrica(Fabrica fabrica)
+        public async Task<List<Fabrica>> CreateFabrica(CreateFabricaDto model)
         {
-            await _watchFactory.Fabricas.AddAsync(fabrica);
+            await _watchFactory.Fabricas.AddAsync(new Fabrica
+            {
+                Descripcion= model.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetAllFabrica();
         }
 
-        public async Task<List<Fabrica>> DeleteFabrica(Fabrica fabrica)
+        public async Task<List<Fabrica>> DeleteFabrica(int id)
         {
+            var fabrica = await GetFabricaById(id);
+
             _watchFactory.Fabricas.Remove(fabrica);
             await _watchFactory.SaveChangesAsync();
 
@@ -44,13 +50,13 @@ namespace Infraestructura.Repository
             return await _watchFactory.Fabricas.Where(f => f.Id== id).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Fabrica>> UpdateFabrica(int id, Fabrica fabrica)
+        public async Task<List<Fabrica>> UpdateFabrica(int id, UpdateFabricaDto model)
         {
             var dbFabrica = await _watchFactory.Fabricas.Where(e => e.Id== id).FirstOrDefaultAsync();
             if (dbFabrica == null)
                 return null;
 
-            dbFabrica.Descripcion = fabrica.Descripcion;
+            dbFabrica.Descripcion = model.Descripcion;
 
             return await GetAllFabrica();
         }

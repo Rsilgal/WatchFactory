@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Zona;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,20 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Zona>> CreateZona(Zona zona)
+        public async Task<List<Zona>> CreateZona(CreateZonaDto dto)
         {
-            await _watchFactory.Zonas.AddAsync(zona);
+            await _watchFactory.Zonas.AddAsync(new Zona
+            {
+                Descripcion = dto.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetZonas();
         }
 
-        public async Task<List<Zona>> DeleteZona(Zona zona)
+        public async Task<List<Zona>> DeleteZona(int id)
         {
+            var zona = await GetZonaById(id);
             _watchFactory.Zonas.Remove(zona);
             await _watchFactory.SaveChangesAsync();
 
@@ -44,11 +49,11 @@ namespace Infraestructura.Repository
             return await _watchFactory.Zonas.ToListAsync();
         }
 
-        public async Task<List<Zona>> UpdateZona(int id, Zona zona)
+        public async Task<List<Zona>> UpdateZona(int id, UpdateZonaDto dto)
         {
             var dbZona = await _watchFactory.Zonas.FirstOrDefaultAsync(z => z.Id == id);
 
-            dbZona.Descripcion = zona.Descripcion;
+            dbZona.Descripcion = dto.Descripcion;
 
             await _watchFactory.SaveChangesAsync();
 

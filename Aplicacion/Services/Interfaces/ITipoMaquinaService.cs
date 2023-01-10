@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.TipoMaquina;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace Aplicacion.Services.Interfaces
     public interface ITipoMaquinaService
     {
         Task<List<TipoMaquina>> GetAllTipoMaquinas();
-        Task<List<TipoMaquina>> CreateTipoMaquina(TipoMaquina tipoMaquina);
+        Task<List<TipoMaquina>> CreateTipoMaquina(CreateTipoMaquinaDto model);
+        Task<List<TipoMaquina>> DeleteTipoMaquina(int id);
+        Task<List<TipoMaquina>> UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model);
+        Task<TipoMaquina> GetTipoMaquinaById(int id);
     }
 }

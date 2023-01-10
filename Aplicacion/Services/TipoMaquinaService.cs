@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.TipoMaquina;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -18,15 +19,30 @@ namespace Aplicacion.Services
             _tipoMaquinaRepository= tipoMaquinaRepository;
         }
 
-        public async Task<List<TipoMaquina>> CreateTipoMaquina(TipoMaquina tipoMaquina)
+        public async Task<List<TipoMaquina>> CreateTipoMaquina(CreateTipoMaquinaDto model)
         {
-            return await _tipoMaquinaRepository.CreateTipoMaquina(tipoMaquina);
+            return await _tipoMaquinaRepository.CreateTipoMaquina(model);
             
+        }
+
+        public async Task<List<TipoMaquina>> DeleteTipoMaquina(int id)
+        {
+            return await _tipoMaquinaRepository.DeleteTipoMaquina(id);
         }
 
         public async Task<List<TipoMaquina>> GetAllTipoMaquinas()
         {
             return await _tipoMaquinaRepository.GetAllTipoMaquinas();
+        }
+
+        public async Task<TipoMaquina> GetTipoMaquinaById(int id)
+        {
+            return await _tipoMaquinaRepository.GetTipoMaquinaById(id);
+        }
+
+        public async Task<List<TipoMaquina>> UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model)
+        {
+            return await _tipoMaquinaRepository.UpdateTipoMaquina(id, model);
         }
     }
 }

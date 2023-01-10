@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Maquina;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,22 @@ namespace Infraestructura.Repository
             _watchFactory= watchFactory;
         }
 
-        public async Task<List<Maquina>> CreateMaquina(Maquina maquina)
+        public async Task<List<Maquina>> CreateMaquina(CreateMaquinaDto model)
         {
-            await _watchFactory.Maquinas.AddAsync(maquina);
+            await _watchFactory.Maquinas.AddAsync(new Maquina
+            {
+                Descripcion = model.Descripcion,
+                LineaProduccionID = model.LineaProduccionID,
+                TipoMaquinaID = model.TipoMaquinaID
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetAllMaquinas();
         }
 
-        public async Task<List<Maquina>> DeleteMaquina(Maquina maquina)
+        public async Task<List<Maquina>> DeleteMaquina(int id)
         {
+            var maquina = await GetMaquinaById(id);
             _watchFactory.Maquinas.Remove(maquina);
             await _watchFactory.SaveChangesAsync();
 
@@ -74,13 +81,13 @@ namespace Infraestructura.Repository
             return maquinas;
         }
 
-        public async Task<List<Maquina>> UpdateMaquina(int id, Maquina maquina)
+        public async Task<List<Maquina>> UpdateMaquina(int id, UpdateMaquinaDto model)
         {
             var dbMaquina = await _watchFactory.Maquinas.FirstOrDefaultAsync(m => m.Id ==id);
 
-            dbMaquina.Descripcion = maquina.Descripcion;
-            dbMaquina.TipoMaquinaID = maquina.TipoMaquinaID;
-            dbMaquina.LineaProduccionID = maquina.LineaProduccionID;
+            dbMaquina.Descripcion = model.Descripcion;
+            dbMaquina.TipoMaquinaID = model.TipoMaquinaID;
+            dbMaquina.LineaProduccionID = model.LineaProduccionID;
 
             await _watchFactory.SaveChangesAsync();
 

@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Categoria;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Aplicacion.Services.Interfaces
     public interface ICategoriaService
     {
         Task<List<Categoria>> GetCategorias();
-        Task<List<Categoria>> CreateCategoria(Categoria categoria);
+        Task<List<Categoria>> CreateCategoria(CreateCategoriaDto categoria);
+        Task<Categoria> GetCategoriaById(int id);
+        Task<List<Categoria>> UpdateCategoria(int id, UpdateCategoriaDto categoria);
     }
 }

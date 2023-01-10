@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Repository;
+using Dominio.Modelos.Dtos.Rol;
 using Dominio.Modelos.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,16 +19,21 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Rol>> CreateRol(Rol rol)
+        public async Task<List<Rol>> CreateRol(CreateRolDto model)
         {
-            await _watchFactory.Roles.AddAsync(rol);
+            await _watchFactory.Roles.AddAsync(new Rol { 
+                Nombre = model.Name, 
+                Descripcion = model.Description, 
+                eliminado = false 
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetRols();
         }
 
-        public async Task<List<Rol>> DeleteRol(Rol rol)
+        public async Task<List<Rol>> DeleteRol(int id)
         {
+            var rol = await GetRolById(id);
             _watchFactory.Roles.Remove(rol);
             await _watchFactory.SaveChangesAsync();
             
@@ -44,13 +50,13 @@ namespace Infraestructura.Repository
             return await _watchFactory.Roles.ToListAsync();
         }
 
-        public async Task<List<Rol>> UpdateRol(int id, Rol rol)
+        public async Task<List<Rol>> UpdateRol(int id, UpdateRolDto model)
         {
             var dbRol = await _watchFactory.Roles.FirstOrDefaultAsync(r => r.Id == id);
 
-            dbRol.Descripcion = rol.Descripcion;
-            dbRol.Nombre = rol.Nombre;
-            dbRol.eliminado = rol.eliminado;
+            dbRol.Descripcion = model.Description;
+            dbRol.Nombre = model.Name;
+            dbRol.eliminado = model.eliminado;
 
             await _watchFactory.SaveChangesAsync();
 

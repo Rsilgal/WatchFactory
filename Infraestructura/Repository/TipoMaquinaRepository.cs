@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.TipoMaquina;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,20 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<TipoMaquina>> CreateTipoMaquina(TipoMaquina tipoMaquina)
+        public async Task<List<TipoMaquina>> CreateTipoMaquina(CreateTipoMaquinaDto model)
         {
-            await _watchFactory.TipoMaquinas.AddAsync(tipoMaquina);
+            await _watchFactory.TipoMaquinas.AddAsync(new TipoMaquina
+            {
+                Descripcion= model.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetAllTipoMaquinas();
         }
 
-        public async Task<List<TipoMaquina>> DeleteTipoMaquina(TipoMaquina tipoMaquina)
+        public async Task<List<TipoMaquina>> DeleteTipoMaquina(int id)
         {
+            var tipoMaquina = await GetTipoMaquinaById(id);
             _watchFactory.TipoMaquinas.Remove(tipoMaquina);
             await _watchFactory.SaveChangesAsync();
 
@@ -44,11 +49,11 @@ namespace Infraestructura.Repository
             return await _watchFactory.TipoMaquinas.FirstOrDefaultAsync(tm => tm.Id == id);
         }
 
-        public async Task<List<TipoMaquina>> UpdateTipoMaquina(int id, TipoMaquina tipoMaquina)
+        public async Task<List<TipoMaquina>> UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model)
         {
             var dbTipoMaquina = await _watchFactory.TipoMaquinas.FirstOrDefaultAsync(tm => tm.Id == id);
 
-            dbTipoMaquina.Descripcion = tipoMaquina.Descripcion;
+            dbTipoMaquina.Descripcion = model.Descripcion;
 
             await _watchFactory.SaveChangesAsync();
 

@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Fabrica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Aplicacion.Repository
     public interface IFabricaRepository
     {
         Task<List<Fabrica>> GetAllFabrica();
-        Task<List<Fabrica>> CreateFabrica(Fabrica fabrica);
-        Task<List<Fabrica>> UpdateFabrica(int id, Fabrica fabrica);
-        Task<List<Fabrica>> DeleteFabrica(Fabrica fabrica);
+        Task<List<Fabrica>> CreateFabrica(CreateFabricaDto fabrica);
+        Task<List<Fabrica>> UpdateFabrica(int id, UpdateFabricaDto fabrica);
+        Task<List<Fabrica>> DeleteFabrica(int id);
         Task<Fabrica> GetFabricaById(int id);
     }
 }

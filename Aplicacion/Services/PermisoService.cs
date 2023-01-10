@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Dtos.Permiso;
 using Dominio.Modelos.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,29 @@ namespace Aplicacion.Services
             _permisoRepository = permisoRepository;
         }
 
-        public async Task<List<Permiso>> CreatePermiso(Permiso permiso)
+        public async Task<List<Permiso>> CreatePermiso(CreatePermisoDto model)
         {
-            return await _permisoRepository.CreatePermiso(permiso);
+            return await _permisoRepository.CreatePermiso(model);
+        }
+
+        public async Task<List<Permiso>> DeletePermiso(int id)
+        {
+            return await _permisoRepository.DeletePermiso(id);
+        }
+
+        public async Task<Permiso> GetPermisoById(int id)
+        {
+            return await _permisoRepository.GetPermisoById(id);
         }
 
         public async Task<List<Permiso>> GetPermisos()
         {
             return await _permisoRepository.GetPermisos();
+        }
+
+        public async Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model)
+        {
+            return await _permisoRepository.UpdatePermiso(id, model);
         }
     }
 }

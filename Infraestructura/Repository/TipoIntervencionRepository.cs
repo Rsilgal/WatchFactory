@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.TipoIntervencion;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,20 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<TipoIntervencion>> CreateTipoIntervencion(TipoIntervencion tipo)
+        public async Task<List<TipoIntervencion>> CreateTipoIntervencion(CreateTipoIntervencionDto model)
         {
-            await _watchFactory.TipoIntervenciones.AddAsync(tipo);
+            await _watchFactory.TipoIntervenciones.AddAsync(new TipoIntervencion
+            {
+                Descripcion= model.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetTipoIntervencion();
         }
 
-        public async Task<List<TipoIntervencion>> DeleteTipoIntervencion(TipoIntervencion tipo)
+        public async Task<List<TipoIntervencion>> DeleteTipoIntervencion(int id)
         {
+            var tipo = await GetTipoIntervencionById(id);
             _watchFactory.TipoIntervenciones.Remove(tipo);
             await _watchFactory.SaveChangesAsync();
 
@@ -44,11 +49,11 @@ namespace Infraestructura.Repository
             return await _watchFactory.TipoIntervenciones.FirstOrDefaultAsync(ti => ti.Id == id);
         }
 
-        public async Task<List<TipoIntervencion>> UpdateTipoIntervencion(int id, TipoIntervencion tipo)
+        public async Task<List<TipoIntervencion>> UpdateTipoIntervencion(int id, UpdateTipoIntervencionDto model)
         {
             var dbTipoIntervencion = await _watchFactory.TipoIntervenciones.FirstOrDefaultAsync(ti => ti.Id == id);
 
-            dbTipoIntervencion.Descripcion = tipo.Descripcion;
+            dbTipoIntervencion.Descripcion = model.Descripcion;
 
             await _watchFactory.SaveChangesAsync();
 

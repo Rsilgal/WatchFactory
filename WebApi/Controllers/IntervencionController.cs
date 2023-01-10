@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Services;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Dtos.Intervencion;
 using Dominio.Modelos.Intervencion;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,17 +34,17 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Intervencion intervencion)
+        public async Task<ActionResult> Post(CreateIntervencionDto model)
         {
-            var newIntervencionFromService = await _intervencionService.CreateIntervencion(intervencion);
+            var newIntervencionFromService = await _intervencionService.CreateIntervencion(model);
             if (newIntervencionFromService == null) return NotFound();
             return Ok(newIntervencionFromService);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Intervencion intervencion)
+        public async Task<ActionResult> Update(int id, UpdateIntervencionDto model)
         {
-            var updatedIntervencionFromService = await _intervencionService.UpdateIntervencion(id, intervencion);
+            var updatedIntervencionFromService = await _intervencionService.UpdateIntervencion(id, model);
             if (updatedIntervencionFromService == null) return NotFound();
             return Ok(updatedIntervencionFromService);
         }

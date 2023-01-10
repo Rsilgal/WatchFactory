@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.EstadoIIntervencion;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,20 @@ namespace Infraestructura.Repository
             _watchFactory= watchFactory;
         }
 
-        public async Task<List<EstadoIntervencion>> CreateEstadoIntervencion(EstadoIntervencion estado)
+        public async Task<List<EstadoIntervencion>> CreateEstadoIntervencion(CreateEstadoIntervencionDto model)
         {
-            await _watchFactory.EstadoIntervenciones.AddAsync(estado);
+            await _watchFactory.EstadoIntervenciones.AddAsync(new EstadoIntervencion
+            {
+                Descripcion= model.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetEstadoIntervencion();
         }
 
-        public async Task<List<EstadoIntervencion>> DeleteEstadoIntervencion(EstadoIntervencion estado)
+        public async Task<List<EstadoIntervencion>> DeleteEstadoIntervencion(int id)
         {
+            var estado = await GetEstadoIntervencionById(id);
             _watchFactory.EstadoIntervenciones.Remove(estado);
             await _watchFactory.SaveChangesAsync();
 
@@ -43,11 +48,11 @@ namespace Infraestructura.Repository
             return await _watchFactory.EstadoIntervenciones.FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<List<EstadoIntervencion>> UpdateEstadoIntervencion(int id, EstadoIntervencion estado)
+        public async Task<List<EstadoIntervencion>> UpdateEstadoIntervencion(int id, UpdateEstadoIntervencionDto model)
         {
             var dbEstado = await _watchFactory.EstadoIntervenciones.FirstOrDefaultAsync(e => e.Id == id);
 
-            dbEstado.Descripcion = estado.Descripcion;
+            dbEstado.Descripcion = model.Descripcion;
 
             await _watchFactory.SaveChangesAsync();
 

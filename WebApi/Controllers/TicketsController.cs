@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Services;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Nucleo;
 using Dominio.Modelos.Usuarios;
 using Infraestructura;
@@ -36,17 +37,17 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Ticket ticket)
+        public async Task<ActionResult> Post(CreateTicketDto model)
         {
-            var newTicketFromService = await _ticketService.CreateTicket(ticket);
+            var newTicketFromService = await _ticketService.CreateTicket(model);
             if (newTicketFromService == null) return NotFound();
             return Ok(newTicketFromService);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, Ticket ticket) 
+        public async Task<ActionResult> Put(int id, UpdateTicketDto model) 
         {
-            var updatedTicketFromService = await _ticketService.UpdateTicket(id, ticket);
+            var updatedTicketFromService = await _ticketService.UpdateTicket(id, model);
             if (updatedTicketFromService == null) return NotFound();
             return Ok(updatedTicketFromService);
         }

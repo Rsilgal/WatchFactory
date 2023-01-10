@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Urgencia;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,20 @@ namespace Infraestructura.Repository
             _watchFactory = watchFactory;
         }
 
-        public async Task<List<Urgencia>> CreateUrgencia(Urgencia urgencia)
+        public async Task<List<Urgencia>> CreateUrgencia(CreateUrgenciaDto dto)
         {
-            await _watchFactory.AddAsync(urgencia);
+            await _watchFactory.AddAsync(new Urgencia
+            {
+                Descripcion= dto.Descripcion,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetUrgencias();
         }
 
-        public async Task<List<Urgencia>> DeleteUrgencia(Urgencia urgencia)
+        public async Task<List<Urgencia>> DeleteUrgencia(int id)
         {
+            var urgencia = await GetUrgenciaById(id);
             _watchFactory.Urgencias.Remove(urgencia);
             await _watchFactory.SaveChangesAsync(); 
             
@@ -44,11 +49,11 @@ namespace Infraestructura.Repository
             return await _watchFactory.Urgencias.ToListAsync();
         }
 
-        public async Task<List<Urgencia>> UpdateUrgencia(int id, Urgencia urgencia)
+        public async Task<List<Urgencia>> UpdateUrgencia(int id, UpdateUrgenciaDto to)
         {
             var dbUrgencia = await _watchFactory.Urgencias.FirstOrDefaultAsync(u => u.Id == id);
 
-            dbUrgencia.Descripcion = urgencia.Descripcion;
+            dbUrgencia.Descripcion = to.Descripcion;
 
             return await GetUrgencias();
         }

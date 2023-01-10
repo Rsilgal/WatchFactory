@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.LineaProduccion;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,21 @@ namespace Infraestructura.Repository
             _watchFactory= watchFactory;
         }
 
-        public async Task<List<LineaProduccion>> CreateLineaProduccion(LineaProduccion lineaProduccion)
+        public async Task<List<LineaProduccion>> CreateLineaProduccion(CreateLineaDto model)
         {
-            await _watchFactory.Lineas.AddAsync(lineaProduccion);
+            await _watchFactory.Lineas.AddAsync(new LineaProduccion
+            {
+                Descripcion= model.Descripcion,
+                FabricaID= model.FabricaID,
+            });
             await _watchFactory.SaveChangesAsync();
 
             return await GetAllLineasProduccion();
         }
 
-        public async Task<List<LineaProduccion>> DeleteLineaProduccion(LineaProduccion lineaProduccion)
+        public async Task<List<LineaProduccion>> DeleteLineaProduccion(int id)
         {
+            var lineaProduccion = await GetLineaProduccionById(id);
             _watchFactory.Lineas.Remove(lineaProduccion);
             await _watchFactory.SaveChangesAsync();
 
@@ -51,12 +57,12 @@ namespace Infraestructura.Repository
             return await _watchFactory.Lineas.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public async Task<List<LineaProduccion>> UpdateLineaProduccion(int id, LineaProduccion lineaProduccion)
+        public async Task<List<LineaProduccion>> UpdateLineaProduccion(int id, UpdateLineaDto model)
         {
             var dbLinea = await _watchFactory.Lineas.FirstOrDefaultAsync(l => l.Id == id);
 
-            dbLinea.Descripcion = lineaProduccion.Descripcion;
-            dbLinea.FabricaID = lineaProduccion.FabricaID;
+            dbLinea.Descripcion = model.Descripcion;
+            dbLinea.FabricaID = model.FabricaID;
 
             await _watchFactory.SaveChangesAsync();
 

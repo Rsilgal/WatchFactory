@@ -19,7 +19,7 @@ namespace Dominio.Modelos.Nucleo
         
         public int ZonaID { get; set; }
         
-        public string Estado { get; set; }
+        public int EstadoID { get; set; }
         
         public Maquina Maquina { get; set; }
         

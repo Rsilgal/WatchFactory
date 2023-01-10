@@ -1,5 +1,6 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
+using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Nucleo;
 using Dominio.Modelos.Usuarios;
 using System;
@@ -20,9 +21,9 @@ namespace Aplicacion.Services
             _ticketRepository = ticketRepository;
         }
 
-        public async Task<List<Ticket>> CreateTicket(Ticket ticket)
+        public async Task<List<Ticket>> CreateTicket(CreateTicketDto model)
         {
-            return await _ticketRepository.CreateTicket(ticket);
+            return await _ticketRepository.CreateTicket(model);
         }
 
         public async Task<List<Ticket>> DeleteTicket(int id)
@@ -55,9 +56,9 @@ namespace Aplicacion.Services
             return await _ticketRepository.GetTicketsByTipoMaquina(TipoMaquinaID);
         }
 
-        public async Task<List<Ticket>> UpdateTicket(int id, Ticket ticket)
+        public async Task<List<Ticket>> UpdateTicket(int id, UpdateTicketDto model)
         {
-            return await _ticketRepository.UpdateTicket(id, ticket);
+            return await _ticketRepository.UpdateTicket(id, model);
         }
     }
 }

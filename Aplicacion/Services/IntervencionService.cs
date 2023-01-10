@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Intervencion;
 using Dominio.Modelos.Intervencion;
 using Dominio.Modelos.Nucleo;
 using System;
@@ -20,9 +21,9 @@ namespace Aplicacion.Services
             this._intervecnionRepository = intervecnionRepository;
         }
 
-        public async Task<List<Intervencion>> CreateIntervencion(Intervencion intervencion)
+        public async Task<List<Intervencion>> CreateIntervencion(CreateIntervencionDto model)
         {
-            return await _intervecnionRepository.CreateIntervencion(intervencion);
+            return await _intervecnionRepository.CreateIntervencion(model);
         }
 
         public async Task<List<Intervencion>> DeleteIntervencion(int id)
@@ -46,9 +47,9 @@ namespace Aplicacion.Services
             return await _intervecnionRepository.GetIntervencionesByTipoIntervencion(TipoIntervencionID);
         }
 
-        public async Task<List<Intervencion>> UpdateIntervencion(int id, Intervencion intervencion)
+        public async Task<List<Intervencion>> UpdateIntervencion(int id, UpdateIntervencionDto model)
         {
-            return await _intervecnionRepository.UpdateIntervencion(id, intervencion);
+            return await _intervecnionRepository.UpdateIntervencion(id, model);
         }
     }
 }

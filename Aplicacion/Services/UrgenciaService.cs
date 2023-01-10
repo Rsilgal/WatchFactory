@@ -1,6 +1,7 @@
 ﻿using Aplicacion.Repository;
 using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Urgencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,30 @@ namespace Aplicacion.Services
             _urgenciaRepository = urgenciaRepository;
         }
 
-        public async Task<List<Urgencia>> CreateUrgencia(Urgencia urgencia)
+        public async Task<List<Urgencia>> CreateUrgencia(CreateUrgenciaDto dto)
         {
             
-            return await _urgenciaRepository.CreateUrgencia(urgencia);
+            return await _urgenciaRepository.CreateUrgencia(dto);
+        }
+
+        public async Task<List<Urgencia>> DeleteUrgencia(int id)
+        {
+            return await _urgenciaRepository.DeleteUrgencia(id);
+        }
+
+        public async Task<Urgencia> GetUrgenciaById(int id)
+        {
+            return await _urgenciaRepository.GetUrgenciaById(id);
         }
 
         public async Task<List<Urgencia>> GetUrgencias()
         {
             return await _urgenciaRepository.GetUrgencias();
+        }
+
+        public async Task<List<Urgencia>> UpdateUrgencia(int id, UpdateUrgenciaDto dto)
+        {
+            return await _urgenciaRepository.UpdateUrgencia(id, dto);
         }
     }
 }
