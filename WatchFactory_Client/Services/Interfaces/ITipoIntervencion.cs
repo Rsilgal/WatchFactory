@@ -12,5 +12,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreateTipoIntervencion(CreateTipoIntervencionDto model);
         Task DeleteTipoIntervencion(int id);
         Task UpdateTipoIntervencion(int id, UpdateTipoIntervencionDto model);
+        Task GetAllDataFromTipoIntervencion(int skip, int take);
     }
 }

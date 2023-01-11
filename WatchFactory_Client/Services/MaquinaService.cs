@@ -68,15 +68,20 @@ namespace WatchFactory_Client.Services
         public async Task<Maquina> GetMaquinaById(int id)
         {
             var result = await _http.GetFromJsonAsync<Maquina>($"api/maquina/{id}");
-            if (result != null)
-                return result;
-            throw new Exception("No se ha enocntrado ninguna maquina");
+            return result;
         }
 
         public async Task UpdateMaquina(int id, UpdateMaquinaDto model)
         {
             var result = await _http.PutAsJsonAsync($"api/maquina/{id}", model);
             await SetMaquina(result);
+        }
+
+        public async Task GetAllDataFromMaquina(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Maquina>>($"api/maquina/page/{skip}/{take}");
+            if (result != null)
+                Maquinas= result;
         }
     }
 }

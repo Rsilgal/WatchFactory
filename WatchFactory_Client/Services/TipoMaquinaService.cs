@@ -55,5 +55,12 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/tipomaquina/{id}", model);
             await SetTipMaquina(result);
         }
+
+        public async Task GetAllDataFromTipoMaquina(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<TipoMaquina>>($"api/tipomaquina/page/{skip}/{take}");
+            if (result != null)
+                TiposMaquinas = result;
+        }
     }
 }

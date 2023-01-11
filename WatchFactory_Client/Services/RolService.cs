@@ -62,5 +62,10 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/usuario/{id}", model);
             await SetRol(result);
         }
+
+        public async Task GetAllDataFromRol(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Rol>>($"api/rol/page/{skip}/{take}");
+        }
     }
 }

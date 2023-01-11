@@ -12,5 +12,7 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreatePermiso(CreatePermisoDto model);
         Task DeletePermisoById(int id);
         Task UpdatePermiso(int id, UpdatePermisoDto model);
+        Task GetAllDataFromPermisos(int skip, int take);
+        Task GetRoles();
     }
 }

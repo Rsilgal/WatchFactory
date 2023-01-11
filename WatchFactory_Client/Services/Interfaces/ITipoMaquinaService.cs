@@ -12,5 +12,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreateTipoMaquina(CreateTipoMaquinaDto model);
         Task DeleteTipoMaquina(int id);
         Task UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model);
+        Task GetAllDataFromTipoMaquina(int skip, int take);
     }
 }

@@ -19,5 +19,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task GetAllTipoMaquina();
         Task GetAllLineas();
         Task GetAllFabricas();
+        Task GetAllDataFromMaquina(int skip, int take);
     }
 }

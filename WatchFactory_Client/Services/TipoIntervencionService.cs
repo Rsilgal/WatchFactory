@@ -54,5 +54,12 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/tipointervencion/{id}", model);
             await SetTipo(result);
         }
+
+        public async Task GetAllDataFromTipoIntervencion(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<TipoIntervencion>>($"api/tipointervencion/page/{skip}/{take}");
+            if (result != null)
+                Tipos= result;
+        }
     }
 }

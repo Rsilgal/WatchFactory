@@ -54,5 +54,12 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/urgencia/{id}", model);
             await SetUrgencia(result);
         }
+
+        public async Task GetAllDataFromUrgencia(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Urgencia>>($"api/urgencia/page/{skip}/{take}");
+            if (result != null)
+                Urgencias= result;
+        }
     }
 }

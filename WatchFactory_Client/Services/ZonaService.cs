@@ -54,5 +54,12 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/zona/{id}", model);
             await SetZona(result);
         }
+
+        public async Task GetAllDataFromZona(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Zona>>($"api/zona/page/{skip}/{take}");
+            if (result != null)
+                Zonas = result;
+        }
     }
 }

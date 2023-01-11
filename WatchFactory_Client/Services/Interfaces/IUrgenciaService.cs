@@ -12,5 +12,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreateUrgencia(CreateUrgenciaDto model);
         Task DeleteUrgencia(int id);
         Task UpdateUrgencia(int id, UpdateUrgenciaDto model);
+        Task GetAllDataFromUrgencia(int skip, int take);
     }
 }

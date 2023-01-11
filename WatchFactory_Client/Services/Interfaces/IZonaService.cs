@@ -12,5 +12,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task CreateZona(CreateZonaDto model);
         Task DeleteZona(int id);
         Task UpdateZona(int id, UpdateZonaDto model);
+        Task GetAllDataFromZona(int skip, int take);
     }
 }

@@ -54,5 +54,17 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync($"api/permiso/{id}", model);
             await SetPermiso(result);
         }
+
+        public async Task GetAllDataFromPermisos(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Permiso>>($"api/permiso/page/{skip}/{take}");
+        }
+
+        public async Task GetRoles()
+        {
+            var result = await _http.GetFromJsonAsync<List<Rol>>("api/roles");
+            if (result != null)
+                Roles = result;
+        }
     }
 }

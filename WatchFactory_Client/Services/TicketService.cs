@@ -70,55 +70,5 @@ namespace WatchFactory_Client.Services
             var result = await _http.PutAsJsonAsync<Ticket>($"api/tickets/{ticket.Id}", ticket);
             await SetTickets(result);
         }
-
-        public async Task GetFabricas()
-        {
-            //await _configurationService.GetFabricas();
-            //Fabricas = _configurationService.Fabricas;
-        }
-
-        // TODO: Revisar
-        public async Task GetLineas()
-        {
-            //await _configurationService.GetLineas();
-            //Lineas = _configurationService.Lineas;
-        }
-
-        // TODO: Revisar
-        public async Task GetMaquinas()
-        {
-            //await _configurationService.GetMaquinas();
-            //Maquinas = _configurationService.Maquinas;
-        }
-
-        public async Task GetCategorias()
-        {
-            //await _configurationService.GetCategorias();
-            //Categorias = _configurationService.Categorias;
-        }
-
-        public async Task GetUsuarios()
-        {
-            //await _configurationService.GetUsuarios();
-            //Usuarios = _configurationService.Usuarios;
-        }
-
-        public async Task GetUrgencias()
-        {
-            //await _configurationService.GetUrgencias();
-            //Urgencias = _configurationService.Urgencias;
-        }
-
-        public async Task GetZonas()
-        {
-            //    await _configurationService.GetZonas();
-            //    Zonas = _configurationService.Zonas;
-        }
-
-        public async Task GetEstados()
-        {
-            //await _configurationService.GetEstados();
-            //Estados = _configurationService.Estados;
-        }
     }
 }

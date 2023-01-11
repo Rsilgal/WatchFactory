@@ -14,5 +14,6 @@ namespace WatchFactory_Client.Services.Interfaces
         Task UpdateRol(int id, UpdateRolDto model);
 
         Task GetUsuarios();
+        Task GetAllDataFromRol(int skip, int take);
     }
 }
