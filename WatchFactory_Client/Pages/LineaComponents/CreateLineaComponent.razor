@@ -1,0 +1,40 @@
+﻿@page "/linea"
+@inject ILineaProduccionService LineaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una linea de producción</PageTitle>
+<h3>Nueva Linea de Producción</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    </div>
+    <div>
+        <label for="fabrica">Fabrica</label>
+        <InputSelect id="fabrica" @bind-Value="Dto.FabricaID" class="form-select">
+            @foreach (var fabrica in LineaService.Fabricas)
+            {
+                <option value="@fabrica.Id">@fabrica.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</EditForm>
+
+@code {
+    CreateLineaDto Dto = new CreateLineaDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LineaService.GetAllLineas();
+        await LineaService.GetFabricas();
+    }
+
+    async Task HandleSubmit()
+    {
+        await LineaService.CreateLinea(Dto);
+    }
+}

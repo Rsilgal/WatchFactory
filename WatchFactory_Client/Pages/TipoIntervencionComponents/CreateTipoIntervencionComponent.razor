@@ -1,0 +1,24 @@
+﻿@page "/tipointervencion"
+@inject ITipoIntervencion TipoIntervencionService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear un nuevo Tipo de Intervencion</PageTitle>
+<h3>Nuevo Tipo de Intervencion</h3>
+
+<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Crear</button>
+
+@code {
+    CreateTipoIntervencionDto Dto = new CreateTipoIntervencionDto();
+
+    async Task CreateIntervencion()
+    {
+        await TipoIntervencionService.CreateTipoIntervencion(Dto);
+    }
+
+}

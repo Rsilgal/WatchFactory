@@ -1,0 +1,23 @@
+﻿@page "/permiso"
+@inject IPermisoService PermisoService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una nuevo Permiso</PageTitle>
+<h3>Nuevo Permiso</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>"
+    </div>
+    <button type="submit" class="btn btn-primary"></button>
+</EditForm>
+
+@code {
+    CreatePermisoDto Dto = new CreatePermisoDto();
+
+    async Task HandleSubmit()
+    {
+        await PermisoService.CreatePermiso(Dto);
+    }
+}

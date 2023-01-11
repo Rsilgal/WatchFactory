@@ -1,5 +1,4 @@
 ﻿@page "/categoria"
-@using Dominio.Modelos.Dtos.Categoria;
 @inject ICategoriaService CategoriaService
 @inject NavigationManager NavigationManager
 
@@ -7,6 +6,7 @@
 <h3>Nueva Categoría</h3>
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
     <div>
         <label for="descripcion">Descripcion</label>
         <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>

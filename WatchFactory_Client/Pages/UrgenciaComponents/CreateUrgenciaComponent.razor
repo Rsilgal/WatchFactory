@@ -1,0 +1,24 @@
+﻿@page "/zona"
+@inject IZonaService ZonaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una nueva Zona</PageTitle>
+<h3>Nueva Zona</h3>
+
+<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Crear</button>
+
+@code {
+    CreateZonaDto Dto = new CreateZonaDto();
+
+    async Task CreateIntervencion()
+    {
+        await ZonaService.CreateZona(Dto);
+    }
+
+}

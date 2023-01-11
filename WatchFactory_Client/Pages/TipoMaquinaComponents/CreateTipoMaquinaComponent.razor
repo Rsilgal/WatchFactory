@@ -1,0 +1,24 @@
+﻿@page "/tipomaquina"
+@inject ITipoMaquinaService TipoMaquinaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear un nuevo Tipo de Maquina</PageTitle>
+<h3>Nuevo Tipo de Maquina</h3>
+
+<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Crear</button>
+
+@code {
+    CreateTipoMaquinaDto Dto = new CreateTipoMaquinaDto();
+
+    async Task CreateIntervencion()
+    {
+        await TipoMaquinaService.CreateTipoMaquina(Dto);
+    }
+
+}

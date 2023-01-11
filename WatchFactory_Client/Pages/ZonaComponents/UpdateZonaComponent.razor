@@ -1,0 +1,37 @@
+﻿@page "/zona/{id:int}"
+@inject IZonaService ZonaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar una nueva Zona</PageTitle>
+<h3>Actualizar Zona</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Actualizar</button>
+<button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdateZonaDto Dto = new UpdateZonaDto();
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+
+    async Task HandleSubmit()
+    {
+        await ZonaService.UpdateZona(Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await ZonaService.DeleteZona(Id);
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page "/linea/{id:int}"
+@inject ILineaProduccionService LineaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una linea de producción</PageTitle>
+<h3>Nueva Linea de Producción</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    </div>
+    <div>
+        <label for="fabrica">Fabrica</label>
+        <InputSelect id="fabrica" @bind-Value="Dto.FabricaID" class="form-select">
+            @foreach (var fabrica in LineaService.Fabricas)
+            {
+                    <option value="@fabrica.Id">@fabrica.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+</EditForm>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    UpdateLineaDto Dto = new UpdateLineaDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var linea = await LineaService.GetLineaById((int)Id);
+        Dto.Descripcion = linea.Descripcion;
+        Dto.FabricaID = linea.FabricaID;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LineaService.GetFabricas();
+    }
+
+    async Task HandleSubmit()
+    {
+        await LineaService.UpdateLinea(Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await LineaService.DeleteLinea(Id);
+    }
+}

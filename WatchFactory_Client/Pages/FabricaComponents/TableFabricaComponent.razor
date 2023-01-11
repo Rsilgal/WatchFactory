@@ -1,0 +1,39 @@
+﻿@page "/fabricas"
+@inject IFabricaService FabricaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Tabla de Fabricas</PageTitle>
+<h3>Fabricas</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Descripcion</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fabrica in FabricaService.Fabricas)
+        {
+            <tr>
+                <td>@fabrica.Id</td>
+                <td>@fabrica.Descripcion</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => ShowFabrica(fabrica.Id)"><i class="oi oi-pencil"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await FabricaService.GetAllFabrica();
+    }
+
+    void ShowFabrica(int id){
+        NavigationManager.NavigateTo($"/fabrica/{id}");
+    }
+}

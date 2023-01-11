@@ -1,9 +1,9 @@
-﻿@page "/categoria/{id:int}"
-@inject ICategoriaService CategoriaService
+﻿@page "/estadointervencion/{id:int}"
+@inject IEstadoIntervencion EstadoIntervencion
 @inject NavigationManager NavigationManager
 
-<PageTitle>Actualizar una nueva categoria</PageTitle>
-<h3>Actualizar Categoría</h3>
+<PageTitle>Actualizar un Estado de intervencion</PageTitle>
+<h3>Actualizar Estado de Intervencion</h3>
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
@@ -13,18 +13,18 @@
         <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
     </div>
     <button type="submit" class="btn btn-primary">Actualizar</button>
-    <button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+    <button type="button" @onclick="DeleteSubmit" class="btn btn-danger">Eliminar</button>
 </EditForm>
 
 @code {
     [Parameter]
     public int? Id { get; set; }
-    UpdateCategoriaDto Dto = new UpdateCategoriaDto();
+    UpdateEstadoIntervencionDto Dto = new UpdateEstadoIntervencionDto();
 
     protected override async Task OnParametersSetAsync()
     {
-        var categoria = await CategoriaService.GetCategoriaByID((int)Id);
-        Dto.Descripcion = categoria.Descripcion;
+        var estado = await EstadoIntervencion.GetEstadoById((int)Id);
+        Dto.Descripcion = estado.Descripcion;
     }
 
     protected override async Task OnInitializedAsync()
@@ -34,11 +34,11 @@
 
     async Task HandleSubmit()
     {
-        await CategoriaService.UpdateCategoria((int)Id, Dto);
+        await EstadoIntervencion.UpdateEstado((int)Id, Dto);
     }
 
     async Task DeleteSubmit()
     {
-        await CategoriaService.DeleteCategoria((int)Id);
+        await EstadoIntervencion.DeleteEstadoById((int)Id);
     }
 }

@@ -1,0 +1,70 @@
+﻿@page "/tiposintervencion"
+@inject ITipoIntervencion TipoIntervencionService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Tabla de Tipos de Intervencion</PageTitle>
+<h3>Tipos de Intervencion</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Descripcion</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tipo in TipoIntervencionService.Tipos)
+        {
+            <tr>
+                <td>@tipo.Id</td>
+                <td>@tipo.Descripcion</td>
+                <td>
+                    <button>
+                        <i class="oi oi-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<ul>
+    <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
+    <li class="oi oi-chevron-right" @onclick="NextPage"></li>
+</ul>
+<button type="button" class="btn btn-primary" @onclick="HandleSubmit">Crear Tipo</button>
+
+@code {
+    private int _offset = 0;
+    private int _take = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdatePagination();
+    }
+
+    async Task UpdatePagination()
+    {
+        await TipoIntervencionService.GetAllDataFromTipoIntervencion(_offset, _take);
+    }
+
+    async void PrevPage()
+    {
+        if (_offset > 0)
+        {
+            _offset--;
+            await UpdatePagination();
+        }
+    }
+
+    async void NextPage()
+    {
+        _offset++;
+        await UpdatePagination();
+    }
+
+    void HandleSubmit()
+    {
+        NavigationManager.NavigateTo("/tipointervencion");
+    }
+}

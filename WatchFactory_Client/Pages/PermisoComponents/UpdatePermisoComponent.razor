@@ -1,0 +1,53 @@
+﻿@page "/permiso/{id:int}"
+@inject IPermisoService PermisoService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar un Permiso</PageTitle>
+<h3>Actualizar Permiso</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>"
+    </div>
+
+    <select multiple>
+        @foreach (var item in PermisoService.Roles)
+        {
+            <selectItem value="@item.Id">@item.Descripcion</selectItem>
+        }
+    </select>
+
+    <button type="submit" class="btn btn-primary"></button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdatePermisoDto Dto = new UpdatePermisoDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var permiso = await PermisoService.GetPermisoById(Id);
+        Dto.Descripcion = permiso.Descripcion;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await PermisoService.GetRoles();
+    }
+
+    async Task HandleSubmit()
+    {
+        await PermisoService.UpdatePermiso(Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await PermisoService.DeletePermisoById(Id);
+    }
+}
