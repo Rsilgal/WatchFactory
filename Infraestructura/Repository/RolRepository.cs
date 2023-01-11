@@ -40,6 +40,18 @@ namespace Infraestructura.Repository
             return await GetRols();
         }
 
+        public async Task<List<Rol>> GetAllDataFromRol(int skip, int take)
+        {
+            var roles = await _watchFactory.Roles
+                .Include(r => r.Usuarios)
+                .Include(r => r.Permisos)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return roles;
+        }
+
         public async Task<Rol> GetRolById(int id)
         {
             return await _watchFactory.Roles.FirstOrDefaultAsync(r => r.Id == id);

@@ -39,6 +39,16 @@ namespace Infraestructura.Repository
             return await GetUrgencias();
         }
 
+        public async Task<List<Urgencia>> GetAllDataFromURgencias(int skip, int take)
+        {
+            var urgencias = await _watchFactory.Urgencias
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return urgencias;
+        }
+
         public async Task<Urgencia> GetUrgenciaById(int id)
         {
             return await _watchFactory.Urgencias.FirstOrDefaultAsync(u => u.Id == id);

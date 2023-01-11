@@ -39,6 +39,17 @@ namespace Infraestructura.Repository
             return await GetPermisos();
         }
 
+        public async Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take)
+        {
+            var permisos = await _watchFactory.Permisos
+                .Include(p => p.Roles)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return permisos;
+        }
+
         public async Task<Permiso> GetPermisoById(int id)
         {
             return await _watchFactory.Permisos.FirstOrDefaultAsync(p => p.Id == id);

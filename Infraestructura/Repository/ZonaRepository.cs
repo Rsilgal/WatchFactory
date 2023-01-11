@@ -39,6 +39,14 @@ namespace Infraestructura.Repository
             return await GetZonas();
         }
 
+        public async Task<List<Zona>> GetAllDataFromZona(int skip, int take)
+        {
+            return await _watchFactory.Zonas
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+        }
+
         public async Task<Zona> GetZonaById(int id)
         {
             return await _watchFactory.Zonas.FirstOrDefaultAsync(z => z.Id == id);

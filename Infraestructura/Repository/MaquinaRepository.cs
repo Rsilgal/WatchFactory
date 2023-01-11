@@ -40,6 +40,21 @@ namespace Infraestructura.Repository
             return await GetAllMaquinas();
         }
 
+        public async Task<List<Maquina>> GetAllDataFromMaquina(int skip, int take)
+        {
+            var maquinas = await _watchFactory.Maquinas
+                .Include(m => m.TipoMaquina)
+                .Include(m => m.LineaProduccion)
+                .ThenInclude(lp => lp.Fabrica)
+                .OrderBy(m => m.Id)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return maquinas;
+    
+        }
+
         public async Task<List<Maquina>> GetAllMaquinas()
         {
             return await _watchFactory.Maquinas.ToListAsync();
@@ -47,7 +62,11 @@ namespace Infraestructura.Repository
 
         public async Task<Maquina> GetMaquinaById(int id)
         {
-            return await _watchFactory.Maquinas.FirstOrDefaultAsync(m => m.Id == id);
+            return await _watchFactory.Maquinas.
+                Include(m => m.TipoMaquina).
+                Include(m => m.LineaProduccion).
+                ThenInclude(e => e.Fabrica).
+                FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<List<Maquina>> GetMaquinasByFabrica(int fabricaId)

@@ -39,6 +39,16 @@ namespace Infraestructura.Repository
             return await GetTipoIntervencion();
         }
 
+        public async Task<List<TipoIntervencion>> GetAllDataFromTipoIntervencion(int skip, int take)
+        {
+            var tipos = await _watchFactory.TipoIntervenciones
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return tipos;
+        }
+
         public async Task<List<TipoIntervencion>> GetTipoIntervencion()
         {
             return await _watchFactory.TipoIntervenciones.ToListAsync();

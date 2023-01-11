@@ -39,6 +39,17 @@ namespace Infraestructura.Repository
             return await GetAllTipoMaquinas();
         }
 
+        public async Task<List<TipoMaquina>> GetAllDataFromTipoMaquinas(int skip, int take)
+        {
+            var tipos = await _watchFactory.TipoMaquinas
+                .Include(tm => tm.Maquinas)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return tipos;
+        }
+
         public async Task<List<TipoMaquina>> GetAllTipoMaquinas()
         {
             return await _watchFactory.TipoMaquinas.ToListAsync();
