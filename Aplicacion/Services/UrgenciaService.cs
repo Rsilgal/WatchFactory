@@ -30,6 +30,11 @@ namespace Aplicacion.Services
             return await _urgenciaRepository.DeleteUrgencia(id);
         }
 
+        public async Task<List<Urgencia>> GetAllDataFromUrgencias(int skip, int take)
+        {
+            return await _urgenciaRepository.GetAllDataFromURgencias(skip, take);
+        }
+
         public async Task<Urgencia> GetUrgenciaById(int id)
         {
             return await _urgenciaRepository.GetUrgenciaById(id);

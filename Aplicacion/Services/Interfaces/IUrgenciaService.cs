@@ -15,5 +15,6 @@ namespace Aplicacion.Services.Interfaces
         Task<List<Urgencia>> DeleteUrgencia(int id);
         Task<Urgencia> GetUrgenciaById(int id);
         Task<List<Urgencia>> UpdateUrgencia(int id, UpdateUrgenciaDto dto);
+        Task<List<Urgencia>> GetAllDataFromUrgencias(int skip, int take);
     }
 }

@@ -29,6 +29,11 @@ namespace Aplicacion.Services
             return await _tipoIntervencionRepository.DeleteTipoIntervencion(id);
         }
 
+        public async Task<List<TipoIntervencion>> GetAllDataFromTipoIntervencion(int skip, int take)
+        {
+            return await _tipoIntervencionRepository.GetAllDataFromTipoIntervencion(skip, take);
+        }
+
         public async Task<TipoIntervencion> GetTipoIntervecionById(int id)
         {
             return await _tipoIntervencionRepository.GetTipoIntervencionById(id);

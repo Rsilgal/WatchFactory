@@ -15,5 +15,6 @@ namespace Aplicacion.Repository
         Task<List<Zona>> UpdateZona(int id, UpdateZonaDto dto);
         Task<List<Zona>> DeleteZona(int id);
         Task<Zona> GetZonaById(int id);
+        Task<List<Zona>> GetAllDataFromZona(int skip, int take);
     }
 }

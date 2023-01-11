@@ -15,5 +15,6 @@ namespace Aplicacion.Services.Interfaces
         Task<List<TipoMaquina>> DeleteTipoMaquina(int id);
         Task<List<TipoMaquina>> UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model);
         Task<TipoMaquina> GetTipoMaquinaById(int id);
+        Task<List<TipoMaquina>> GetAllDataFromTipoMaquinas(int skip, int take);
     }
 }

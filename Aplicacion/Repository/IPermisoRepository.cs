@@ -15,5 +15,6 @@ namespace Aplicacion.Repository
         Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
         Task<List<Permiso>> DeletePermiso(int id);
         Task<Permiso> GetPermisoById(int id);
+        Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take);
     }
 }

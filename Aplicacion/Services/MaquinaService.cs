@@ -38,6 +38,11 @@ namespace Aplicacion.Services
             return await _maquinaRepository.GetMaquinaById(id);
         }
 
+        public async Task<List<Maquina>> GettAllDataFromMaquina(int skip, int take)
+        {
+            return await _maquinaRepository.GetAllDataFromMaquina(skip, take);
+        }
+
         public async Task<List<Maquina>> UpdateMaquina(int id, UpdateMaquinaDto model)
         {
             return await _maquinaRepository.UpdateMaquina(id, model);

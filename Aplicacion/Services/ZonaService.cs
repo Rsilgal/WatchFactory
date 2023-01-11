@@ -30,6 +30,11 @@ namespace Aplicacion.Services
             return await _zonaRepository.DeleteZona(id);
         }
 
+        public async Task<List<Zona>> GetAllDataFromZona(int skip, int take)
+        {
+            return await _zonaRepository.GetAllDataFromZona(skip, take);
+        }
+
         public async Task<Zona> GetZonaById(int id)
         {
             return await _zonaRepository.GetZonaById(id);

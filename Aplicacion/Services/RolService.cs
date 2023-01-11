@@ -29,6 +29,11 @@ namespace Aplicacion.Services
             return await _rolRepository.DeleteRol(id);
         }
 
+        public async Task<List<Rol>> GetAllDataFromRol(int skip, int take)
+        {
+            return await _rolRepository.GetAllDataFromRol(skip, take);
+        }
+
         public async Task<Rol> GetRolById(int id)
         {
             return await _rolRepository.GetRolById(id);

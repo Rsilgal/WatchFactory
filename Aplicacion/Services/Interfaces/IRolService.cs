@@ -15,5 +15,6 @@ namespace Aplicacion.Services.Interfaces
         Task<List<Rol>> UpdateRol(int id, UpdateRolDto model);
         Task<List<Rol>> DeleteRol(int id);
         Task<Rol> GetRolById(int id);
+        Task<List<Rol>> GetAllDataFromRol(int skip, int take);
     }
 }

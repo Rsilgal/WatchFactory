@@ -18,5 +18,6 @@ namespace Aplicacion.Repository
         Task<List<Maquina>> GetMaquinasByLinea(int lineaId);
         Task<List<Maquina>> GetMaquinasByTipoMaquina(int tipoMaquinaId);
         Task<List<Maquina>> GetMaquinasByFabrica(int fabricaId);
+        Task<List<Maquina>> GetAllDataFromMaquina(int skip, int take);
     }
 }

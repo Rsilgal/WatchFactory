@@ -30,6 +30,11 @@ namespace Aplicacion.Services
             return await _tipoMaquinaRepository.DeleteTipoMaquina(id);
         }
 
+        public async Task<List<TipoMaquina>> GetAllDataFromTipoMaquinas(int skip, int take)
+        {
+            return await _tipoMaquinaRepository.GetAllDataFromTipoMaquinas(skip, take);
+        }
+
         public async Task<List<TipoMaquina>> GetAllTipoMaquinas()
         {
             return await _tipoMaquinaRepository.GetAllTipoMaquinas();

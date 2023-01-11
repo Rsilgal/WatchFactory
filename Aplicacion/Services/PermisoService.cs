@@ -29,6 +29,11 @@ namespace Aplicacion.Services
             return await _permisoRepository.DeletePermiso(id);
         }
 
+        public async Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take)
+        {
+            return await _permisoRepository.GetAllDataFromPermisos( skip,  take);
+        }
+
         public async Task<Permiso> GetPermisoById(int id)
         {
             return await _permisoRepository.GetPermisoById(id);

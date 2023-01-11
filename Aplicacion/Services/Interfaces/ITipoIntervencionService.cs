@@ -16,5 +16,6 @@ namespace Aplicacion.Services.Interfaces
         Task<List<TipoIntervencion>> UpdateTipoIntervecion(int id, UpdateTipoIntervencionDto model);
         Task<TipoIntervencion> GetTipoIntervecionById(int id);
         Task<List<TipoIntervencion>> DeleteTipoIntervencion(int id);
+        Task<List<TipoIntervencion>> GetAllDataFromTipoIntervencion(int skip, int take);
     }
 }

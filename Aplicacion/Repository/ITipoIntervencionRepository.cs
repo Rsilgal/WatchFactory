@@ -15,5 +15,6 @@ namespace Aplicacion.Repository
         Task<List<TipoIntervencion>> UpdateTipoIntervencion(int id, UpdateTipoIntervencionDto model);
         Task<List<TipoIntervencion>> DeleteTipoIntervencion(int id);
         Task<TipoIntervencion> GetTipoIntervencionById(int id);
+        Task<List<TipoIntervencion>> GetAllDataFromTipoIntervencion(int skip, int take);
     }
 }

@@ -15,5 +15,6 @@ namespace Aplicacion.Services.Interfaces
         Task<List<Permiso>> DeletePermiso(int id);
         Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
         Task<Permiso> GetPermisoById(int id);
+        Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take);
     }
 }

@@ -15,5 +15,6 @@ namespace Aplicacion.Repository
         Task<List<TipoMaquina>> UpdateTipoMaquina(int id, UpdateTipoMaquinaDto model);
         Task<List<TipoMaquina>> DeleteTipoMaquina(int id);
         Task<TipoMaquina> GetTipoMaquinaById(int id);
+        Task<List<TipoMaquina>> GetAllDataFromTipoMaquinas(int skip, int take);
     }
 }

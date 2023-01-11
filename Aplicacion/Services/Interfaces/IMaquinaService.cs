@@ -15,5 +15,6 @@ namespace Aplicacion.Services.Interfaces
         Task<Maquina> GetMaquinaById(int id);
         Task<List<Maquina>> UpdateMaquina(int id, UpdateMaquinaDto model);
         Task<List<Maquina>> DeleteMaquina(int id);
+        Task<List<Maquina>> GettAllDataFromMaquina(int skip, int take);
     }
 }

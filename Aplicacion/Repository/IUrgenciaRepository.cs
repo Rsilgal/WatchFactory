@@ -15,5 +15,6 @@ namespace Aplicacion.Repository
         Task<List<Urgencia>> UpdateUrgencia(int id, UpdateUrgenciaDto dto);
         Task<List<Urgencia>> DeleteUrgencia(int id);
         Task<Urgencia> GetUrgenciaById(int id);
+        Task<List<Urgencia>> GetAllDataFromURgencias(int skip, int take);
     }
 }
