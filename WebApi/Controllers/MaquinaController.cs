@@ -53,10 +53,19 @@ namespace WebApi.Controllers
             return Ok(maquinasFromService);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var maquinasFromService = await _maquinaService.DeleteMaquina(id);
+            if (maquinasFromService == null)
+                return NotFound();
+            return Ok(maquinasFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var maquinasFromService = await _maquinaService.GettAllDataFromMaquina(skip, take);
             if (maquinasFromService == null)
                 return NotFound();
             return Ok(maquinasFromService);

@@ -2,6 +2,7 @@
 using Dominio.Modelos.Dtos.Rol;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using System.Text;
 
 namespace WebApi.Controllers
@@ -57,6 +58,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var rolesFromService = await _rolService.DeleteRol(id);
+            if (rolesFromService == null)
+                return NotFound();
+            return Ok(rolesFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var rolesFromService = await _rolService.GetAllDataFromRol(skip, take);
             if (rolesFromService == null)
                 return NotFound();
             return Ok(rolesFromService);

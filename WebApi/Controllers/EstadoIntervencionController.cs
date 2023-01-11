@@ -27,7 +27,7 @@ namespace WebApi.Controllers
             return Ok(estadosFromService);
         }
 
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
             var estadoFromService = await _estadoService.GetEstadoIntervencionById(id);
@@ -36,7 +36,7 @@ namespace WebApi.Controllers
             return Ok(estadoFromService);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, UpdateEstadoIntervencionDto model)
         {
             var estadosFromService = await _estadoService.UpdateEstadoIntervencion(id, model);

@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Get()
         {
             var permisosFromService = await _permisoService.GetPermisos();
-            if (permisosFromService == null) 
+            if (permisosFromService == null)
                 return NotFound();
             return Ok(permisosFromService);
         }
@@ -56,7 +56,16 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var permisosFromService = await _permisoService.DeletePermiso(id);
-            if(permisosFromService == null)
+            if (permisosFromService == null)
+                return NotFound();
+            return Ok(permisosFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var permisosFromService = await _permisoService.GetAllDataFromPermisos(skip, take);
+            if (permisosFromService != null)
                 return NotFound();
             return Ok(permisosFromService);
         }

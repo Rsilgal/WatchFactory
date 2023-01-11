@@ -52,7 +52,7 @@ namespace WebApi.Controllers
             return Ok(lineasFromService);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var lineasFromService = await _lineaService.DeleteLinea(id);

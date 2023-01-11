@@ -61,5 +61,14 @@ namespace WebApi.Controllers
                 return NotFound();
             return Ok(tiposFromService);
         }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var tiposFromService = await _intervencionService.GetAllDataFromTipoIntervencion(skip, take);
+            if (tiposFromService == null)
+                return NotFound();
+            return Ok(tiposFromService);
+        }
     }
 }

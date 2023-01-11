@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Get()
         {
             var tiposMaquinaFromService = await _tipoMaquinaService.GetAllTipoMaquinas();
-            if (tiposMaquinaFromService== null) 
+            if (tiposMaquinaFromService == null)
                 return NotFound();
             return Ok(tiposMaquinaFromService);
         }
@@ -29,7 +29,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Get(int id)
         {
             var tipoMaquinaFromService = await _tipoMaquinaService.GetTipoMaquinaById(id);
-            if (tipoMaquinaFromService == null) 
+            if (tipoMaquinaFromService == null)
                 return NotFound();
             return Ok(tipoMaquinaFromService);
         }
@@ -56,6 +56,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var tiposMaquinaFromService = await _tipoMaquinaService.DeleteTipoMaquina(id);
+            if (tiposMaquinaFromService == null)
+                return NotFound();
+            return Ok(tiposMaquinaFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var tiposMaquinaFromService = await _tipoMaquinaService.GetAllDataFromTipoMaquinas(skip, take);
             if (tiposMaquinaFromService == null)
                 return NotFound();
             return Ok(tiposMaquinaFromService);

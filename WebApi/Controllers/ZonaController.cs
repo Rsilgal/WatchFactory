@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Get()
         {
             var zonasFromService = await _zonaService.GetZonas();
-            if (zonasFromService == null) 
+            if (zonasFromService == null)
                 return NotFound();
             return Ok(zonasFromService);
         }
@@ -56,6 +56,15 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var zonasFromService = await _zonaService.DeleteZona(id);
+            if (zonasFromService == null)
+                return NotFound();
+            return Ok(zonasFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Paginaton(int skip, int take)
+        {
+            var zonasFromService = await _zonaService.GetAllDataFromZona(skip, take);
             if (zonasFromService == null)
                 return NotFound();
             return Ok(zonasFromService);
