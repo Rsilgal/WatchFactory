@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Aplicacion.Services
 {
-    internal class MaquinaService : IMaquinaService
+    public class MaquinaService : IMaquinaService
     {
         private readonly IMaquinaRepository _maquinaRepository;
         public MaquinaService(IMaquinaRepository maquinaRepository)

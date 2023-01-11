@@ -3,6 +3,7 @@ using Dominio.Modelos.Dtos.Maquina;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.Json.Serialization;
 
 namespace WebApi.Controllers
 {

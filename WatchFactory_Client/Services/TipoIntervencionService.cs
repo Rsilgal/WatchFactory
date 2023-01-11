@@ -5,7 +5,7 @@ using WatchFactory_Client.Services.Interfaces;
 
 namespace WatchFactory_Client.Services
 {
-    public class TipoIntervencionService : ITipoIntervencion
+    public class TipoIntervencionService : ITipoIntervencionService
     {
         private readonly HttpClient _http;
 

@@ -1,9 +1,9 @@
-﻿@page "/zona"
-@inject IZonaService ZonaService
+﻿@page "/urgencia"
+@inject IUrgenciaService UrgenciaService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Crear una nueva Zona</PageTitle>
-<h3>Nueva Zona</h3>
+<PageTitle>Crear una nueva Urgencia</PageTitle>
+<h3>Nueva Urgencia</h3>
 
 <EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
     <DataAnnotationsValidator />
@@ -14,11 +14,11 @@
 <button type="submit" class="btn btn-primary">Crear</button>
 
 @code {
-    CreateZonaDto Dto = new CreateZonaDto();
+    CreateUrgenciaDto Dto = new CreateUrgenciaDto();
 
     async Task CreateIntervencion()
     {
-        await ZonaService.CreateZona(Dto);
+        await UrgenciaService.CreateUrgencia(Dto);
     }
 
 }

@@ -46,7 +46,7 @@ namespace WatchFactory_Client.Services
 
         public async Task GetAllLineas()
         {
-            var result = await _http.GetFromJsonAsync<List<LineaProduccion>>("api/lineaproduccion");
+            var result = await _http.GetFromJsonAsync<List<LineaProduccion>>("api/linea");
             if (result != null)
                 Lineas = result;
         }

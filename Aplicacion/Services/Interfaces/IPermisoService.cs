@@ -11,10 +11,10 @@ namespace Aplicacion.Services.Interfaces
     public interface IPermisoService
     {
         Task<List<Permiso>> GetPermisos();
-        Task<List<Permiso>> CreatePermiso(CreatePermisoDto model);
-        Task<List<Permiso>> DeletePermiso(int id);
-        Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
-        Task<Permiso> GetPermisoById(int id);
+        Task<List<Permiso>> CreatePermiso(CreatePermisoDto permiso);
         Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take);
+        Task<Permiso> GetPermisoById(int id);
+        Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
+        Task<List<Permiso>> DeletePermiso(int id);
     }
 }

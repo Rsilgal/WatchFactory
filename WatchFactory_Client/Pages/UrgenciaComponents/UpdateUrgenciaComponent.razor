@@ -1,9 +1,9 @@
-﻿@page "/zona/{id:int}"
-@inject IZonaService ZonaService
+﻿@page "/urgencia/{id:int}"
+@inject IUrgenciaService UrgenciaService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Actualizar una Zona</PageTitle>
-<h3>Actualizar Zona</h3>
+<PageTitle>Actualizar una Urgencia</PageTitle>
+<h3>Actualizar Urgencia</h3>
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
@@ -18,7 +18,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    UpdateZonaDto Dto = new UpdateZonaDto();
+    UpdateUrgenciaDto Dto = new UpdateUrgenciaDto();
 
     protected override Task OnParametersSetAsync()
     {
@@ -27,11 +27,11 @@
 
     async Task HandleSubmit()
     {
-        await ZonaService.UpdateZona(Id, Dto);
+        await UrgenciaService.UpdateUrgencia(Id, Dto);
     }
 
     async Task DeleteSubmit()
     {
-        await ZonaService.DeleteZona(Id);
+        await UrgenciaService.DeleteUrgencia(Id);
     }
 }

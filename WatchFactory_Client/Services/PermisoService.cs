@@ -58,6 +58,8 @@ namespace WatchFactory_Client.Services
         public async Task GetAllDataFromPermisos(int skip, int take)
         {
             var result = await _http.GetFromJsonAsync<List<Permiso>>($"api/permiso/page/{skip}/{take}");
+            if (result != null)
+                Permisos= result;
         }
 
         public async Task GetRoles()

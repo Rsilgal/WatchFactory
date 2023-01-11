@@ -65,7 +65,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult> Pagination(int skip, int take)
         {
             var permisosFromService = await _permisoService.GetAllDataFromPermisos(skip, take);
-            if (permisosFromService != null)
+            if (permisosFromService == null)
                 return NotFound();
             return Ok(permisosFromService);
         }

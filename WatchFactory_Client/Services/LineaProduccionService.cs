@@ -19,7 +19,7 @@ namespace WatchFactory_Client.Services
 
         public async Task CreateLinea(CreateLineaDto model)
         {
-            var result = await _http.PostAsJsonAsync("api/lineaproduccion", model);
+            var result = await _http.PostAsJsonAsync("api/linea", model);
             await SetLineaProduccion(result);
         }
 
@@ -31,13 +31,13 @@ namespace WatchFactory_Client.Services
 
         public async Task DeleteLinea(int id)
         {
-            var result = await _http.DeleteAsync("api/lineaproduccion");
+            var result = await _http.DeleteAsync("api/linea");
             await SetLineaProduccion(result);
         }
 
         public async Task GetAllLineas()
         {
-            var result = await _http.GetFromJsonAsync<List<LineaProduccion>>("api/lineaproduccion");
+            var result = await _http.GetFromJsonAsync<List<LineaProduccion>>("api/linea");
             if (result != null)
                 Lineas = result;
         }
@@ -51,7 +51,7 @@ namespace WatchFactory_Client.Services
 
         public async Task<LineaProduccion> GetLineaById(int id)
         {
-            var result = await _http.GetFromJsonAsync<LineaProduccion>($"api/lineaproduccion/{id}");
+            var result = await _http.GetFromJsonAsync<LineaProduccion>($"api/linea/{id}");
             if (result != null)
                 return result;
 
@@ -61,7 +61,7 @@ namespace WatchFactory_Client.Services
 
         public async Task UpdateLinea(int id, UpdateLineaDto model)
         {
-            var result = await _http.PutAsJsonAsync($"api/lineaproduccion/{id}", model);
+            var result = await _http.PutAsJsonAsync($"api/linea/{id}", model);
             await SetLineaProduccion(result);
         }
     }

@@ -3,7 +3,7 @@ using Dominio.Modelos.Dtos.TipoIntervencion;
 
 namespace WatchFactory_Client.Services.Interfaces
 {
-    public interface ITipoIntervencion
+    public interface ITipoIntervencionService
     {
         IEnumerable<TipoIntervencion> Tipos { get; set; }
 

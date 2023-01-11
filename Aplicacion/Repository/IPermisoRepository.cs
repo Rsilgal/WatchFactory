@@ -11,8 +11,8 @@ namespace Aplicacion.Repository
     public interface IPermisoRepository
     {
         Task<List<Permiso>> GetPermisos();
-        Task<List<Permiso>> CreatePermiso(CreatePermisoDto model);
-        Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto model);
+        Task<List<Permiso>> CreatePermiso(CreatePermisoDto permiso);
+        Task<List<Permiso>> UpdatePermiso(int id, UpdatePermisoDto permiso);
         Task<List<Permiso>> DeletePermiso(int id);
         Task<Permiso> GetPermisoById(int id);
         Task<List<Permiso>> GetAllDataFromPermisos(int skip, int take);
