@@ -1,8 +1,8 @@
 @page "/login"
 @inject IUserService UserService
-@*@inject AuthenticationStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthStateProvider
 @inject ILocalStorageService LocalStorage
-@inject HttpClient Http*@
+@*@inject HttpClient Http*@
 
 <EditForm Model="user" OnValidSubmit="HandleLogin">
     <DataAnnotationsValidator />
@@ -31,10 +31,10 @@
     private LoginUserDto user = new LoginUserDto();
 
     async Task HandleLogin() {
-        await UserService.login(user);
+        var token = await UserService.login(user);
         //var result = await Http.PostAsJsonAsync("api/auth/login", usuario);
         //var token = await result.Content.ReadAsStringAsync();
-        //await LocalStorage.SetItemAsync("token", token);
-        //await AuthStateProvider.GetAuthenticationStateAsync();
+        await LocalStorage.SetItemAsync("token", token);
+        await AuthStateProvider.GetAuthenticationStateAsync();
     }
 }

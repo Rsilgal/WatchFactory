@@ -9,23 +9,18 @@ namespace WatchFactory_Client.Services
     public class UserService : IUserService
     {
         private readonly HttpClient _http;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly ILocalStorageService _localStorage;
         private string token = string.Empty;
 
-        public UserService(HttpClient http, AuthenticationStateProvider authenticationStateProvider, ILocalStorageService _localStorage)
+        public UserService(HttpClient http)
         {
             _http = http;
-            _authenticationStateProvider = authenticationStateProvider;
-            _localStorage = _localStorage;
         }
 
-        public async Task login(LoginUserDto user)
+        public async Task<string> login(LoginUserDto user)
         {
             var result = await _http.PostAsJsonAsync("api/auth/login", user);
             var token = await result.Content.ReadAsStringAsync();
-            await _localStorage.SetItemAsync("token", token);
-            await _authenticationStateProvider.GetAuthenticationStateAsync();
+            return token;
         }
 
         public async Task register(RegisterUserDto user)
