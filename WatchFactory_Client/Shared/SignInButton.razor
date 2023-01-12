@@ -4,13 +4,13 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <button @onclick="SignIn" class="btn btn-primary">SignIn</button>
+        <button @onclick="SignIn" class="m-2 btn btn-outline-primary">Sign In</button>
     </NotAuthorized>
 </AuthorizeView>
 
 @code {
     void SignIn()
     {
-        NavigationManager.NavigateTo("register");
+        NavigationManager.NavigateTo("/register");
     }
 }
