@@ -1,10 +1,10 @@
-﻿using Dominio.Modelos;
+﻿using Dominio.Modelos.Dtos.User;
 
 namespace WatchFactory_Client.Services.Interfaces
 {
     public interface IUserService
     {
-        Task register(User user);
-        Task login(User user);
+        Task register(RegisterUserDto user);
+        Task login(LoginUserDto user);
     }
 }

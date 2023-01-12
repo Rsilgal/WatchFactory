@@ -1,0 +1,40 @@
+@page "/login"
+@inject IUserService UserService
+@*@inject AuthenticationStateProvider AuthStateProvider
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http*@
+
+<EditForm Model="user" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label for="username">Usuario</label>
+        <InputText id="username" @bind-Value="user.Email" class="form-control"></InputText>
+        <ValidationMessage For="() => user.Email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Contraseña</label>
+        <InputText id="password" @bind-Value="user.Password" type="password" class="form-control"></InputText>
+        <ValidationMessage For="() => user.Password" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+
+<AuthorizeView Roles="Admin">
+    <NotAuthorized>No tienes rol</NotAuthorized>
+    <Authorized>
+        De verdad eres admin!!!!!
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private LoginUserDto user = new LoginUserDto();
+
+    async Task HandleLogin() {
+        await UserService.login(user);
+        //var result = await Http.PostAsJsonAsync("api/auth/login", usuario);
+        //var token = await result.Content.ReadAsStringAsync();
+        //await LocalStorage.SetItemAsync("token", token);
+        //await AuthStateProvider.GetAuthenticationStateAsync();
+    }
+}
