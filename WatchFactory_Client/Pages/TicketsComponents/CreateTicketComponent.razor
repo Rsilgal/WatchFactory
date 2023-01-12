@@ -67,18 +67,18 @@ else
 @code {
     CreateTicketDto Dto = new CreateTicketDto();
     private bool isLoading = false;
-    private int fabricaId = 1;
-    private int lineaId = 1;
+    private int fabricaId = 0;
+    private int lineaId = 0;
 
     protected override async Task OnInitializedAsync()
     {
         isLoading = true;
-        //await TicketService.GetFabricas();
-        //await TicketService.GetLinea();
-        //await TicketService.GetMaquina();
-        //await TicketService.GetCategorias();
-        //await TicketService.GetUrgencia();
-        //await TicketService.GetZona();
+        await TicketService.GetFabricas();
+        await TicketService.GetLinea();
+        await TicketService.GetMaquina();
+        await TicketService.GetCategorias();
+        await TicketService.GetUrgencia();
+        await TicketService.GetZona();
         isLoading = false;
     }
 
