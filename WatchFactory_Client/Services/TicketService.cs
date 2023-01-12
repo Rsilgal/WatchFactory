@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Usuarios;
 using System.Net.Http.Json;
 using WatchFactory_Client.Services.Interfaces;
@@ -32,9 +33,9 @@ namespace WatchFactory_Client.Services
 
         public List<Ticket> Tickets { get; set; } = new();
 
-        public async Task CreateTicket(Ticket ticket)
+        public async Task CreateTicket(CreateTicketDto ticket)
         {
-            var result = await _http.PostAsJsonAsync<Ticket>($"api/tickets", ticket);
+            var result = await _http.PostAsJsonAsync($"api/tickets", ticket);
             await SetTickets(result);
         }
 
@@ -65,10 +66,59 @@ namespace WatchFactory_Client.Services
             throw new Exception("Ticket no encontrado!");
         }
 
-        public async Task UpdateTicket(Ticket ticket)
+        public async Task UpdateTicket(int id, UpdateTicketDto ticket)
         {
-            var result = await _http.PutAsJsonAsync<Ticket>($"api/tickets/{ticket.Id}", ticket);
+            var result = await _http.PutAsJsonAsync($"api/tickets/{id}", ticket);
             await SetTickets(result);
+        }
+
+        public async Task GetFabricas()
+        {
+            var result = await _http.GetFromJsonAsync<List<Fabrica>>("api/fabrica");
+            if (result != null)
+                Fabricas = result;
+        }
+
+        public async Task GetLinea()
+        {
+            var result = await _http.GetFromJsonAsync<List<LineaProduccion>>("api/linea");
+            if (result != null)
+                Lineas = result;
+        }
+
+        public async Task GetMaquina()
+        {
+            var result = await _http.GetFromJsonAsync<List<Maquina>>("api/maquina");
+            if (result != null)
+                Maquinas = result;
+        }
+
+        public async Task GetCategorias()
+        {
+            var result = await _http.GetFromJsonAsync<List<Categoria>>("api/categoria");
+            if (result != null)
+                Categorias = result;
+        }
+
+        public async Task GetUrgencia()
+        {
+            var result = await _http.GetFromJsonAsync<List<Urgencia>>("api/urgencia");
+            if (result != null)
+                Urgencias= result;
+        }
+
+        public async Task GetZona()
+        {
+            var result = await _http.GetFromJsonAsync<List<Zona>>("api/zona");
+            if (result != null)
+                Zonas = result;
+        }
+
+        public async Task GetEstadoIntervencion()
+        {
+            var result = await _http.GetFromJsonAsync<List<EstadoIntervencion>>("api/zona");
+            if(result != null)
+                Estados= result;
         }
     }
 }

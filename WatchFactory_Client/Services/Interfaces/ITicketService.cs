@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Usuarios;
 
 namespace WatchFactory_Client.Services.Interfaces
@@ -16,10 +17,18 @@ namespace WatchFactory_Client.Services.Interfaces
 
         List<Ticket> Tickets { get; set; }
         
-        Task CreateTicket(Ticket ticket);
-        Task UpdateTicket(Ticket ticket);
+        Task CreateTicket(CreateTicketDto ticket);
+        Task UpdateTicket(int id, UpdateTicketDto ticket);
         Task DeleteTicket(int id);
         Task GetAllTicket();
         Task<Ticket> GetTicket(int id);
+
+        Task GetFabricas();
+        Task GetLinea();
+        Task GetMaquina();
+        Task GetCategorias();
+        Task GetUrgencia();
+        Task GetZona();
+        Task GetEstadoIntervencion();
     }
 }
