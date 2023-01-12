@@ -1,4 +1,4 @@
-﻿@page "/ticket"
+﻿@*@page "/ticket"
 @page "/ticket/{id:int}"
 @inject ITicketService TicketService
 
@@ -68,7 +68,7 @@ else
             }
         </InputSelect>
     </div>*@
-    <div>
+@*    <div>
         <label>Zona</label> <br />
         <InputSelect @bind-Value="tkt.ZonaID" class="form-select">
             @foreach (var zona in TicketService.Zonas)
@@ -85,10 +85,10 @@ else
     <button type="submit" class="btn btn-primary">@btnText</button>
     <button type="button" @onclick="DeleteSubmit" class="btn btn-danger">Eliminar Ticket</button>
 
-</EditForm>
+</EditForm>*@
 
 
-@code {
+@*@code {
     [Parameter]
     public int? Id { get; set; }
 
@@ -155,3 +155,4 @@ else
     }
 
 }
+*@
