@@ -5,28 +5,36 @@
 <PageTitle>Tabla de Roles</PageTitle>
 <h3>Roles</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripción</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var rol in RolService.Roles)
-        {
+@if (RolService.Roles == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@rol.Id</td>
-                <td>@rol.Descripcion</td>
+                <th>Identificador</th>
+                <th>Descripción</th>
             </tr>
-        }
-    </tbody>
-</table>
-<ul class="pagination">
-    <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
-    <li class="oi oi-chevron-right" @onclick="NextPage"></li>
-</ul>
-<button class="btn btn-primary" @onclick="CreateRol">Nuevo Rol</button>
+        </thead>
+        <tbody>
+            @foreach (var rol in RolService.Roles)
+            {
+                <tr>
+                    <td>@rol.Id</td>
+                    <td>@rol.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPage"></li>
+    </ul>
+    <button class="btn btn-primary" @onclick="CreateRol">Nuevo Rol</button>
+}
+
 
 @code {
     private int _offset = 1;

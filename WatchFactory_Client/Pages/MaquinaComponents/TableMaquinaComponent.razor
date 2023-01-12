@@ -5,34 +5,41 @@
 <PageTitle>Tabla de maquinas</PageTitle>
 <h3>Maquinas</h3>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Descripcion</th>
-            <th>Fabrica</th>
-            <th>Linea</th>
-            <th>Tipo de Maquina</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var maquina in service.Maquinas)
-        {
+@if (service.Maquinas == null)
+{
+    <p><em>Cargando....</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@maquina.Descripcion</td>
-                <td>@maquina.LineaProduccion.Fabrica.Descripcion</td>
-                <td>@maquina.LineaProduccion.Descripcion</td>
-                <td>@maquina.TipoMaquina.Descripcion</td>
-                <td>
-                    <button @onclick="() => ShowMaquina(maquina.Id)">
-                        <i class="oi oi-pencil"></i>
-                    </button>
-                </td>
+                <th>Descripcion</th>
+                <th>Fabrica</th>
+                <th>Linea</th>
+                <th>Tipo de Maquina</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var maquina in service.Maquinas)
+            {
+                    <tr>
+                        <td>@maquina.Descripcion</td>
+                        <td>@maquina.LineaProduccion.Fabrica.Descripcion</td>
+                        <td>@maquina.LineaProduccion.Descripcion</td>
+                        <td>@maquina.TipoMaquina.Descripcion</td>
+                        <td>
+                            <button @onclick="() => ShowMaquina(maquina.Id)">
+                                <i class="oi oi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" @onclick="CreateMaquina"></button>
+}
 
 <ul class="pagination">
     <li class="page-item" @onclick="PrevPag">

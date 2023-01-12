@@ -5,36 +5,44 @@
 <PageTitle>Permisos</PageTitle>
 <h3>Tabla de permisos</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripcion</th>
-            <th>Roles</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var permiso in PermisoService.Permisos)
-        {
+@if (PermisoService.Permisos == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table>
+        <thead>
             <tr>
-                <td>@permiso.Id</td>
-                <td>@permiso.Descripcion</td>
-                <td>"permiso.Roles.ToList()"</td>
-                <td>
-                    <button @onclick="() => ShowPermiso(permiso.Id)">
-                        <i class="oi oi-pencil"></i>
-                    </button>
-                </td>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th>Roles</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<ul class="pagination">
-    <li class="oi oi-chevron-left" @onclick="PrevPag"></li>
-    <li class="oi oi-chevron-right" @onclick="NextPag"></li>
-</ul>
-<button @onclick="CreatePermiso" class="btn btn-primary">Nuevo Permiso</button>
+        </thead>
+        <tbody>
+            @foreach (var permiso in PermisoService.Permisos)
+            {
+                    <tr>
+                        <td>@permiso.Id</td>
+                        <td>@permiso.Descripcion</td>
+                        <td>"permiso.Roles.ToList()"</td>
+                        <td>
+                            <button @onclick="() => ShowPermiso(permiso.Id)">
+                                <i class="oi oi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="oi oi-chevron-left" @onclick="PrevPag"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPag"></li>
+    </ul>
+    <button @onclick="CreatePermiso" class="btn btn-primary">Nuevo Permiso</button>
+}
+
 
 @code {
     private int _offset = 1;

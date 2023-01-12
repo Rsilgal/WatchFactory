@@ -5,34 +5,41 @@
 <PageTitle>Tabla de Tipos de Intervencion</PageTitle>
 <h3>Tipos de Intervencion</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripcion</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tipo in TipoMaquinaService.TiposMaquinas)
-        {
+@if (TipoMaquinaService.TiposMaquinas == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@tipo.Id</td>
-                <td>@tipo.Descripcion</td>
-                <td>
-                    <button>
-                        <i class="oi oi-pencil"></i>
-                    </button>
-                </td>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<ul>
-    <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
-    <li class="oi oi-chevron-right" @onclick="NextPage"></li>
-</ul>
-<button type="button" class="btn btn-primary" @onclick="HandleSubmit">Crear Tipo</button>
+        </thead>
+        <tbody>
+            @foreach (var tipo in TipoMaquinaService.TiposMaquinas)
+            {
+                <tr>
+                    <td>@tipo.Id</td>
+                    <td>@tipo.Descripcion</td>
+                    <td>
+                        <button>
+                            <i class="oi oi-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <ul>
+        <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPage"></li>
+    </ul>
+    <button type="button" class="btn btn-primary" @onclick="HandleSubmit">Crear Tipo</button>
+}
 
 @code {
     private int _offset = 1;

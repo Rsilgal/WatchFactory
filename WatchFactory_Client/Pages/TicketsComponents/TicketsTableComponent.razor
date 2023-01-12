@@ -6,34 +6,42 @@
 
 <h3>Tickets</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Estado</th>
-            <th>Linea</th>
-            <th>Maquina</th>
-            <th>Descripción</th>
-            <th>Urgencia</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var ticket in TicketService.Tickets)
-        {
+@if (TicketService.Tickets == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>"ticket.Estado.Descripcion"</td>
-                <td>"ticket.Maquina.LineaProduccion.Descripcion""</td>
-                <td>"ticket.Maquina.Descripcion"</td>
-                <td>@ticket.Descripcion</td>
-                <td>"ticket.Urgencia.Descripcion"</td>
-                <td>
-                    <button class="btn btn-primary" @onclick="(() => ShowTicket(ticket.Id))"><i class="oi oi-pencil"></i></button>
-                </td>
+                <th>Estado</th>
+                <th>Linea</th>
+                <th>Maquina</th>
+                <th>Descripción</th>
+                <th>Urgencia</th>
+                <th></th>
             </tr>
-        } 
-    </tbody>
-</table>
-<button class="btn btn-primary" @onclick="CreateTicket"> Crear Ticket</button>
+        </thead>
+        <tbody>
+            @foreach (var ticket in TicketService.Tickets)
+            {
+                <tr>
+                    <td>"ticket.Estado.Descripcion"</td>
+                    <td>"ticket.Maquina.LineaProduccion.Descripcion""</td>
+                    <td>"ticket.Maquina.Descripcion"</td>
+                    <td>@ticket.Descripcion</td>
+                    <td>"ticket.Urgencia.Descripcion"</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="(() => ShowTicket(ticket.Id))"><i class="oi oi-pencil"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="CreateTicket"> Crear Ticket</button>
+}
+
 
 @code {
     protected override async Task OnInitializedAsync()

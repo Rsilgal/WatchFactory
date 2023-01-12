@@ -5,34 +5,41 @@
 <PageTitle>Tabla de Zonas</PageTitle>
 <h3>Tipos de Zona</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripcion</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var zona in ZonaService.Zonas)
-        {
+@if (ZonaService.Zonas == null)
+{
+    <p><em>Cargnado...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@zona.Id</td>
-                <td>@zona.Descripcion</td>
-                <td>
-                    <button>
-                        <i class="oi oi-pencil"></i>
-                    </button>
-                </td>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<ul>
-    <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
-    <li class="oi oi-chevron-right" @onclick="NextPage"></li>
-</ul>
-<button type="button" class="btn btn-primary" @onclick="HandleSubmit">Crear Tipo</button>
+        </thead>
+        <tbody>
+            @foreach (var zona in ZonaService.Zonas)
+            {
+                <tr>
+                    <td>@zona.Id</td>
+                    <td>@zona.Descripcion</td>
+                    <td>
+                        <button>
+                            <i class="oi oi-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <ul>
+        <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPage"></li>
+    </ul>
+    <button type="button" class="btn btn-primary" @onclick="HandleSubmit">Crear Tipo</button>
+}
 
 @code {
     private int _offset = 1;

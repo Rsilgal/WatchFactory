@@ -5,27 +5,35 @@
 <PageTitle>Tabla de Fabricas</PageTitle>
 <h3>Fabricas</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripcion</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var fabrica in FabricaService.Fabricas)
-        {
+@if (FabricaService.Fabricas == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@fabrica.Id</td>
-                <td>@fabrica.Descripcion</td>
-                <td>
-                    <button class="btn btn-primary" @onclick="() => ShowFabrica(fabrica.Id)"><i class="oi oi-pencil"></i></button>
-                </td>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var fabrica in FabricaService.Fabricas)
+            {
+                <tr>
+                    <td>@fabrica.Id</td>
+                    <td>@fabrica.Descripcion</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => ShowFabrica(fabrica.Id)"><i class="oi oi-pencil"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" @onclick="CreateFabrica"></button>
+}
 
 @code {
     protected override async Task OnInitializedAsync()
@@ -35,5 +43,10 @@
 
     void ShowFabrica(int id){
         NavigationManager.NavigateTo($"/fabrica/{id}");
+    }
+
+    void CreateFabrica()
+    {
+        NavigationManager.NavigateTo("/fabrica");
     }
 }
