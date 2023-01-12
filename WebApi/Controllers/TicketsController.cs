@@ -6,6 +6,7 @@ using Dominio.Modelos.Usuarios;
 using Infraestructura;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace WebApi.Controllers
 {
@@ -58,6 +59,14 @@ namespace WebApi.Controllers
             var deletedTicketFromService = await _ticketService.DeleteTicket(id);
             if (deletedTicketFromService == null) return NotFound();
             return Ok(deletedTicketFromService);
+        }
+
+        [HttpGet("page/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int skip, int take)
+        {
+            var ticketsFromService = await _ticketService.GetAllDataFromTickets(skip, take);
+            if (ticketsFromService == null) return NotFound();
+            return Ok(ticketsFromService);
         }
     }
 }

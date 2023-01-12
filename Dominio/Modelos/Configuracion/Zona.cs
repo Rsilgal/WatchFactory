@@ -13,6 +13,6 @@ namespace Dominio.Modelos.Configuracion
         /// Descripcion de la zona
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
-        public IEnumerable<Ticket> Tickets { get; set; }
+        //public IEnumerable<Ticket> Tickets { get; set; }
     }
 }

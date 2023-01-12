@@ -22,6 +22,7 @@ namespace WatchFactory_Client.Services.Interfaces
         Task DeleteTicket(int id);
         Task GetAllTicket();
         Task<Ticket> GetTicket(int id);
+        Task GetAllDataFromTickets(int skip, int take);
 
         Task GetFabricas();
         Task GetLinea();

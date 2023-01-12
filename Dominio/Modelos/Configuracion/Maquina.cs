@@ -15,6 +15,6 @@ namespace Dominio.Modelos.Configuracion
         public int TipoMaquinaID { get; set; }
         public LineaProduccion LineaProduccion { get; set; }
         public TipoMaquina TipoMaquina { get; set; }
-        public IEnumerable<Ticket> Tickets { get; set; }
+        //public IEnumerable<Ticket> Tickets { get; set; }
     }
 }

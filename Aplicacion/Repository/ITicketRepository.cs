@@ -21,5 +21,6 @@ namespace Aplicacion.Repository
         Task<List<Ticket>> GetTicketsByFabrica(int FabricaID);
         Task<List<Ticket>> GetTicketsByLinea(int LineaID);
         Task<List<Ticket>> GetTicketsByTipoMaquina(int TipoMaquinaID);
+        Task<List<Ticket>> GetAllDataFromTickets(int skip, int take);
     }
 }

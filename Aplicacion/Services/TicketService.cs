@@ -31,6 +31,11 @@ namespace Aplicacion.Services
             return await _ticketRepository.DeleteTicket(id);
         }
 
+        public async Task<List<Ticket>> GetAllDataFromTickets(int skip, int take)
+        {
+            return await _ticketRepository.GetAllDataFromTickets(skip, take);
+        }
+
         public async Task<Ticket> GetTicketById(int id)
         {
             return await _ticketRepository.GetTicketById(id);

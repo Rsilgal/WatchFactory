@@ -13,6 +13,6 @@ namespace Dominio.Modelos.Configuracion
         /// Descripcion de la Categoría
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
-        public IEnumerable<Ticket> Tickets { get; set; }
+        //public virtual IEnumerable<Ticket> Tickets { get; set; }
     }
 }

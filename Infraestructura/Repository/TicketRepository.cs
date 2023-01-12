@@ -49,6 +49,21 @@ namespace Infraestructura.Repository
             return await GetTickets();
         }
 
+        public async Task<List<Ticket>> GetAllDataFromTickets(int skip, int take)
+        {
+            return await _watchFactory.Tickets
+                .Include(t => t.Usuario)
+                .Include(t => t.Zona)
+                .Include(t => t.Categoria)
+                .Include(t => t.Urgencia)
+                .Include(t => t.Maquina)
+                .ThenInclude(m => m.LineaProduccion)
+                .ThenInclude(lp => lp.Fabrica)
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+        }
+
         public async Task<Ticket> GetTicketById(int id)
         {
             var ticket = await _watchFactory.Tickets.

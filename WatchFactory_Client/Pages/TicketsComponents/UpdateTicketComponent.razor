@@ -61,7 +61,8 @@ else
             <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Nuevo Ticket</button>
+        <button type="submit" class="btn btn-primary">Actualizar Ticket</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteTicket">Eliminar</button>
     </EditForm>
 }
 @code {
@@ -98,5 +99,10 @@ else
     async Task UpdateTicket()
     {
         await TicketService.UpdateTicket(Id, Dto);
+    }
+
+    async Task DeleteTicket()
+    {
+        await TicketService.DeleteTicket(Id);
     }
 }

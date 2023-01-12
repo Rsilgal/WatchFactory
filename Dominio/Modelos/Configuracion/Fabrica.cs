@@ -12,6 +12,6 @@ namespace Dominio.Modelos.Configuracion
         /// Obtención y escritura del atributo Descirpcion
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
-        public IEnumerable<LineaProduccion> Lineas { get;}
+        //public IEnumerable<LineaProduccion> Lineas { get;}
     }
 }

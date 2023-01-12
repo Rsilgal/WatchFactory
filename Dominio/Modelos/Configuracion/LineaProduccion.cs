@@ -16,6 +16,6 @@ namespace Dominio.Modelos.Configuracion
         public int FabricaID { get; set; }
         
         public Fabrica Fabrica { get; set; }
-        public IEnumerable<Maquina> Maquinas { get; set; }
+        //public IEnumerable<Maquina> Maquinas { get; set; }
     }
 }

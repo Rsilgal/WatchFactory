@@ -120,5 +120,12 @@ namespace WatchFactory_Client.Services
             if(result != null)
                 Estados= result;
         }
+
+        public async Task GetAllDataFromTickets(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Ticket>>($"api/tickets/page/{skip}/{take}");
+            if (result != null)
+                Tickets = result;
+        }
     }
 }

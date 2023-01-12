@@ -16,7 +16,7 @@ namespace Dominio.Modelos.Usuarios
         public byte[] passwordSalt { get; set; }
         public bool Eliminado { get; set; } = false;
 
-        public IEnumerable<Ticket> Tickets { get; set; }
+        //public IEnumerable<Ticket> Tickets { get; set; }
 
         public IEnumerable<Rol> Roles { get; set; }
     }
