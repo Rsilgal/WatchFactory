@@ -1,0 +1,38 @@
+﻿@page "/register"
+@inject IUserService UserService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Registro de Usuario</PageTitle>
+<h3>Nuevo Usuario</h3>
+
+<EditForm Model="Dto" OnValidSubmit="Register">
+    <DataAnnotationsValidator />
+    <div class="form-floating">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <InputText id="nombre" class="form-control" @bind-Value="Dto.Name"></InputText>
+            <ValidationMessage For="() => Dto.Name" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="Dto.Email"></InputText>
+            <ValidationMessage For="() => Dto.Email" />
+        </div>
+        <div class="form-group">
+            <label for="pass">Contraseña</label>
+            <InputText id="pass" class="form-control" @bind-Value="Dto.Password" type="password"></InputText>
+            <ValidationMessage For="() => Dto.Password" />
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Registro</button>
+</EditForm>
+
+@code {
+    RegisterUserDto Dto = new RegisterUserDto();
+
+    async Task Register()
+    {
+        await UserService.register(Dto);
+    }
+}
