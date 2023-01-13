@@ -21,5 +21,6 @@ namespace Aplicacion.Repository
         Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
         Task<List<Intervencion>> GetIntervencionesByEstadoIntervencion(int EstadoIntervencionID);
         Task<List<Intervencion>> GetIntervencionesByTicket(int TicketID);
+        Task<List<Intervencion>> GetAllDataFromIntervenciones(int skip, int take);
     }
 }

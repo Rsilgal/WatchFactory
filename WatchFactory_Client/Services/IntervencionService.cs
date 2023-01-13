@@ -32,6 +32,13 @@ namespace WatchFactory_Client.Services
             await SetIntervencion(result);
         }
 
+        public async Task GetAllDataFromIntervenciones(int skip, int take)
+        {
+            var result = await _http.GetFromJsonAsync<List<Intervencion>>($"api/intervencion/{skip}/{take}");
+            if (result != null)
+                Intervenciones = result;
+        }
+
         public async Task GetEstadoIntervencion()
         {
             var result = await _http.GetFromJsonAsync<List<EstadoIntervencion>>("api/estadointervencion");

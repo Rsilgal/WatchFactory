@@ -12,6 +12,6 @@ namespace Dominio.Modelos.Configuracion
         /// Descripcion del estado de la Intervención.
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
-        public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
+        //public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
     }
 }

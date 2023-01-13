@@ -48,6 +48,15 @@ namespace Infraestructura.Repository
             return await GetIntervenciones();
         }
 
+        public async Task<List<Intervencion>> GetAllDataFromIntervenciones(int skip, int take)
+        {
+            return await _watchFactory.Intervenciones
+                .Include(i => i.Ticket)
+                .Include(i => i.EstadoIntervencion)
+                .Include(i => i.TipoIntervencion)
+                .ToListAsync();
+        }
+
         public async Task<Intervencion> GetIntervencion(int id)
         {
             var intervencion = await _watchFactory.Intervenciones.
@@ -62,7 +71,8 @@ namespace Infraestructura.Repository
 
         public async Task<List<Intervencion>> GetIntervenciones()
         {
-            return await _watchFactory.Intervenciones.ToListAsync();
+            return await _watchFactory.Intervenciones
+                .ToListAsync();
         }
 
         public async Task<List<Intervencion>> GetIntervencionesByEstadoIntervencion(int EstadoIntervencionID)

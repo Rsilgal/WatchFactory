@@ -31,6 +31,11 @@ namespace Aplicacion.Services
             return await _intervecnionRepository.DeleteIntervencion(id);
         }
 
+        public async Task<List<Intervencion>> GetAllDataFromIntervenciones(int skip, int take)
+        {
+            return await _intervecnionRepository.GetAllDataFromIntervenciones(skip, take);
+        }
+
         public async Task<Intervencion> GetIntervencionById(int id)
         {
             return await _intervecnionRepository.GetIntervencion(id);

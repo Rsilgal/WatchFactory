@@ -31,7 +31,7 @@ namespace Dominio.Modelos.Nucleo
         
         public Zona Zona { get; set; }
 
-        public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
+        //public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
 
     }
 }

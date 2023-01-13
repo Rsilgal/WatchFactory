@@ -13,6 +13,6 @@ namespace Dominio.Modelos.Configuracion
         /// Descipción del tipo de intervención.
         /// </summary>
         public string Descripcion { get; set; } = string.Empty;
-        public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
+        //public IEnumerable<Intervencion.Intervencion> Intervenciones { get; set; }
     }
 }
