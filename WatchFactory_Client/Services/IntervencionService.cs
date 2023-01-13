@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Intervencion;
 using Dominio.Modelos.Intervencion;
 using Dominio.Modelos.Nucleo;
 using System.Net.Http.Json;
@@ -20,7 +21,7 @@ namespace WatchFactory_Client.Services
         public List<EstadoIntervencion> Estados { get; set; }
         public List<TipoIntervencion> Tipos { get; set; }
 
-        public async Task CreateIntervencion(Intervencion intervencion)
+        public async Task CreateIntervencion(CreateIntervencionDto intervencion)
         {
             var result = await _http.PostAsJsonAsync($"api/intervencion", intervencion);
             await SetIntervencion(result);
@@ -68,9 +69,9 @@ namespace WatchFactory_Client.Services
                 Tipos = result;
         }
 
-        public async Task UpdateIntervencion(Intervencion intervencion)
+        public async Task UpdateIntervencion(int id, UpdateIntervencionDto intervencion)
         {
-            var result = await _http.PutAsJsonAsync($"api/intervencion/{intervencion.Id}", intervencion);
+            var result = await _http.PutAsJsonAsync($"api/intervencion/{id}", intervencion);
             await SetIntervencion(result);
         }
 

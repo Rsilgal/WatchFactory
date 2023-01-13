@@ -5,7 +5,6 @@
 <PageTitle>Intervenciones</PageTitle>
 
 <h3>Tabla de intervenciones</h3>
-<h4>@_offset</h4>
 
 @if (IntervencionService.Intervenciones == null)
 {
@@ -29,11 +28,12 @@ else
             @foreach (var intervencion in IntervencionService.Intervenciones)
             {
                 <tr>
-                    <td>"intervencion.EstadoIntervencion.Descripcion"</td>
-                    <td>"intervencion.TipoIntervencion.Descripcion"</td>
-                    <td>"intervencion.Ticket.Maquina.LineaProduccion.Fabrica.Descripcion"</td>
-                    <td>"intervencion.Ticket.Maquina.LineaProduccion.Descripcion"</td>
-                    <td>"intervencion.Ticket.Urgencia.Descripcion""</td>
+                    <td>@intervencion.EstadoIntervencion.Descripcion</td>
+                    <td>@intervencion.TipoIntervencion.Descripcion</td>
+                    <td>@intervencion.Ticket.Maquina.LineaProduccion.Fabrica.Descripcion</td>
+                    <td>@intervencion.Ticket.Maquina.LineaProduccion.Descripcion</td>
+                    <td>@intervencion.Ticket.Maquina.Descripcion</td>
+                    <td>@intervencion.Ticket.Urgencia</td>
                     <td>
                         <button class="btn btn-primary" @onclick="(() => ShowIntervencion(intervencion.Id))"><i class="oi oi-pencil"></i></button>
                     </td>

@@ -1,4 +1,5 @@
 ﻿using Dominio.Modelos.Configuracion;
+using Dominio.Modelos.Dtos.Intervencion;
 
 namespace WatchFactory_Client.Services.Interfaces
 {
@@ -11,9 +12,9 @@ namespace WatchFactory_Client.Services.Interfaces
 
         Task GetIntervenciones();
         Task<Intervencion> GetIntervencion(int id);
-        Task CreateIntervencion(Intervencion intervencion);
+        Task CreateIntervencion(CreateIntervencionDto intervencion);
         Task DeleteIntervencion(int id);
-        Task UpdateIntervencion(Intervencion intervencion);
+        Task UpdateIntervencion(int id, UpdateIntervencionDto intervencion);
         Task GetEstadoIntervencion();
         Task GetTipoIntervencion();
 
