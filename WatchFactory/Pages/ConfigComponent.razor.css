@@ -1,0 +1,31 @@
+﻿body {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+/*.container1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.row1 > div {
+    border: 5px solid pink;
+    margin: 15%;
+}*/
+
+.columna{
+    width:20%;
+    text-align: center;
+}
+
+.fila {
+    height: 20%;
+}
+
+.filaOculta{
+    height:20%;
+    opacity: 0%;
+}

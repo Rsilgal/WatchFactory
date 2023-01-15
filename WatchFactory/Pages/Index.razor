@@ -8,4 +8,11 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<CreateZonaComponent></CreateZonaComponent>
+<AuthorizeView Policy="AdminPolicy">
+    <NotAuthorized>
+        <p>Este mensaje es para ti</p>
+    </NotAuthorized>
+    <Authorized>
+        <p><em>Esto solo es visible para los administradores. Felicidades!!!</em></p>
+    </Authorized>
+</AuthorizeView>
