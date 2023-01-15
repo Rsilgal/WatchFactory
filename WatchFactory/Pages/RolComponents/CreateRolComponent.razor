@@ -1,0 +1,29 @@
+﻿@page "/rol"
+@inject IRolServicePages RolService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear un Rol</PageTitle>
+<h3>Nuevo Rol</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="name">Nombre</label>
+        <InputText id="name" class="form-control" @bind-Value="Dto.Name"></InputText>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Description"></InputText>
+    </div>
+
+</EditForm>
+<button type="submit" class="btn btn-primary">Crear Rol</button>
+
+
+@code {
+    CreateRolDto Dto = new CreateRolDto();
+
+    async Task HandleSubmit()
+    {
+        await RolService.CreateRol(Dto);
+    }
+}

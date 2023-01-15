@@ -1,0 +1,44 @@
+﻿@page "/estadointervencion/{id:int}"
+@inject IEstadoIntervencionPages EstadoIntervencion
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar un Estado de intervencion</PageTitle>
+<h3>Actualizar Estado de Intervencion</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <button type="button" @onclick="DeleteSubmit" class="btn btn-danger">Eliminar</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    UpdateEstadoIntervencionDto Dto = new UpdateEstadoIntervencionDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var estado = await EstadoIntervencion.GetEstadoById((int)Id);
+        Dto.Descripcion = estado.Descripcion;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Dto.Descripcion = string.Empty;
+    }
+
+    async Task HandleSubmit()
+    {
+        await EstadoIntervencion.UpdateEstado((int)Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await EstadoIntervencion.DeleteEstadoById((int)Id);
+    }
+}

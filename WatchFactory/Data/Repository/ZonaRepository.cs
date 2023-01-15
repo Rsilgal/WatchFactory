@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WatchFactory.Data;
 
-namespace Infraestructura.Repository
+namespace WatchFactory.Data.Repository
 {
     public class ZonaRepository : IZonaRepository
     {

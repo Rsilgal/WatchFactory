@@ -1,0 +1,85 @@
+﻿@page "/permisos"
+@inject IPermisoServicePages PermisoService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Permisos</PageTitle>
+<h3>Tabla de permisos</h3>
+
+@if (PermisoService.Permisos == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th>Roles</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var permiso in PermisoService.Permisos)
+            {
+                    <tr>
+                        <td>@permiso.Id</td>
+                        <td>@permiso.Descripcion</td>
+                        <td>"permiso.Roles.ToList()"</td>
+                        <td>
+                            <button @onclick="() => ShowPermiso(permiso.Id)">
+                                <i class="oi oi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="oi oi-chevron-left" @onclick="PrevPag"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPag"></li>
+    </ul>
+    <button @onclick="CreatePermiso" class="btn btn-primary">Nuevo Permiso</button>
+}
+
+
+@code {
+    private int _offset = 1;
+    private int _limit = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdatePaginacion();
+    }
+
+    async Task UpdatePaginacion()
+    {
+        await PermisoService.GetAllDataFromPermisos(_offset, _limit);
+    }
+
+    void ShowPermiso(int id)
+    {
+        NavigationManager.NavigateTo($"/permiso/{id}");
+    }
+
+    async Task PrevPag()
+    {
+        if (_offset > 0)
+        {
+            _offset--;
+            await UpdatePaginacion();
+        }
+    }
+
+    async Task NextPag()
+    {
+        _offset++;
+        await UpdatePaginacion();
+    }
+
+    void CreatePermiso()
+    {
+        NavigationManager.NavigateTo("/permiso");
+    }
+}

@@ -1,0 +1,44 @@
+﻿@page "/categoria/{id:int}"
+@inject ICategoriaServicePages CategoriaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar una nueva categoria</PageTitle>
+<h3>Actualizar Categoría</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    UpdateCategoriaDto Dto = new UpdateCategoriaDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var categoria = await CategoriaService.GetCategoriaByID((int)Id);
+        Dto.Descripcion = categoria.Descripcion;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Dto.Descripcion = string.Empty;
+    }
+
+    async Task HandleSubmit()
+    {
+        await CategoriaService.UpdateCategoria((int)Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await CategoriaService.DeleteCategoria((int)Id);
+    }
+}

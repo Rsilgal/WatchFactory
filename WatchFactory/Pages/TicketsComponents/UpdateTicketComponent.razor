@@ -1,0 +1,108 @@
+﻿@page "/ticket/{id:int}"
+@inject ITicketServicePages TicketService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Editar un Ticket</PageTitle>
+<h3>Editar Ticket</h3>
+
+@if (isLoading)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="Dto" OnValidSubmit="UpdateTicket">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+@*            <label for="fabrica">Fabrica</label>
+            <InputSelect class="form-select" @bind-Value="fabricaId" id="fabrica">
+                @foreach (var fabrica in TicketService.Fabricas)
+                {
+                    <option value="@fabrica.Id">@fabrica.Descripcion</option>
+                }
+            </InputSelect>
+            <label for="linea">Linea</label>
+            <InputSelect class="form-select" @bind-Value="lineaId" id="linea">
+                @foreach (var linea in TicketService.Lineas.Where(e => e.FabricaID == fabricaId).ToList())
+                {
+                    <option value="@linea.Id">@linea.Descripcion</option>
+                }
+            </InputSelect>
+            <label for="maquina">Maquina</label>
+            <InputSelect class="form-select" @bind-Value="Dto.MaquinaID" id="maquina">
+                @foreach (var maquina in TicketService.Maquinas.Where(e => e.LineaProduccionID == lineaId))
+                {
+                    <option value="@maquina.Id">@maquina.Descripcion</option>
+                }
+            </InputSelect>*@
+            <label for="categoria">Categoria</label>
+            <InputSelect class="form-select" @bind-Value="Dto.CategoriaID" id="categoria">
+                @foreach (var categoria in TicketService.Categorias)
+                {
+                    <option value="@categoria.Id">@categoria.Descripcion</option>
+                }
+            </InputSelect>
+            <label for="urgencia">Urgencia</label>
+            <InputSelect class="form-select" @bind-Value="Dto.UrgenciaID" id="urgencia">
+                @foreach (var urgencia in TicketService.Urgencias)
+                {
+                    <option value="@urgencia.Id">@urgencia.Descripcion</option>
+                }
+            </InputSelect>
+            <label for="zona">Zona</label>
+            <InputSelect class="form-select" @bind-Value="Dto.ZonaID" id="urgencia">
+                @foreach (var zona in TicketService.Zonas)
+                {
+                    <option value="@zona.Id">@zona.Descripcion</option>
+                }
+            </InputSelect>
+            <label for="descripcion">Descripción</label>
+            <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Actualizar Ticket</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteTicket">Eliminar</button>
+    </EditForm>
+}
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdateTicketDto Dto = new UpdateTicketDto();
+    private bool isLoading = false;
+    private int fabricaId = 1;
+    private int lineaId = 1;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        //var ticket = await TicketService.GetTicket(Id);
+        //Dto.Descripcion = ticket.Descripcion;
+        //Dto.MaquinaID = ticket.MaquinaID;
+        //Dto.ZonaID = ticket.ZonaID;
+        //Dto.CategoriaID = ticket.CategoriaID;
+        //Dto.EstadoID = ticket.EstadoID;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        //await TicketService.GetFabricas();
+        //await TicketService.GetLinea();
+        //await TicketService.GetMaquina();
+        //await TicketService.GetCategorias();
+        //await TicketService.GetUrgencia();
+        //await TicketService.GetZona();
+        isLoading = false;
+    }
+
+    async Task UpdateTicket()
+    {
+        await TicketService.UpdateTicket(Id, Dto);
+    }
+
+    async Task DeleteTicket()
+    {
+        await TicketService.DeleteTicket(Id);
+    }
+}

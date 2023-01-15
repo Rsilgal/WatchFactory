@@ -1,0 +1,93 @@
+﻿@page "/maquinas"
+@inject IMaquinaServicePages service
+@inject NavigationManager NavigationManager
+
+<PageTitle>Tabla de maquinas</PageTitle>
+<h3>Maquinas</h3>
+
+@if (service.Maquinas == null)
+{
+    <p><em>Cargando....</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Fabrica</th>
+                <th>Linea</th>
+                <th>Tipo de Maquina</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var maquina in service.Maquinas)
+            {
+                    <tr>
+                        <td>@maquina.Descripcion</td>
+                        <td>@maquina.LineaProduccion.Fabrica.Descripcion</td>
+                        <td>@maquina.LineaProduccion.Descripcion</td>
+                        <td>@maquina.TipoMaquina.Descripcion</td>
+                        <td>
+                            <button @onclick="() => ShowMaquina(maquina.Id)">
+                                <i class="oi oi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" @onclick="CreateMaquina"></button>
+}
+
+<ul class="pagination">
+    <li class="page-item" @onclick="PrevPag">
+        <i class="oi oi-chevron-left"></i>
+    </li>
+    <li class="page-item" @onclick="NextPag">
+        <i class="oi oi-chevron-right"></i>
+    </li>
+</ul>
+
+<button class="btn btn-primary" @onclick="CreateMaquina">Nueva Maquina</button>
+
+@code {
+    private int _offset = 1;
+    private int _limit = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdatePagination();
+    }
+
+    void ShowMaquina(int id)
+    {
+        NavigationManager.NavigateTo($"/maquina/{id}");
+    }
+
+    async Task UpdatePagination()
+    {
+        await service.GetAllDataFromMaquina(_offset, _limit);
+    }
+
+    async Task CreateMaquina()
+    {
+        NavigationManager.NavigateTo("/maquina");
+    }
+
+    async Task PrevPag()
+    {
+        if (_offset > 0)
+        {
+            _offset--;
+            await UpdatePagination();
+        }
+    }
+
+    async Task NextPag()
+    {
+        _offset++;
+        await UpdatePagination();
+    }
+}

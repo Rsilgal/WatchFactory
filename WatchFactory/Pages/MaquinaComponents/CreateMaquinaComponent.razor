@@ -1,0 +1,61 @@
+﻿@page "/maquina"
+@inject IMaquinaServicePages service
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una nueva Maquina</PageTitle>
+<h3>Nueva Maquina</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="fabrica">Fabrica</label>
+        <InputSelect id="fabrica" @bind-Value="fabricaID" class="form-select">
+            @foreach (var fabrica in service.Fabricas)
+            {
+                <option value="@fabrica.Id">@fabrica.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label for="linea">Linea de producción</label>
+        <InputSelect id="linea" @bind-Value="Dto.LineaProduccionID" class="form-select">
+            @foreach (var linea in service.Lineas.Where(e => e.FabricaID == fabricaID))
+            {
+                <option value="@linea.Id">@linea.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <label for="tipo">Tipo de maquina</label>
+        <InputSelect id="tipo" @bind-Value="Dto.TipoMaquinaID" class="form-select">
+            @foreach (var tipo in service.Tipos)
+            {
+                <option value="@tipo.Id">@tipo.Descripcion</option>
+            }
+        </InputSelect>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</EditForm>
+
+
+@code {
+    CreateMaquinaDto Dto = new CreateMaquinaDto();
+    private int fabricaID = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await service.GetAllFabricas();
+        await service.GetAllLineas();
+        await service.GetAllTipoMaquina();
+    }
+
+    async void HandleSubmit()
+    {
+        await service.CreateMaquina(Dto);
+    }
+}

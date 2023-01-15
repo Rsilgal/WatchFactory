@@ -12,9 +12,9 @@ namespace Infraestructura.Repository
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private readonly WatchFactoryDbContext _watchFactory;
+        private readonly ApplicationDbContext _watchFactory;
 
-        public CategoriaRepository(WatchFactoryDbContext watchFactory)
+        public CategoriaRepository(ApplicationDbContext watchFactory)
         {
             _watchFactory = watchFactory;
         }

@@ -1,0 +1,28 @@
+﻿@page "/estadointervencion"
+@inject IEstadoIntervencionPages EstadoIntervencion
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear un Estado de intervencion</PageTitle>
+<h3>Nuevo Estado de Intervencion</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</EditForm>
+
+@code {
+    CreateEstadoIntervencionDto Dto = new CreateEstadoIntervencionDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Dto.Descripcion = string.Empty;
+    }
+
+    async Task HandleSubmit()
+    {
+        await EstadoIntervencion.CreateEstado(Dto);
+    }
+}

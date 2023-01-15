@@ -3,7 +3,6 @@ using Aplicacion.Services.Interfaces;
 using Dominio.Modelos.Dtos.Ticket;
 using Dominio.Modelos.Nucleo;
 using Dominio.Modelos.Usuarios;
-using Infraestructura;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;

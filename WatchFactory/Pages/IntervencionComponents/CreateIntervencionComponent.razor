@@ -1,0 +1,58 @@
+@page "/intervencion"
+@inject IIntervencionServicePages IntervencionService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una nueva intervencion</PageTitle>
+<h3>Nueva intervencion</h3>
+
+@if(IntervencionService.Tipos == null && IntervencionService.Estados == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="tipo">Tipo de Intervencion</label>
+            <InputSelect id="tipo" @bind-Value="Dto.TipoId" class="form-select">
+            @foreach (var tipo in IntervencionService.Tipos)
+            {
+                <option value="@tipo.Id">@tipo.Descripcion</option>
+            }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="estado">Estado de la Intervencion</label>
+            <InputSelect id="estado" @bind-Value="Dto.EstadoId" class="form-select">
+            @foreach (var estado in IntervencionService.Estados)
+            {
+                <option value="@estado.Id">@estado.Descripcion</option>
+            }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="descripcion">Descripcion</label>
+            <InputTextArea id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputTextArea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </EditForm>
+}
+@code {
+    CreateIntervencionDto Dto = new CreateIntervencionDto();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await IntervencionService.GetEstadoIntervencion();
+        await IntervencionService.GetTipoIntervencion();
+    }
+
+    async Task CreateIntervencion() {
+        await IntervencionService.CreateIntervencion(Dto);
+    }
+}
+
+
+
+

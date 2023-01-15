@@ -1,0 +1,37 @@
+﻿@page "/urgencia/{id:int}"
+@inject IUrgenciaServicePages UrgenciaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar una Urgencia</PageTitle>
+<h3>Actualizar Urgencia</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Actualizar</button>
+<button type="button" class="btn btn-danger" @onclick="DeleteSubmit">Eliminar</button>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdateUrgenciaDto Dto = new UpdateUrgenciaDto();
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+
+    async Task HandleSubmit()
+    {
+        await UrgenciaService.UpdateUrgencia(Id, Dto);
+    }
+
+    async Task DeleteSubmit()
+    {
+        await UrgenciaService.DeleteUrgencia(Id);
+    }
+}

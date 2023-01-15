@@ -6,5 +6,37 @@
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Identity;
 @using WatchFactory
 @using WatchFactory.Shared
+
+@using WatchFactory.Pages.TicketsComponents
+@using WatchFactory.Pages.IntervencionComponents
+@using WatchFactory.Pages.CategoriaComponents
+@using WatchFactory.Pages.EstadoIntervencionComponents
+@using WatchFactory.Pages.FabricaComponents
+@using WatchFactory.Pages.LineaComponents
+@using WatchFactory.Pages.MaquinaComponents
+@using WatchFactory.Pages.PermisoComponents
+@using WatchFactory.Pages.RolComponents
+@using WatchFactory.Pages.TipoIntervencionComponents
+@using WatchFactory.Pages.TipoMaquinaComponents
+@using WatchFactory.Pages.UrgenciaComponents
+@using WatchFactory.Pages.ZonaComponents
+
+@using Dominio.Modelos.Dtos.Categoria;
+@using Dominio.Modelos.Dtos.EstadoIIntervencion;
+@using Dominio.Modelos.Dtos.Fabrica;
+@using Dominio.Modelos.Dtos.Intervencion;
+@using Dominio.Modelos.Dtos.LineaProduccion;
+@using Dominio.Modelos.Dtos.Maquina;
+@using Dominio.Modelos.Dtos.Permiso;
+@using Dominio.Modelos.Dtos.Rol;
+@using Dominio.Modelos.Dtos.Ticket;
+@using Dominio.Modelos.Dtos.TipoIntervencion;
+@using Dominio.Modelos.Dtos.TipoMaquina;
+@using Dominio.Modelos.Dtos.Urgencia;
+@using Dominio.Modelos.Dtos.Zona;
+@using Dominio.Modelos.Dtos.User;
+
+@using Aplicacion.Services.Interfaces;

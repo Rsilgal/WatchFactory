@@ -1,0 +1,48 @@
+﻿@page "/rol/{id:int}"
+@inject IRolServicePages RolService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear un Rol</PageTitle>
+<h3>Nuevo Rol</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="name">Nombre</label>
+        <InputText id="name" class="form-control" @bind-Value="Dto.Name"></InputText>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Description"></InputText>
+        <label for="eliminado">Eliminado?</label>
+        <InputRadio id="eliminado" Value="@Dto.eliminado"></InputRadio>
+    </div>
+
+</EditForm>
+<button type="submit" class="btn btn-primary">Actualizar Rol</button>
+<button type="button" class="btn btn-danger">Eliminar</button>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdateRolDto Dto = new UpdateRolDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var rol = await RolService.GetRolById(Id);
+        Dto.Description = rol.Descripcion;
+        Dto.Name = rol.Nombre;
+        Dto.eliminado = rol.eliminado;
+    }
+
+    async Task HandleSubmit()
+    {
+        await RolService.UpdateRol(Id, Dto);
+    }
+
+    async Task DeleteRol()
+    {
+        await RolService.DeleteRol(Id);
+    }
+}

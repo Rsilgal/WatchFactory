@@ -1,0 +1,75 @@
+@page "/intervencion/{id:int}"
+@inject IIntervencionServicePages IntervencionService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Actualizar una intervencion</PageTitle>
+<h3>Actualiza intervencion</h3>
+
+@if(IntervencionService.Tipos == null && IntervencionService.Estados == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="Dto" OnValidSubmit="UpdateIntervencion">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label for="tipo">Tipo de Intervencion</label>
+            <InputSelect id="tipo" @bind-Value="Dto.TipoId" class="form-select">
+            @foreach (var tipo in IntervencionService.Tipos)
+            {
+                <option value="@tipo.Id">@tipo.Descripcion</option>
+            }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="estado">Estado de la Intervencion</label>
+            <InputSelect id="estado" @bind-Value="Dto.EstadoId" class="form-select">
+            @foreach (var estado in IntervencionService.Estados)
+            {
+                <option value="@estado.Id">@estado.Descripcion</option>
+            }
+            </InputSelect>
+        </div>
+        <div>
+            <label for="descripcion">Descripcion</label>
+            <InputTextArea id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputTextArea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Crear</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteIntervencion"></button>
+    </EditForm>
+}
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    UpdateIntervencionDto Dto = new UpdateIntervencionDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var intervencion = await IntervencionService.GetIntervencion(Id);
+        Dto.Descripcion = intervencion.Descripcion;
+        Dto.EstadoId = intervencion.EstadoIntervencionID;
+        Dto.TipoId = intervencion.TipoIntervencionID;
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await IntervencionService.GetEstadoIntervencion();
+        await IntervencionService.GetTipoIntervencion();
+    }
+
+    async Task UpdateIntervencion() {
+        await IntervencionService.UpdateIntervencion(Id, Dto);
+    }
+
+    async Task DeleteIntervencion()
+    {
+        await IntervencionService.DeleteIntervencion(Id);
+    }
+}
+
+
+
+

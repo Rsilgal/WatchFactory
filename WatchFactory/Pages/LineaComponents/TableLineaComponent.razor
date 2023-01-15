@@ -1,0 +1,58 @@
+﻿@page "/lineas"
+@inject ILineaProduccionServicePages LineaService
+@inject NavigationManager NavigationManager
+
+@if (LineaService.Lineas == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Descipción</th>
+                <th>Fabrica</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var linea in LineaService.Lineas)
+            {
+                    <tr>
+                        <th>@linea.Descripcion</th>
+                        <th>@LineaService.Fabricas.Where(e => e.Id == linea.FabricaID).First().Descripcion</th>
+                        <th>
+                            <button class="btn btn-principal" @onclick="() => ShowLinea(linea.Id)">
+                                <i class="oi oi-pencil"></i>
+                            </button>
+                        </th>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" @onclick="CreateLinea"></button>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await LineaService.GetAllLineas();
+        await LineaService.GetFabricas();
+    }
+
+    void HandleSubmit()
+    {
+        NavigationManager.NavigateTo("/linea");
+    }
+
+    void ShowLinea(int id)
+    {
+        NavigationManager.NavigateTo($"/linea/{id}");
+    }
+
+    void CreateLinea()
+    {
+        NavigationManager.NavigateTo("/linea");
+    }
+}

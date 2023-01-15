@@ -1,0 +1,53 @@
+﻿@page "/estadosintervencion"
+@inject IEstadoIntervencionPages EstadoIntervencion
+@inject NavigationManager NavigationManager
+
+<PageTitle>Estados de intervencion</PageTitle>
+<h3>Tabla de Estados de intervencion</h3>
+
+@if (EstadoIntervencion.Estados == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Descripcion</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estado in EstadoIntervencion.Estados)
+            {
+                    <tr>
+                        <td>@estado.Id</td>
+                        <td>@estado.Descripcion</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="() => ShowEstadoIntervencion(estado.Id)"><i class="oi oi-pencil"></i></button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="HandleSubmit">Crear Estado</button>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await EstadoIntervencion.GetAllEstados();
+    }
+
+    void ShowEstadoIntervencion(int id)
+    {
+        NavigationManager.NavigateTo($"/estadointervencion/{id}");
+    }
+
+    void HandleSubmit()
+    {
+        NavigationManager.NavigateTo("/estadointervencion");
+    }
+}

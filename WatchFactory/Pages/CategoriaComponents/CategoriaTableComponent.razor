@@ -1,0 +1,54 @@
+﻿@page "/categorias"
+@inject ICategoriaServicePages CategoriaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Categorias</PageTitle>
+
+<h3>Tabla de Categorias</h3>
+
+@if (CategoriaService.Categorias == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoria in CategoriaService.Categorias)
+            {
+                    <tr>
+                        <td>@categoria.Id</td>
+                        <td>@categoria.Descripcion</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="() => ShowCategoria(categoria.Id)"><i class="oi oi-pencil"></i></button>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="CreateCategoria">Crear Categoria</button>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await CategoriaService.GetAllCategorias();
+    }
+
+    void CreateCategoria()
+    {
+        NavigationManager.NavigateTo("/categoria");
+    }
+
+    void ShowCategoria(int id)
+    {
+        NavigationManager.NavigateTo($"/categoria/{id}");
+    }
+}

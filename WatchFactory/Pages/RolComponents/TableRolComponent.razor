@@ -1,0 +1,72 @@
+﻿@page "/roles"
+@inject IRolServicePages RolService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Tabla de Roles</PageTitle>
+<h3>Roles</h3>
+
+@if (RolService.Roles == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rol in RolService.Roles)
+            {
+                <tr>
+                    <td>@rol.Id</td>
+                    <td>@rol.Descripcion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <li class="oi oi-chevron-left" @onclick="PrevPage"></li>
+        <li class="oi oi-chevron-right" @onclick="NextPage"></li>
+    </ul>
+    <button class="btn btn-primary" @onclick="CreateRol">Nuevo Rol</button>
+}
+
+
+@code {
+    private int _offset = 1;
+    private int _limit = 10;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdatePagination();
+    }
+
+    async Task UpdatePagination()
+    {
+        await RolService.GetAllDataFromRol(_offset, _limit);
+    }
+
+    async Task PrevPage()
+    {
+        if (_offset > 0)
+        {
+            _offset--;
+            await UpdatePagination();
+        }
+    }
+
+    async Task NextPage()
+    {
+        _offset++;
+        await UpdatePagination();
+    }
+
+    void CreateRol()
+    {
+        NavigationManager.NavigateTo("/rol");
+    }
+}

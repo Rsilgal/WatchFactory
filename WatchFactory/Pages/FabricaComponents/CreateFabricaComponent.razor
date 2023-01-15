@@ -1,0 +1,30 @@
+﻿@page "/fabrica"
+@inject IFabricaServicePages FabricaService
+@inject NavigationManager NavigatorManager
+
+<PageTitle>Crear una Nueva Fabrica</PageTitle>
+<h3>Nueva Fabrica</h3>
+
+<EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+
+    <div>
+        <label for="descripcion">Descripcion</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</EditForm>
+
+@code {
+    CreateFabricaDto Dto = new CreateFabricaDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FabricaService.GetAllFabrica();
+    }
+
+    async Task HandleSubmit()
+    {
+        await FabricaService.CreateFabrica(Dto);
+    }
+}

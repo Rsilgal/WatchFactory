@@ -1,0 +1,24 @@
+﻿@page "/urgencia"
+@inject IUrgenciaServicePages UrgenciaService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Crear una nueva Urgencia</PageTitle>
+<h3>Nueva Urgencia</h3>
+
+<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+    <DataAnnotationsValidator />
+
+    <label for="descripcion">Descripcion</label>
+    <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+</EditForm>
+<button type="submit" class="btn btn-primary">Crear</button>
+
+@code {
+    CreateUrgenciaDto Dto = new CreateUrgenciaDto();
+
+    async Task CreateIntervencion()
+    {
+        await UrgenciaService.CreateUrgencia(Dto);
+    }
+
+}
