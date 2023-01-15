@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using WatchFactory.Areas.Identity;
 using WatchFactory.Data;
 using WatchFactory.Data.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,14 @@ builder.Services.AddScoped<ITipoMaquinaServicePages, TipoMaquinaServicePages>();
 builder.Services.AddScoped<IUrgenciaServicePages, UrgenciaServicePages>();
 builder.Services.AddScoped<IUserServicePages, UserServicePages>();
 builder.Services.AddScoped<IZonaServicePages, ZonaServicePages>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser().RequireRole("Admin");
+    });
+});
 
 var app = builder.Build();
 
