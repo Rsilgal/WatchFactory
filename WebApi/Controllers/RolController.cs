@@ -2,7 +2,6 @@
 using Dominio.Modelos.Dtos.Rol;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 using System.Text;
 
 namespace WebApi.Controllers
