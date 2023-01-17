@@ -49,6 +49,7 @@ namespace Aplicacion.Services.Pages
 
         private async Task SetTickets(HttpResponseMessage result)
         {
+
             var response = await result.Content.ReadFromJsonAsync<List<Ticket>>();
             Tickets = response;
         }

@@ -13,7 +13,7 @@ namespace Dominio.Modelos.Nucleo
         
         public int CategoriaID { get; set; }
         
-        public int UsuarioID { get; set; }
+        //public int UsuarioID { get; set; }
         
         public int UrgenciaID { get; set; }
         
@@ -25,7 +25,7 @@ namespace Dominio.Modelos.Nucleo
         
         public Categoria Categoria { get; set; }
         
-        public Usuario Usuario { get; set; }
+        //public Usuario Usuario { get; set; }
         
         public Urgencia Urgencia { get; set; }
         

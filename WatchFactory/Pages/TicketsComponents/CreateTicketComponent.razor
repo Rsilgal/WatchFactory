@@ -84,6 +84,9 @@ else
 
     async Task CreateTicket()
     {
+        Dto.FechaCreacion = DateTime.Now;
+        Dto.EstadoID = "0";
+        Dto.UsuarioID = 1;
         await TicketService.CreateTicket(Dto);
     }
 }

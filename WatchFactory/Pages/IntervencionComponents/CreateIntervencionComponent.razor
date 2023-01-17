@@ -42,7 +42,9 @@ else
     </EditForm>
 }
 @code {
+    [Parameter]
     public int Id { get; set; }
+
     private Ticket _ticket;
 
     CreateIntervencionDto Dto = new CreateIntervencionDto();

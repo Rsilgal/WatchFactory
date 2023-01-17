@@ -30,7 +30,7 @@ namespace WatchFactory.Data.Repository
                 CategoriaID= model.CategoriaID,
                 MaquinaID= model.MaquinaID,
                 UrgenciaID= model.UrgenciaID,
-                UsuarioID= model.UsuarioID,
+                //UsuarioID= model.UsuarioID,
                 ZonaID= model.ZonaID,
             });
             await _watchFactory.SaveChangesAsync();
@@ -53,13 +53,11 @@ namespace WatchFactory.Data.Repository
         public async Task<List<Ticket>> GetAllDataFromTickets(int skip, int take)
         {
             return await _watchFactory.Tickets
-                .Include(t => t.Usuario)
                 .Include(t => t.Zona)
                 .Include(t => t.Categoria)
                 .Include(t => t.Urgencia)
                 .Include(t => t.Maquina)
-                .ThenInclude(m => m.LineaProduccion)
-                .ThenInclude(lp => lp.Fabrica)
+                .Include(t => t.Maquina.LineaProduccion.Fabrica)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
@@ -71,7 +69,7 @@ namespace WatchFactory.Data.Repository
                 Where(t => t.Id == id).
                 Include(t => t.Urgencia).
                 Include(t => t.Categoria).
-                Include(t => t.Usuario).
+                //Include(t => t.Usuario).
                 Include(t => t.Urgencia).
                 Include(t => t.Zona).
                 Include(t => t.Maquina).
@@ -87,7 +85,7 @@ namespace WatchFactory.Data.Repository
             var tickets = await _watchFactory.Tickets.
                 Include(t => t.Urgencia).
                 Include(t => t.Categoria).
-                Include(t => t.Usuario).
+                //Include(t => t.Usuario).
                 Include(t => t.Urgencia).
                 Include(t => t.Zona).
                 Include(t => t.Maquina).
