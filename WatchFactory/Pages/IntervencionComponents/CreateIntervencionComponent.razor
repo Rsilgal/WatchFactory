@@ -1,5 +1,7 @@
-@page "/intervencion"
+@page "/intervencion/ticket/{id:int}"
+@using Dominio.Modelos.Nucleo;
 @inject IIntervencionServicePages IntervencionService
+@inject ITicketService TicketService
 @inject NavigationManager NavigationManager
 
 <PageTitle>Crear una nueva intervencion</PageTitle>
@@ -40,6 +42,9 @@ else
     </EditForm>
 }
 @code {
+    public int Id { get; set; }
+    private Ticket _ticket;
+
     CreateIntervencionDto Dto = new CreateIntervencionDto();
 
     protected async override Task OnInitializedAsync()
@@ -49,6 +54,7 @@ else
     }
 
     async Task CreateIntervencion() {
+        Dto.TicketId = Id;
         await IntervencionService.CreateIntervencion(Dto);
     }
 }

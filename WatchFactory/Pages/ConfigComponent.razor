@@ -1,47 +1,108 @@
 ﻿@page "/config"
+@inject NavigationManager _navigation
 
 <PageTitle>Panel de Configuración del sistema</PageTitle>
 
-<div class="test">
-    <table class="table">
-        <tr class="fila">
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-        </tr>
-        <tr class="filaOculta">
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-        </tr>
-        <tr class="fila">
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-        </tr>
-        <tr class="filaOculta">
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-        </tr>
-        <tr class="fila">
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-            <td class="columna">a</td>
-        </tr>
-    </table>
-</div>
+<table class="table table-borderless">
+    <tr class="fila">
+        <td class="columnaOculta"></td>
+        <td class="columna" @onclick="() => goTo(1)">Fabrica</td>
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(2)">Linea</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="filaOculta">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="fila">
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(3)">Maquina</td>
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(4)">Tipo de Maquina</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="filaOculta">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="fila">
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(5)">Urgencia</td>
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(6)">Categoria</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="filaOculta">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="fila">
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(7)">Estado Intervencion</td>
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(8)">Tipo Intervencion</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="filaOculta">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="fila">
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(9)">Permiso</td>
+        <td class="columnaOculta">a</td>
+        <td class="columna" @onclick="() => goTo(10)">Rol</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="filaOculta">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+    <tr class="fila">
+        <td class="columnaOculta">a</td>
+        <td class="columnaOculta">Urgencia</td>
+        <td class="columna" @onclick="() => goTo(11)">Zona</td>
+        <td class="columnaOculta">Categoria</td>
+        <td class="columnaOculta">a</td>
+    </tr>
+</table>
 
 @code {
+    Dictionary<int, string> mapUrl = new Dictionary<int, string>();
 
+    protected override void OnInitialized()
+    {
+        mapUrl.Add(1, "fabricas");
+        mapUrl.Add(2, "lineas");
+        mapUrl.Add(3, "maquinas");
+        mapUrl.Add(4, "tiposmaquina");
+        mapUrl.Add(5, "urgencias");
+        mapUrl.Add(6, "categorias");
+        mapUrl.Add(7, "estadosintervencion");
+        mapUrl.Add(8, "tiposintervencion");
+        mapUrl.Add(9, "permisos");
+        mapUrl.Add(10, "roles");
+        mapUrl.Add(11, "zonas");
+    }
+
+    void goTo(int url)
+    {
+        _navigation.NavigateTo(mapUrl[url]);
+    }
 }

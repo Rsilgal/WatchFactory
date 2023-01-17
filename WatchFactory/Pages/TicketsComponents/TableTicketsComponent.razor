@@ -33,6 +33,11 @@ else
                     <td>@ticket.Urgencia.Descripcion</td>
                     <td>@ticket.Descripcion</td>
                     <td>
+                        <button class="btn btn-primary" @onclick="() => NewIntervencion(ticket.Id)">
+                            <i class="oi oi-add"></i>
+                        </button>
+                    </td>
+                    <td>
                         <button class="btn btn-primary" @onclick="(() => ShowTicket(ticket.Id))"><i class="oi oi-pencil"></i></button>
                     </td>
                 </tr>
@@ -89,5 +94,10 @@ else
     {
         _offset++;
         await UpdateTickets();
+    }
+
+    void NewIntervencion(int id)
+    {
+        NavigationManager.NavigateTo($"/intervencion/ticket/{id}");
     }
 }

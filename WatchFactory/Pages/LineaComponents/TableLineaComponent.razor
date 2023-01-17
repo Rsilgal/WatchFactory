@@ -2,6 +2,8 @@
 @inject ILineaProduccionServicePages LineaService
 @inject NavigationManager NavigationManager
 
+<h3>Lisatdo de lineas de producción</h3>
+
 @if (LineaService.Lineas == null)
 {
     <p><em>Cargando...</em></p>
@@ -31,7 +33,7 @@ else
             }
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary" @onclick="CreateLinea"></button>
+    <button type="button" class="btn btn-primary" @onclick="CreateLinea">Crear Linea</button>
 }
 
 @code {

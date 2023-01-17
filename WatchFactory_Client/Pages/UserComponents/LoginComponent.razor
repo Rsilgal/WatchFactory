@@ -20,7 +20,7 @@
     <button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
 
-<AuthorizeView Roles="Admin">
+<AuthorizeView Roles="@($"{roles}")">
     <NotAuthorized>No tienes rol</NotAuthorized>
     <Authorized>
         De verdad eres admin!!!!!
@@ -29,6 +29,12 @@
 
 @code {
     private LoginUserDto user = new LoginUserDto();
+
+    private List<string> roles  = new List<string> {
+        "a",
+        "b",
+        "c"
+    };
 
     async Task HandleLogin() {
         var token = await UserService.login(user);
