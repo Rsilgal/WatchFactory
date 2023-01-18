@@ -6,7 +6,7 @@
 
 <h3>Tickets</h3>
 
-@if (TicketService.Tickets == null)
+@if (isLoading)
 {
     <p><em>Cargando...</em></p>
 }
@@ -57,6 +57,7 @@ else
 
 
 @code {
+    private bool isLoading = true;
     private int _offset = 0;
     private int _take = 10;
 
@@ -67,8 +68,9 @@ else
 
     async Task UpdateTickets()
     {
+        isLoading = true;
         await TicketService.GetAllDataFromTickets(_offset, _take);
-
+        isLoading = false;
     }
 
     void ShowTicket(int id)
