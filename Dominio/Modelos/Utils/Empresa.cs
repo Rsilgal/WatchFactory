@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.Modelos.Configuracion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Dominio.Modelos.Utils
         public string Codigo { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
         public DateTime FechaCreacion { get; set; }
+        public EstadoIntervencion EstadoInicial { get; set; }
     }
 }

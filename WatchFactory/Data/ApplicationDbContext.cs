@@ -2,6 +2,7 @@
 using Dominio.Modelos.Intervencion;
 using Dominio.Modelos.Nucleo;
 using Dominio.Modelos.Usuarios;
+using Dominio.Modelos.Utils;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,11 +24,13 @@ namespace WatchFactory.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<EstadoIntervencion> EstadoIntervenciones { get; set; }
         public DbSet<TipoIntervencion> TipoIntervenciones { get; set; }
-        //public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         //public DbSet<Rol> Roles { get; set; }
         //public DbSet<Permiso> Permisos { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Intervencion> Intervenciones { get; set; }
         public DbSet<Zona> Zonas { get; set; }
+
+        public DbSet<Empresa> Empresa { get; set; }
     }
 }
