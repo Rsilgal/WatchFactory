@@ -45,8 +45,7 @@ namespace WatchFactory.Data.Repository
         {
             var maquinas = await _watchFactory.Maquinas
                 .Include(m => m.TipoMaquina)
-                .Include(m => m.LineaProduccion)
-                .ThenInclude(lp => lp.Fabrica)
+                .Include(m => m.LineaProduccion.Fabrica)
                 .OrderBy(m => m.Id)
                 .Skip(skip)
                 .Take(take)
