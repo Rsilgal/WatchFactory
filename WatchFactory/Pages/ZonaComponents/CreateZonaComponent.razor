@@ -10,8 +10,9 @@
 
     <label for="descripcion">Descripcion</label>
     <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
-<button type="submit" class="btn btn-primary">Crear</button>
+
 
 @code {
     CreateZonaDto Dto = new CreateZonaDto();
