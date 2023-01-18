@@ -58,6 +58,7 @@ else
     async Task CreateIntervencion() {
         Dto.TicketId = Id;
         await IntervencionService.CreateIntervencion(Dto);
+        NavigationManager.NavigateTo("/tickets");
     }
 }
 
