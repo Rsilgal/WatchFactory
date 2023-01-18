@@ -5,11 +5,13 @@
 <PageTitle>Crear un nuevo Tipo de Intervencion</PageTitle>
 <h3>Nuevo Tipo de Intervencion</h3>
 
-<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+<EditForm Model="Dto" OnValidSubmit="CreateTipoIntervencion">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <label for="descripcion">Descripcion</label>
     <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -17,9 +19,10 @@
 @code {
     CreateTipoIntervencionDto Dto = new CreateTipoIntervencionDto();
 
-    async Task CreateIntervencion()
+    async Task CreateTipoIntervencion()
     {
         await TipoIntervencionService.CreateTipoIntervencion(Dto);
+        NavigationManager.NavigateTo("/tiposintervencion");
     }
 
 }

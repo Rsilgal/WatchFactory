@@ -15,6 +15,7 @@ else
 {
     <EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
         <DataAnnotationsValidator />
+        <ValidationSummary />
         <div class="form-group">
             <label for="tipo">Tipo de Intervencion</label>
             <InputSelect id="tipo" @bind-Value="Dto.TipoId" class="form-select">

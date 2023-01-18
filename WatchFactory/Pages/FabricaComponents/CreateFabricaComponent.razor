@@ -7,11 +7,13 @@
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <div>
         <label for="descripcion">Descripcion</label>
         <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
     </div>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -26,5 +28,6 @@
     async Task HandleSubmit()
     {
         await FabricaService.CreateFabrica(Dto);
+        NavigatorManager.NavigateTo("/fabricas");
     }
 }

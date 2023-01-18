@@ -6,11 +6,14 @@
 <h3>Nuevo Permiso</h3>
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <div class="form-group">
         <label for="descripcion">Descripcion</label>
         <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>"
     </div>
-    <button type="submit" class="btn btn-primary"></button>
+    <button type="submit" class="btn btn-primary">Crear Permiso</button>
 </EditForm>
 
 @code {

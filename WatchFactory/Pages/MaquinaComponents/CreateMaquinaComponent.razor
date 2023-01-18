@@ -13,6 +13,7 @@ else
 {
     <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
         <DataAnnotationsValidator />
+        <ValidationSummary />
 
         <div>
             <label for="descripcion">Descripcion</label>
@@ -45,7 +46,8 @@ else
                 }
             </InputSelect>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <br />
+        <button type="submit" class="btn btn-primary">Crear</button>
     </EditForm>
 }
 
@@ -65,5 +67,6 @@ else
     async void HandleSubmit()
     {
         await service.CreateMaquina(Dto);
+        NavigationManager.NavigateTo("/maquinas");
     }
 }

@@ -7,9 +7,11 @@
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <label for="descripcion">Descripcion</label>
     <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -24,5 +26,6 @@
     async Task HandleSubmit()
     {
         await EstadoIntervencion.CreateEstado(Dto);
+        NavigationManager.NavigateTo("/estadosintervencion");
     }
 }

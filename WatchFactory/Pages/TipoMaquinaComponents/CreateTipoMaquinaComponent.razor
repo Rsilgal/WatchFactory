@@ -5,7 +5,7 @@
 <PageTitle>Crear un nuevo Tipo de Maquina</PageTitle>
 <h3>Nuevo Tipo de Maquina</h3>
 
-<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+<EditForm Model="Dto" OnValidSubmit="CreateTipoMaquina">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -19,9 +19,10 @@
 @code {
     CreateTipoMaquinaDto Dto = new CreateTipoMaquinaDto();
 
-    async Task CreateIntervencion()
+    async Task CreateTipoMaquina()
     {
         await TipoMaquinaService.CreateTipoMaquina(Dto);
+        NavigationManager.NavigateTo("/tiposmaquina");
     }
 
 

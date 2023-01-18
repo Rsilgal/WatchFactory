@@ -5,22 +5,23 @@
 <PageTitle>Crear una nueva Urgencia</PageTitle>
 <h3>Nueva Urgencia</h3>
 
-<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+<EditForm Model="Dto" OnValidSubmit="CreateUrgencia">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <label for="descripcion">Descripcion</label>
     <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
-
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
 @code {
     CreateUrgenciaDto Dto = new CreateUrgenciaDto();
 
-    async Task CreateIntervencion()
+    async Task CreateUrgencia()
     {
         await UrgenciaService.CreateUrgencia(Dto);
+        NavigationManager.NavigateTo("/urgencias");
     }
 
 }

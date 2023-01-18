@@ -7,10 +7,12 @@
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
+    <ValidationSummary />
     <div>
         <label for="descripcion">Descripcion</label>
         <InputText id="descripcion" @bind-Value="Dto.Descripcion" class="form-control"></InputText>
     </div>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -25,5 +27,6 @@
     async Task HandleSubmit()
     {
         await CategoriaService.CreateCategoria(Dto);
+        NavigationManager.NavigateTo("categorias");
     }
 }

@@ -5,11 +5,13 @@
 <PageTitle>Crear un nuevo Zona</PageTitle>
 <h3>Nuevo Tipo de Zona</h3>
 
-<EditForm Model="Dto" OnValidSubmit="CreateIntervencion">
+<EditForm Model="Dto" OnValidSubmit="CreateZona">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <label for="descripcion">Descripcion</label>
     <InputText id="descripcion" class="form-control" @bind-Value="Dto.Descripcion"></InputText>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -17,8 +19,9 @@
 @code {
     CreateZonaDto Dto = new CreateZonaDto();
 
-    async Task CreateIntervencion()
+    async Task CreateZona()
     {
         await ZonaService.CreateZona(Dto);
+        NavigationManager.NavigateTo("/zonas");
     }
 }

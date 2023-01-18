@@ -7,6 +7,7 @@
 
 <EditForm Model="Dto" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
+    <ValidationSummary />
 
     <div>
         <label for="descripcion">Descripcion</label>
@@ -21,6 +22,7 @@
             }
         </InputSelect>
     </div>
+    <br />
     <button type="submit" class="btn btn-primary">Crear</button>
 </EditForm>
 
@@ -36,5 +38,6 @@
     async Task HandleSubmit()
     {
         await LineaService.CreateLinea(Dto);
+        NavigationManager.NavigateTo("/lineas");
     }
 }

@@ -13,6 +13,7 @@ else
 {
     <EditForm Model="Dto" OnValidSubmit="CreateTicket">
         <DataAnnotationsValidator />
+        <ValidationSummary />
 
         <div class="form-group">
             <label for="fabrica">Fabrica</label>
@@ -94,5 +95,6 @@ else
         Dto.EstadoID = "0";
         //Dto.UsuarioID = 1;
         await TicketService.CreateTicket(Dto);
+        NavigationManager.NavigateTo("/tickets");
     }
 }
