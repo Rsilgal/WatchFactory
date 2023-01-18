@@ -43,7 +43,7 @@ namespace WatchFactory.Data.Repository
         public async Task<List<TipoMaquina>> GetAllDataFromTipoMaquinas(int skip, int take)
         {
             var tipos = await _watchFactory.TipoMaquinas
-                .Include(tm => tm.Maquinas)
+                //.Include(tm => tm.Maquinas)
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
