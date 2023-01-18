@@ -30,8 +30,8 @@ namespace WatchFactory.Data.Repository
                 CategoriaID= model.CategoriaID,
                 MaquinaID= model.MaquinaID,
                 UrgenciaID= model.UrgenciaID,
-                //UsuarioID= model.UsuarioID,
-                ZonaID= model.ZonaID,
+                UsuarioID = model.UsuarioID,
+                ZonaID = model.ZonaID,
             });
             await _watchFactory.SaveChangesAsync();
 

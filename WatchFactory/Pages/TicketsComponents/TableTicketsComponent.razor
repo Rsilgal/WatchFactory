@@ -21,6 +21,8 @@ else
                 <th>Urgencia</th>
                 <th>Descripción</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,12 +35,19 @@ else
                     <td>@ticket.Urgencia.Descripcion</td>
                     <td>@ticket.Descripcion</td>
                     <td>
-                        <button class="btn btn-primary" @onclick="() => NewIntervencion(ticket.Id)">
-                            <i class="oi oi-add"></i>
+                        <button type="button" class="btn btn-primary" title="Crear intervencion" @onclick="() => NewIntervencion(ticket.Id)">
+                            <i class="oi oi-plus"></i>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-primary" @onclick="(() => ShowTicket(ticket.Id))"><i class="oi oi-pencil"></i></button>
+                        <button type="button" class="btn btn-primary" title="Observar intervenciones" @onclick="() => ShowIntervenciones(ticket.Id)">
+                            <i class="oi oi-eye"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" title="Editar ticket" @onclick="(() => ShowTicket(ticket.Id))">
+                            <i class="oi oi-pencil"></i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -58,7 +67,7 @@ else
 
 @code {
     private bool isLoading = true;
-    private int _offset = 0;
+    private int _offset = 1;
     private int _take = 10;
 
     protected override async Task OnInitializedAsync()
@@ -101,5 +110,10 @@ else
     void NewIntervencion(int id)
     {
         NavigationManager.NavigateTo($"/intervencion/ticket/{id}");
+    }
+
+    void ShowIntervenciones(int id)
+    {
+        NavigationManager.NavigateTo($"/intervenciones/ticket/{id}");
     }
 }

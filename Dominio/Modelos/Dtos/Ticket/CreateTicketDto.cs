@@ -12,7 +12,7 @@ namespace Dominio.Modelos.Dtos.Ticket
         [Required, Range(1, int.MaxValue)]
         public int CategoriaID { get; set; }
         //[Required, Range(1, int.MaxValue)]
-        //public int UsuarioID { get; set; }
+        public string UsuarioID { get; set; }
         [Required, Range(1, int.MaxValue)]
         public int UrgenciaID { get; set; }
         [Required, Range(1, int.MaxValue)]

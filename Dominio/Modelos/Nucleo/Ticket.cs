@@ -12,8 +12,8 @@ namespace Dominio.Modelos.Nucleo
         public int MaquinaID { get; set; }
         
         public int CategoriaID { get; set; }
-        
-        //public int UsuarioID { get; set; }
+
+        public string UsuarioID { get; set; } = string.Empty;
         
         public int UrgenciaID { get; set; }
         

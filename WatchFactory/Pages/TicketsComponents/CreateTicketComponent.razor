@@ -1,6 +1,7 @@
 ﻿@page "/ticket"
 @inject ITicketServicePages TicketService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider stateProvider
 
 <PageTitle>Crear un nuevo Ticket</PageTitle>
 <h3>Nuevo Ticket</h3>
@@ -93,8 +94,14 @@ else
     {
         Dto.FechaCreacion = DateTime.Now;
         Dto.EstadoID = "0";
-        //Dto.UsuarioID = 1;
-        await TicketService.CreateTicket(Dto);
-        NavigationManager.NavigateTo("/tickets");
+        var authState = await stateProvider.GetAuthenticationStateAsync();
+        var userId= authState.User.FindFirst(u => u.Type.Contains("nameidentifier"))?.Value;
+        if (userId != null)
+        {
+            Dto.UsuarioID = userId;
+            await TicketService.CreateTicket(Dto);
+            NavigationManager.NavigateTo("/tickets");
+        }
+        // Error!!
     }
 }
