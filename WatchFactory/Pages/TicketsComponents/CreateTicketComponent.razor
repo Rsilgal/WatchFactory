@@ -17,6 +17,7 @@ else
         <div class="form-group">
             <label for="fabrica">Fabrica</label>
             <InputSelect class="form-select" @bind-Value="fabricaId" id="fabrica">
+                <option>-- Sin Opcion --</option>
                 @foreach (var fabrica in TicketService.Fabricas)
                 {
                     <option value="@fabrica.Id">@fabrica.Descripcion</option>
@@ -24,6 +25,7 @@ else
             </InputSelect>
             <label for="linea">Linea</label>
             <InputSelect class="form-select" @bind-Value="lineaId" id="linea">
+                <option>-- Sin Opcion --</option>
                 @foreach (var linea in TicketService.Lineas.Where(e => e.FabricaID == fabricaId).ToList())
                 {
                     <option value="@linea.Id">@linea.Descripcion</option>
@@ -31,6 +33,7 @@ else
             </InputSelect>
             <label for="maquina">Maquina</label>
             <InputSelect class="form-select" @bind-Value="Dto.MaquinaID" id="maquina">
+                <option>-- Sin Opcion --</option>
                 @foreach (var maquina in TicketService.Maquinas.Where(e => e.LineaProduccionID == lineaId))
                 {
                     <option value="@maquina.Id">@maquina.Descripcion</option>
@@ -38,6 +41,7 @@ else
             </InputSelect>
             <label for="categoria">Categoria</label>
             <InputSelect class="form-select" @bind-Value="Dto.CategoriaID" id="categoria">
+                <option>-- Sin Opcion --</option>
                 @foreach (var categoria in TicketService.Categorias)
                 {
                     <option value="@categoria.Id">@categoria.Descripcion</option>
@@ -45,6 +49,7 @@ else
             </InputSelect>
             <label for="urgencia">Urgencia</label>
             <InputSelect class="form-select" @bind-Value="Dto.UrgenciaID" id="urgencia">
+                <option>-- Sin Opcion --</option>
                 @foreach (var urgencia in TicketService.Urgencias)
                 {
                     <option value="@urgencia.Id">@urgencia.Descripcion</option>
@@ -52,6 +57,7 @@ else
             </InputSelect>
             <label for="zona">Zona</label>
             <InputSelect class="form-select" @bind-Value="Dto.ZonaID" id="urgencia">
+                <option>-- Sin Opcion --</option>
                 @foreach (var zona in TicketService.Zonas)
                 {
                     <option value="@zona.Id">@zona.Descripcion</option>
@@ -86,7 +92,7 @@ else
     {
         Dto.FechaCreacion = DateTime.Now;
         Dto.EstadoID = "0";
-        Dto.UsuarioID = 1;
+        //Dto.UsuarioID = 1;
         await TicketService.CreateTicket(Dto);
     }
 }
