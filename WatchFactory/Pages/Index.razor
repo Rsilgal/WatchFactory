@@ -2,13 +2,15 @@
 @using Aplicacion.ServicesPages.Interfaces;
 @inject IEmpresaServicePages service
 
-<PageTitle>Index</PageTitle>
+<PageTitle>@_companyName</PageTitle>
 
 <h1>Bienvenido a WatchFactory de @_companyName</h1>
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p>Se encuentra en el sistema de WatchFactory que ha sido implementado para @_companyName.</p>
+<p>
+    Este sistema permite la notificación, registro y control de los diferente strabajos realizados 
+    por parte de los equipos encargados del mantenimiento de las instalaciones de @_companyName
+</p>
 
 <AuthorizeView Policy="AdminPolicy">
     <NotAuthorized>

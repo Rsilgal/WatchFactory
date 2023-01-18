@@ -1,0 +1,95 @@
+﻿@page "/usuariospanel"
+@using WatchFactory.Data;
+@inject UserManager<IdentityUser> _userManager
+@inject RoleManager<IdentityRole> _roleManager
+
+<h3>Panel de gestión de usuarios</h3>
+<p>Haciendo uso de este panel, se podrán gestionar los diferentes roles y permisos de los usuarios resgitrados en el sistema.</p>
+
+@if (isLoading) {
+    <p><em>Cargando...</em></p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Confirmado?</th>
+            <th>Telefono</th>
+            <th>Confirmado?</th>
+            <th>Nuevo Rol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in _users)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.EmailConfirmed</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.PhoneNumberConfirmed</td>
+                <td>
+                    <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" @onclick="() => ChangeRolToUser(user, 1)">Admin</button>
+                            <button type="button" class="list-group-item list-group-item-action" @onclick="() => ChangeRolToUser(user, 2)">HR</button>
+                            <button type="button" class="list-group-item list-group-item-action" @onclick="() => ChangeRolToUser(user, 3)">User</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+    private bool isLoading = true;
+    private List<IdentityUser> _users;
+    private List<IdentityRole> _roles;
+    private string _rolActual;
+
+    protected override void OnInitialized()
+    {
+        isLoading = true;
+        getUsersInfo();
+        getRoles();
+        isLoading = false;
+    }
+
+    void getUsersInfo()
+    {
+        _users = _userManager.Users.ToList();
+    }
+
+    void getRoles()
+    {
+        _roles = _roleManager.Roles.ToList();
+    }
+
+    async Task<string> getRol(IdentityUser user)
+    {
+        var roles = await _userManager.GetRolesAsync(user);
+        return roles != null ? roles.First() : "";
+    }
+
+    async Task ChangeRolToUser(IdentityUser user, int rolId)
+    {
+        var rol = "";
+        switch (rolId)
+        {
+            case 1:
+                rol = "Admin";
+                break;
+            case 2:
+                rol = "HR";
+                break;
+            case 3:
+                rol = "User";
+                break;
+        }
+        var roles = await _userManager.GetRolesAsync(user);
+        await _userManager.RemoveFromRolesAsync(user, roles);
+        await _userManager.AddToRoleAsync(user, rol);
+    }
+
+}
