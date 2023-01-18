@@ -83,6 +83,8 @@
     </tr>
 </table>
 
+<button class="btn btn-danger" @onclick="goToEmpresa">Empresa</button>
+
 @code {
     Dictionary<int, string> mapUrl = new Dictionary<int, string>();
 
@@ -104,5 +106,10 @@
     void goTo(int url)
     {
         _navigation.NavigateTo(mapUrl[url]);
+    }
+
+    void goToEmpresa()
+    {
+        _navigation.NavigateTo("/empresa");
     }
 }

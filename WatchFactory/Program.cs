@@ -14,6 +14,8 @@ using WatchFactory.Areas.Identity;
 using WatchFactory.Data;
 using WatchFactory.Data.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Aplicacion.ServicesPages.Interfaces;
+using Aplicacion.ServicesPages;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +86,7 @@ builder.Services.AddScoped<ITipoMaquinaServicePages, TipoMaquinaServicePages>();
 builder.Services.AddScoped<IUrgenciaServicePages, UrgenciaServicePages>();
 builder.Services.AddScoped<IUserServicePages, UserServicePages>();
 builder.Services.AddScoped<IZonaServicePages, ZonaServicePages>();
+builder.Services.AddScoped<IEmpresaServicePages, EmpresaServicePages>();
 
 builder.Services.AddAuthorization(options =>
 {

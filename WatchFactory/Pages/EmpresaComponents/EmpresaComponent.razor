@@ -1,0 +1,77 @@
+﻿@page "/empresa"
+@using Aplicacion.ServicesPages.Interfaces;
+@using Dominio.Modelos.Utils;
+@inject IEmpresaServicePages service
+
+<PageTitle>Información de la compañía</PageTitle>
+<h3>Datos de la compañía</h3>
+
+@if (isLoading)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{   
+    <EditForm Model="service.Empresa">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <InputText id="nombre" class="form-control" @bind-Value="service.Empresa.Nombre"></InputText>
+        </div>
+       <div class="form-group">
+            <label for="archivo">Logo</label>
+            <InputFile if="archivo" class="form-control"></InputFile>
+        </div>
+         <div class="form-group">
+            <label for="eslogan">Eslogan</label>
+            <InputText id="eslogan" class="form-control" @bind-Value="service.Empresa.Eslogan"></InputText>
+        </div>
+        <div class="form-group">
+            <InputText id="codigo" class="form-control" @bind-Value="service.Empresa.Codigo"></InputText>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripcion</label>
+            <InputText id="descripcion" class="form-control" @bind-Value="service.Empresa.Descripcion"></InputText>
+        </div>
+        <div class="form-group">
+            <label for="creacion">Fecha de constitución</label>
+            <iInputDate id="creacion" value="@service.Empresa.FechaCreacion"></iInputDate>
+        </div>
+        <div class="form-group">
+            <label for="seleccion">Estado Inicial</label>
+            <InputSelect id="seleccion" class="form-select" @bind-Value="@service.Empresa.EstadoInicial.Id">
+                <option>--- Sin seleccion ---</option>
+                @foreach (var item in service.Estados)
+                {
+                    <option value="@item.Id">@item.Descripcion</option>
+                }
+            </InputSelect>
+        </div>
+        <br />
+        <button class="btn btn-primary" @onclick="UpdateData">Actualizar datos</button>
+    </EditForm>
+}
+<button type="button" @onclick="UpdateData">Nombre</button>
+<p></p>
+
+@code {
+    private bool isLoading = true;
+    private string Nombre = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        await service.GetEmpresa();
+        await service.GetEstadosIntervenciones();
+        isLoading = false;
+    }
+
+    async Task UpdateData()
+    {
+        await service.UpdateCompanyData(service.Empresa);
+    }
+
+    async Task getNombre()
+    {
+        Nombre = await service.GetNombre();
+    }
+}
