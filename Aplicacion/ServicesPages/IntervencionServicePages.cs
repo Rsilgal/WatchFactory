@@ -33,9 +33,9 @@ namespace Aplicacion.Services.Pages
             await SetIntervencion(result);
         }
 
-        public async Task GetAllDataFromIntervenciones(int skip, int take)
+        public async Task GetAllDataFromIntervencion(int id, int skip, int take)
         {
-            var result = await _http.GetFromJsonAsync<List<Intervencion>>($"api/intervencion/{skip}/{take}");
+            var result = await _http.GetFromJsonAsync<List<Intervencion>>($"api/intervencion/{id}/{skip}/{take}");
             if (result != null)
                 Intervenciones = result;
         }

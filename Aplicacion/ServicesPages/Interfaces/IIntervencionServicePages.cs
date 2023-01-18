@@ -20,6 +20,6 @@ namespace Aplicacion.Services.Pages.Interfaces
         Task GetEstadoIntervencion();
         Task GetTipoIntervencion();
 
-        Task GetAllDataFromIntervenciones(int skip, int take);
+        Task GetAllDataFromIntervencion(int id, int skip, int take);
     }
 }

@@ -57,10 +57,10 @@ namespace WebApi.Controllers
             return Ok(deletedIntervencionFromService);
         }
 
-        [HttpGet("{skip}/{take}")]
-        public async Task<ActionResult> Pagination(int skip, int take)
+        [HttpGet("{id}/{skip}/{take}")]
+        public async Task<ActionResult> Pagination(int id, int skip, int take)
         {
-            var intervencionesFromService = await _intervencionService.GetAllDataFromIntervenciones(skip, take);
+            var intervencionesFromService = await _intervencionService.GetAllDataFromIntervencion(id, skip, take);
             if (intervencionesFromService== null) return NotFound();
             return Ok(intervencionesFromService);
         }

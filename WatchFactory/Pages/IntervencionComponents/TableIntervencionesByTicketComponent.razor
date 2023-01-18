@@ -1,0 +1,67 @@
+﻿@page "/intervenciones/ticket/{id:int}"
+@using Dominio.Modelos.Nucleo;
+@inject IIntervencionServicePages service
+@inject ITicketService ticketService
+@inject NavigationManager navigation
+
+<PageTitle>Tabla de Intervenciones de un Ticket</PageTitle>
+<h3>Intervenciones de un ticket</h3>
+
+@if(_isLoading)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <p>@_ticket.Descripcion</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Tipo</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in service.Intervenciones)
+            {
+                <tr>
+                    <td>@item.EstadoIntervencion.Descripcion</td>
+                    <td>@item.TipoIntervencion.Descripcion</td>
+                    <td>@item.Descripcion</td>
+                    <td>@item.FechaCreacion</td>
+                </tr>                
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="CreateIntervencion"></button>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private int _offset = 0;
+    private int _take = 10;
+    private bool _isLoading;
+    private Ticket _ticket = new Ticket();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _isLoading = true;
+        _ticket = await ticketService.GetTicketById(Id);
+        await UpdateTable();
+    }
+
+    async Task UpdateTable()
+    {
+        _isLoading = true;
+        await service.GetAllDataFromIntervencion(Id, _offset, _take);
+        _isLoading = false;
+    }
+    void CreateIntervencion()
+    {
+        navigation.NavigateTo($"intervencion/ticket/{Id}");
+    }
+}

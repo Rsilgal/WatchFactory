@@ -19,6 +19,6 @@ namespace Aplicacion.Services.Interfaces
 
         Task<Intervencion> GetIntervencionById(int id);
         Task<List<Intervencion>> GetIntervencionesByTipoIntervencion(int TipoIntervencionID);
-        Task<List<Intervencion>> GetAllDataFromIntervenciones(int skip, int take);
+        Task<List<Intervencion>> GetAllDataFromIntervencion(int id, int skip, int take);
     }
 }

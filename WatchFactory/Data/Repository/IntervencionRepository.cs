@@ -49,9 +49,10 @@ namespace WatchFactory.Data.Repository
             return await GetIntervenciones();
         }
 
-        public async Task<List<Intervencion>> GetAllDataFromIntervenciones(int skip, int take)
+        public async Task<List<Intervencion>> GetAllDataFromIntervencion(int id, int skip, int take)
         {
             return await _watchFactory.Intervenciones
+                .Where(i => i.TicketID== id)
                 .Include(i => i.Ticket)
                 .Include(i => i.EstadoIntervencion)
                 .Include(i => i.TipoIntervencion)
