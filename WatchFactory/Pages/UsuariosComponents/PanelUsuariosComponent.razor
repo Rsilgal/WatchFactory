@@ -1,4 +1,5 @@
 ﻿@page "/usuariospanel"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @using WatchFactory.Data;
 @inject UserManager<IdentityUser> _userManager
 @inject RoleManager<IdentityRole> _roleManager
@@ -87,9 +88,17 @@ else
                 rol = "User";
                 break;
         }
+
+        var result = await _roleManager.RoleExistsAsync(rol);
+
+        if (!result)
+        {
+            await _roleManager.CreateAsync(new IdentityRole(rol));
+        }
+
         var roles = await _userManager.GetRolesAsync(user);
         await _userManager.RemoveFromRolesAsync(user, roles);
         await _userManager.AddToRoleAsync(user, rol);
-    }
+}
 
 }

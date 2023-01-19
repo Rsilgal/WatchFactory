@@ -1,4 +1,5 @@
 ﻿@page "/estadointervencion"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IEstadoIntervencionPages EstadoIntervencion
 @inject NavigationManager NavigationManager
 

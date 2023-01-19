@@ -37,7 +37,13 @@ namespace WatchFactory.Controllers
                 return NotFound();
             }
 
-            company = empresa;
+            company.Nombre = empresa.Nombre;
+            company.Logo = empresa.Logo;
+            company.Eslogan = empresa.Eslogan;
+            company.Codigo= empresa.Codigo;
+            company.Descripcion = empresa.Descripcion;
+            //company.FechaCreacion = empresa.FechaCreacion;
+            company.EstadoInicial = empresa.EstadoInicial;
 
             await _db.SaveChangesAsync();
             return Ok(company);

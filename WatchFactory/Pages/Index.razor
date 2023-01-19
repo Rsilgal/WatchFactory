@@ -12,10 +12,22 @@
     por parte de los equipos encargados del mantenimiento de las instalaciones de @_companyName
 </p>
 
-<AuthorizeView Policy="AdminPolicy">
+<AuthorizeView Policy="UserPolicy">
     <NotAuthorized>
         <p>Este mensaje es para ti</p>
     </NotAuthorized>
+    <Authorized>
+        <p><em>Tienes rol, pero de usuario.</em></p>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Policy="HRPolicy">
+    <Authorized >
+        <p><em>Bienvenido, miembro de HR</em></p>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Policy="AdminPolicy">
     <Authorized>
         <p><em>Esto solo es visible para los administradores. Felicidades!!!</em></p>
     </Authorized>

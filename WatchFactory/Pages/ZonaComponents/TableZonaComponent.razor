@@ -1,4 +1,5 @@
 ﻿@page "/zonas"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IZonaServicePages ZonaService
 @inject NavigationManager NavigationManager
 

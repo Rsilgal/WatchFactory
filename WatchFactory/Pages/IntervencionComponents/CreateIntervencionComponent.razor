@@ -1,4 +1,5 @@
 @page "/intervencion/ticket/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @using Dominio.Modelos.Nucleo;
 @inject IIntervencionServicePages IntervencionService
 @inject ITicketService TicketService

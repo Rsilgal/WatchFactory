@@ -1,4 +1,5 @@
 ﻿@page "/rol"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IRolServicePages RolService
 @inject NavigationManager NavigationManager
 

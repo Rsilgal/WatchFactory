@@ -1,4 +1,5 @@
 ﻿@page "/tipointervencion/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject ITipoIntervencionServicePages TipoIntervencionService
 @inject NavigationManager NavigationManager
 

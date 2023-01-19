@@ -1,4 +1,5 @@
 ﻿@page "/tipomaquina/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject ITipoMaquinaServicePages TipoMaquinaService
 @inject NavigationManager NavigationManager
 

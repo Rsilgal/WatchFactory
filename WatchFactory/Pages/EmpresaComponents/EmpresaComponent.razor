@@ -1,4 +1,5 @@
 ﻿@page "/empresa"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @using Aplicacion.ServicesPages.Interfaces;
 @using Dominio.Modelos.Utils;
 @inject IEmpresaServicePages service
@@ -17,25 +18,26 @@ else
             <label for="nombre">Nombre</label>
             <InputText id="nombre" class="form-control" @bind-Value="service.Empresa.Nombre"></InputText>
         </div>
-       <div class="form-group">
+@*       <div class="form-group">
             <label for="archivo">Logo</label>
-            <InputFile if="archivo" class="form-control"></InputFile>
-        </div>
+            <InputFile if="archivo" class="form-control" @bind-Value="service.Empresa.Logo"></InputFile>
+        </div>*@
          <div class="form-group">
             <label for="eslogan">Eslogan</label>
             <InputText id="eslogan" class="form-control" @bind-Value="service.Empresa.Eslogan"></InputText>
         </div>
         <div class="form-group">
+            <label for="codigo">Codigo</label>
             <InputText id="codigo" class="form-control" @bind-Value="service.Empresa.Codigo"></InputText>
         </div>
         <div class="form-group">
             <label for="descripcion">Descripcion</label>
             <InputText id="descripcion" class="form-control" @bind-Value="service.Empresa.Descripcion"></InputText>
         </div>
-        <div class="form-group">
+@*        <div class="form-group">
             <label for="creacion">Fecha de constitución</label>
-            <iInputDate id="creacion" value="@service.Empresa.FechaCreacion"></iInputDate>
-        </div>
+            <iInputDate id="creacion" type="date" @bind-Value="service.Empresa.FechaCreacion" />
+        </div>*@
         <div class="form-group">
             <label for="seleccion">Estado Inicial</label>
             <InputSelect id="seleccion" class="form-select" @bind-Value="@service.Empresa.EstadoInicial.Id">

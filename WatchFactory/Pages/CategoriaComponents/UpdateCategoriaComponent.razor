@@ -1,4 +1,5 @@
 ﻿@page "/categoria/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject ICategoriaServicePages CategoriaService
 @inject NavigationManager NavigationManager
 

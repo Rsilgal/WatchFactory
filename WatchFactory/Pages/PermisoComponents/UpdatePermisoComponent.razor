@@ -1,4 +1,5 @@
 ﻿@page "/permiso/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IPermisoServicePages PermisoService
 @inject NavigationManager NavigationManager
 

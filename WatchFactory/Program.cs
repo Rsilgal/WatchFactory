@@ -94,6 +94,18 @@ builder.Services.AddAuthorization(options =>
     {
         policy.RequireAuthenticatedUser().RequireRole("Admin");
     });
+    options.AddPolicy("HRPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser().RequireRole("HR");
+    });
+    options.AddPolicy("UserPolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser().RequireRole("User");
+    });
+    options.AddPolicy("UserWithRole", policy =>
+    {
+        policy.RequireAssertion(context => context.User.IsInRole("Admin") || context.User.IsInRole("HR") || context.User.IsInRole("User"));
+    });
 });
 
 var app = builder.Build();

@@ -1,4 +1,5 @@
 ﻿@page "/lineas"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject ILineaProduccionServicePages LineaService
 @inject NavigationManager NavigationManager
 

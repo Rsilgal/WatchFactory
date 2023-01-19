@@ -1,4 +1,5 @@
 ﻿@page "/urgencia/{id:int}"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IUrgenciaServicePages UrgenciaService
 @inject NavigationManager NavigationManager
 

@@ -1,4 +1,5 @@
 ﻿@page "/fabrica"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IFabricaServicePages FabricaService
 @inject NavigationManager NavigatorManager
 

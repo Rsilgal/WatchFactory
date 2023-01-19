@@ -1,4 +1,5 @@
 ﻿@page "/maquinas"
+@attribute [Authorize(Policy = "AdminPolicy")]
 @inject IMaquinaServicePages service
 @inject NavigationManager NavigationManager
 
