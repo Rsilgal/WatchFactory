@@ -32,5 +32,8 @@ namespace WatchFactory.Data
         public DbSet<Zona> Zonas { get; set; }
 
         public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Auditoria> Auditoria { get; set; }
+        public DbSet<Notificacion> Notificaciones { get; set; }
+        public DbSet<Reporte> Reporte { get; set; }
     }
 }
