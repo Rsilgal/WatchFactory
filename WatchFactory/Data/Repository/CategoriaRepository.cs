@@ -55,6 +55,8 @@ namespace WatchFactory.Data.Repository
 
             dbCategoria.Descripcion = model.Descripcion;
 
+            await _watchFactory.SaveChangesAsync();
+
             return await GetCategorias();
         }
     }

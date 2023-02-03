@@ -66,6 +66,8 @@ namespace WatchFactory.Data.Repository
 
             dbUrgencia.Descripcion = to.Descripcion;
 
+            await _watchFactory.SaveChangesAsync();
+
             return await GetUrgencias();
         }
     }
