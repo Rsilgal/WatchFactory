@@ -40,10 +40,12 @@
     async Task HandleSubmit()
     {
         await RolService.UpdateRol(Id, Dto);
+        NavigationManager.NavigateTo("roles");
     }
 
     async Task DeleteRol()
     {
         await RolService.DeleteRol(Id);
+        NavigationManager.NavigateTo("roles");
     }
 }

@@ -21,18 +21,21 @@
 
     UpdateTipoMaquinaDto Dto = new UpdateTipoMaquinaDto();
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        return base.OnParametersSetAsync();
+        var tipo = await TipoMaquinaService.GetTipoMaquinaById(Id);
+        Dto.Descripcion = tipo.Descripcion;
     }
 
     async Task HandleSubmit()
     {
         await TipoMaquinaService.UpdateTipoMaquina(Id, Dto);
+        NavigationManager.NavigateTo("/tiposmaquina");
     }
 
     async Task DeleteSubmit()
     {
         await TipoMaquinaService.DeleteTipoMaquina(Id);
+        NavigationManager.NavigateTo("/tiposmaquina");
     }
 }

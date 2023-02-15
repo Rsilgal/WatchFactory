@@ -14,6 +14,7 @@ else
 {
     <EditForm Model="Dto" OnValidSubmit="UpdateTicket">
         <DataAnnotationsValidator />
+        <ValidationSummary></ValidationSummary>
 
         <div class="form-group">
 @*            <label for="fabrica">Fabrica</label>
@@ -77,12 +78,14 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        //var ticket = await TicketService.GetTicket(Id);
-        //Dto.Descripcion = ticket.Descripcion;
-        //Dto.MaquinaID = ticket.MaquinaID;
-        //Dto.ZonaID = ticket.ZonaID;
-        //Dto.CategoriaID = ticket.CategoriaID;
-        //Dto.EstadoID = ticket.EstadoID;
+        var ticket = await TicketService.GetTicket(Id);
+        Dto.Descripcion = ticket.Descripcion;
+        Dto.MaquinaID = ticket.MaquinaID;
+        Dto.ZonaID = ticket.ZonaID;
+        Dto.CategoriaID = ticket.CategoriaID;
+        Dto.EstadoID = ticket.EstadoID;
+        Dto.UsuarioID = ticket.UsuarioID;
+        Dto.UrgenciaID = ticket.UrgenciaID;
     }
 
     protected override async Task OnInitializedAsync()
@@ -91,19 +94,21 @@ else
         //await TicketService.GetFabricas();
         //await TicketService.GetLinea();
         //await TicketService.GetMaquina();
-        //await TicketService.GetCategorias();
-        //await TicketService.GetUrgencia();
-        //await TicketService.GetZona();
+        await TicketService.GetCategorias();
+        await TicketService.GetUrgencia();
+        await TicketService.GetZona();
         isLoading = false;
     }
 
     async Task UpdateTicket()
     {
         await TicketService.UpdateTicket(Id, Dto);
+        NavigationManager.NavigateTo("/tickets");
     }
 
     async Task DeleteTicket()
     {
         await TicketService.DeleteTicket(Id);
+        NavigationManager.NavigateTo("/tickets");
     }
 }

@@ -35,5 +35,6 @@ namespace WatchFactory.Data
         public DbSet<Auditoria> Auditoria { get; set; }
         public DbSet<Notificacion> Notificaciones { get; set; }
         public DbSet<Reporte> Reporte { get; set; }
+        public DbSet<Estadistica> Estadistica { get; set; }
     }
 }

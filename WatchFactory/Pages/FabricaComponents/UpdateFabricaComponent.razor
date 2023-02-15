@@ -23,13 +23,21 @@
 
     UpdateFabricaDto Dto = new UpdateFabricaDto();
 
+    protected override async Task OnParametersSetAsync()
+    {
+        var fabrica = await FabricaService.GetFabricaById((int)Id);
+        Dto.Descripcion = fabrica.Descripcion;
+    }
+
     async Task HandleSubmit()
     {
         await FabricaService.UpdateFabrica((int)Id, Dto);
+        NavigationManager.NavigateTo("/fabricas");
     }
 
     async Task DeleteSubmit()
     {
         await FabricaService.DeleteFabricaById((int)Id);
+        NavigationManager.NavigateTo("/fabricas");
     }
 }

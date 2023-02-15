@@ -28,18 +28,20 @@
         Dto.Descripcion = estado.Descripcion;
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        Dto.Descripcion = string.Empty;
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    Dto.Descripcion = string.Empty;
+    //}
 
     async Task HandleSubmit()
     {
         await EstadoIntervencion.UpdateEstado((int)Id, Dto);
+        NavigationManager.NavigateTo("/estadosintervencion");
     }
 
     async Task DeleteSubmit()
     {
         await EstadoIntervencion.DeleteEstadoById((int)Id);
+        NavigationManager.NavigateTo("/estadosintervencion");
     }
 }

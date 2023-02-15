@@ -1,0 +1,75 @@
+﻿@page "/estadistica"
+@using Microsoft.EntityFrameworkCore;
+@using WatchFactory.Data;
+@inject NavigationManager _navigation
+@inject ApplicationDbContext _db
+
+<h3>Estadisticas</h3>
+
+@if(_estadisticas == null) 
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Tickets Cerrados
+                </th>
+                <th>
+                    Tickets Pendientes
+                </th>
+                <th>
+                    Tieckets Totales
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _estadisticas)
+            {
+                <tr>
+                    <td>
+                        @item.Fecha
+                    </td>
+                    <td>
+                        @item.TicketsCerrados
+                    </td>
+                    <td>
+                        @item.TicketsPendientes
+                    </td>
+                    <td>
+                        @item.TicketsTotales
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Dominio.Modelos.Utils.Estadistica> _estadisticas = new();
+
+    protected async override Task OnInitializedAsync()
+    {
+        //_estadisticas = await _db.Estadistica.ToListAsync();
+        // Para la comprobación del funcionameinto, valores demo
+        _estadisticas.Add(mockEstadistica(DateTime.Now, 9, 15));
+        _estadisticas.Add(mockEstadistica(DateTime.Now.AddDays(1), 23, 4));
+        _estadisticas.Add(mockEstadistica(DateTime.Now.AddDays(2), 4, 6));
+    }
+
+    private Dominio.Modelos.Utils.Estadistica mockEstadistica(DateTime date,int p, int c)
+    {
+        var _demo = new Dominio.Modelos.Utils.Estadistica();
+        _demo.Fecha = date;
+        _demo.TicketsPendientes = p;
+        _demo.TicketsCerrados = c;
+        _demo.TicketsTotales = _demo.TicketsPendientes + _demo.TicketsCerrados;
+        return _demo;
+    }
+}

@@ -28,18 +28,20 @@
         Dto.Descripcion = categoria.Descripcion;
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        Dto.Descripcion = string.Empty;
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    Dto.Descripcion = string.Empty;
+    //}
 
     async Task HandleSubmit()
     {
         await CategoriaService.UpdateCategoria((int)Id, Dto);
+        NavigationManager.NavigateTo("/categorias");
     }
 
     async Task DeleteSubmit()
     {
         await CategoriaService.DeleteCategoria((int)Id);
+        NavigationManager.NavigateTo("/categorias");
     }
 }

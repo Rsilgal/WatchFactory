@@ -21,18 +21,21 @@
 
     UpdateZonaDto Dto = new UpdateZonaDto();
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        return base.OnParametersSetAsync();
+        var zona = await ZonaService.GetZonaById(Id);
+        Dto.Descripcion = zona.Descripcion;
     }
 
     async Task HandleSubmit()
     {
         await ZonaService.UpdateZona(Id, Dto);
+        NavigationManager.NavigateTo("/zonas");
     }
 
     async Task DeleteSubmit()
     {
         await ZonaService.DeleteZona(Id);
+        NavigationManager.NavigateTo("/zonas");
     }
 }

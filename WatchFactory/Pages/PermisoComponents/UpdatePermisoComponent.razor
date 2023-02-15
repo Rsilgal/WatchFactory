@@ -45,10 +45,12 @@
     async Task HandleSubmit()
     {
         await PermisoService.UpdatePermiso(Id, Dto);
+        NavigationManager.NavigateTo("/permisos");
     }
 
     async Task DeleteSubmit()
     {
         await PermisoService.DeletePermisoById(Id);
+        NavigationManager.NavigateTo("/permisos");
     }
 }

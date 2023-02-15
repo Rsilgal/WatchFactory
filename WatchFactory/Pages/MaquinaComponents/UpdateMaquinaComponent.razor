@@ -71,10 +71,12 @@
     async Task HandleSubmit()
     {
         await service.UpdateMaquina(Id, Dto);
+        NavigationManager.NavigateTo("/maquinas");
     }
 
     async Task DeleteMaquina()
     {
         await service.DeleteMaquina(Id);
+        NavigationManager.NavigateTo("/maquinas");
     }
 }

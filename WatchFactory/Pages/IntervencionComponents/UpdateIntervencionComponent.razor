@@ -63,11 +63,13 @@ else
 
     async Task UpdateIntervencion() {
         await IntervencionService.UpdateIntervencion(Id, Dto);
+        NavigationManager.NavigateTo("/tickets");
     }
 
     async Task DeleteIntervencion()
     {
         await IntervencionService.DeleteIntervencion(Id);
+        NavigationManager.NavigateTo("/tickets");
     }
 }
 

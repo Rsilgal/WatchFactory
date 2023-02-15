@@ -45,10 +45,12 @@
     async Task HandleSubmit()
     {
         await LineaService.UpdateLinea(Id, Dto);
+        NavigationManager.NavigateTo("/lineas");
     }
 
     async Task DeleteSubmit()
     {
         await LineaService.DeleteLinea(Id);
+        NavigationManager.NavigateTo("/lineas");
     }
 }

@@ -21,18 +21,21 @@
 
     UpdateUrgenciaDto Dto = new UpdateUrgenciaDto();
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        return base.OnParametersSetAsync();
+        var urgencia = await UrgenciaService.GetUrgenciaById(Id);
+        Dto.Descripcion = urgencia.Descripcion;
     }
 
     async Task HandleSubmit()
     {
         await UrgenciaService.UpdateUrgencia(Id, Dto);
+        NavigationManager.NavigateTo("/urgencias");
     }
 
     async Task DeleteSubmit()
     {
         await UrgenciaService.DeleteUrgencia(Id);
+        NavigationManager.NavigateTo("/urgencias");
     }
 }

@@ -1,6 +1,6 @@
 ﻿@page "/tipointervencion/{id:int}"
 @attribute [Authorize(Policy = "AdminPolicy")]
-@inject ITipoIntervencionServicePages TipoIntervencionService
+@inject ITipoIntervencionService TipoIntervencionService
 @inject NavigationManager NavigationManager
 
 <PageTitle>Crear un nuevo Tipo de Intervencion</PageTitle>
@@ -21,18 +21,21 @@
 
     UpdateTipoIntervencionDto Dto = new UpdateTipoIntervencionDto();
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        return base.OnParametersSetAsync();
+        var tipo = await TipoIntervencionService.GetTipoIntervecionById(Id);
+        Dto.Descripcion = tipo.Descripcion;
     }
 
     async Task HandleSubmit()
     {
-        await TipoIntervencionService.UpdateTipoIntervencion(Id, Dto);
+        await TipoIntervencionService.UpdateTipoIntervecion(Id, Dto);
+        NavigationManager.NavigateTo("/tiposintervencion");
     }
 
     async Task DeleteSubmit()
     {
         await TipoIntervencionService.DeleteTipoIntervencion(Id);
+        NavigationManager.NavigateTo("/tiposintervencion");
     }
 }
